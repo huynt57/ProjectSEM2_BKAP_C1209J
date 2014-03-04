@@ -1,21 +1,15 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import GUI.Configure;
 
 public class VButton extends JPanel implements MouseMotionListener, MouseListener{
 	public static JFrame parentFrame;

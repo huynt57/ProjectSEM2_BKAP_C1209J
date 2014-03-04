@@ -2,7 +2,6 @@ package GUI;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 public class LoginThread extends Thread {
 	public JLabel label;

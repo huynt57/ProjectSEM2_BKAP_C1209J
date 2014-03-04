@@ -2,9 +2,6 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

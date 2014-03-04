@@ -1,14 +1,11 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class RemovablePanel extends JPanel implements MouseListener, MouseMotionListener{
 	private static final long serialVersionUID = 1L;

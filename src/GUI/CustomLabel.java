@@ -6,7 +6,6 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class CustomLabel extends JLabel {
 	public CustomLabel(String text, Color textColor, Color background, Font font, Point pos, Dimension dimension, boolean visible, int horizontalAlignment, int verticalAlignment, JPanel parentPane) {

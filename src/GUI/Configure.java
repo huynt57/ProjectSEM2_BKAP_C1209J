@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Font;
 
 public class Configure {
 	public static int SMOOTHLY = 2;
