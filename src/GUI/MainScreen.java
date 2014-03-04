@@ -26,7 +26,7 @@ public class MainScreen {
 		RemovablePanel mainPanel = new RemovablePanel(mainFrame);
 		mainFrame.setContentPane(mainPanel);
 
-		final CustomFrame loginFrame = new CustomFrame("Login", true, true,
+		final CustomFrame loginFrame = new CustomFrame("Login", false, true,
 				false, new Dimension(300, 380));
 		RemovablePanel loginPane = new RemovablePanel(loginFrame);
 		loginFrame.setContentPane(loginPane);
@@ -142,5 +142,6 @@ public class MainScreen {
 				}
 			}
 		});
+                loginFrame.setVisible(true);
 	}
 }
