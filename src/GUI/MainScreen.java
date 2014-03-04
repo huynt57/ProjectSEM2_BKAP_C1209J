@@ -126,7 +126,6 @@ public class MainScreen {
 				String userName = userNameTextField.getText();
 				String password = passwordTextField.getText();
 				loginStatus.setVisible(false);
-				boolean loginSuccessful = false;
 				if (userName.length() < 6 || password.length() < 6) {
 					loginStatus.setVisible(true);
 					loginStatus.setText("Username or Password must be 6 characters at least.");
@@ -135,24 +134,10 @@ public class MainScreen {
 							image4.getIconHeight());
 					appName.setBounds(115, 340, 120, 20);
 
-					
-					
-					// TODO: Check login information and return TRUE or FALSE to loginSuccessful
-					
-					if (userName.equals("vietzhu")&& password.equals("vietzhu"))loginSuccessful = true;
-					else loginSuccessful = false;
-					
-					// TODO: Check login information and return TRUE or FALSE to loginSuccessful
-
-					
-					String loginStatusText = "";
-					if (!loginSuccessful)
-						loginStatusText = "Username and Password not matched.";
-
 					final LoginThread loadingThread = new LoginThread(loading,
-							loginSuccessful, mainFrame, loginFrame, remember
+							userName, password , mainFrame, loginFrame, remember
 									.isSelected(), keepLogged.isSelected(),
-							loginStatus, loginStatusText, logo, image4, appName);
+							loginStatus, logo, image4, appName);
 					loadingThread.start();
 				}
 			}
