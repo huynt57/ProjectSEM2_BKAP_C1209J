@@ -18,6 +18,8 @@ import GUI.Classes.CustomCheckbox;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
+import GUI.Classes.CustomPasswordField;
+import GUI.Classes.CustomTextField;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
 import GUI.Classes.VButton;
@@ -47,18 +49,19 @@ public class LoginScreen extends CustomFrame {
 						Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(0,
 						40), new Dimension(300, 40), false, 
 				SwingConstants.CENTER, SwingConstants.CENTER, loginPane);
-
-		final HintTextField userNameTextField = new HintTextField("Username",
-				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12),
-				new Point(50, 80), new Dimension(220, 25), loginPane, true);
+		
+		final CustomTextField userNameTextField = new CustomTextField("Username", Color.GRAY, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(50, 80), new Dimension(220, 25), loginPane);
+		userNameTextField.setBorder(null);
+		
+		
 		final ImageIcon image = new ImageIcon("src/GUI/Resources/username.bin");
 		final CustomLabel username = new CustomLabel(image, new Point(19, 75),
 				new Dimension(image.getIconWidth(), image.getIconHeight()),
 				true, loginPane);
-
-		final HintTextField passwordTextField = new HintTextField("Password",
-				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12),
-				new Point(50, 129), new Dimension(220, 25), loginPane, true);
+		
+		final CustomPasswordField passwordTextField = new CustomPasswordField("Password", Color.GRAY, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(50, 129), new Dimension(220, 25), loginPane);
+		passwordTextField.setBorder(null);
+		
 		final ImageIcon image2 = new ImageIcon("src/GUI/Resources/password.bin");
 		final CustomLabel password = new CustomLabel(image2,
 				new Point(19, 125), new Dimension(image2.getIconWidth(),
@@ -77,7 +80,7 @@ public class LoginScreen extends CustomFrame {
 				
 			}
 		});
-//
+
 //		try {
 //			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 //		} catch (Exception ex) {
@@ -87,6 +90,7 @@ public class LoginScreen extends CustomFrame {
 		final CustomCheckbox remember = new CustomCheckbox("",
 				Configure.LOGIN_SCREEN_COLOR, false, false,
 				new Point(130, 180), new Dimension(20, 20), loginPane);
+		
 		final CustomLabel rememberLabel = new CustomLabel("Remember me",
 				Color.BLACK, Configure.LOGIN_SCREEN_COLOR, CustomFont.getFont(
 						Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(153,
