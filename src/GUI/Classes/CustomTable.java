@@ -17,8 +17,7 @@ public class CustomTable extends JPanel {
 		this.dim = dim;
 		setBounds(pos.x, pos.y, dim.width, dim.height);
 		parentPane.add(this);
-		setPreferredSize(new Dimension(dim.width, 1000));
-		
+		setLayout(null);
 //		JScrollPane scroll = new JScrollPane(CustomTable.this);
 		
 		setBackground(Color.WHITE);

@@ -29,9 +29,10 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTextField;
 import GUI.Classes.RemovablePanel;
+import java.sql.SQLException;
 
 public class AccountPanel extends JPanel {
-	public AccountPanel(JPanel parentPanel, Point pos, Dimension d) {
+	public AccountPanel(JPanel parentPanel, Point pos, Dimension d) throws ClassNotFoundException, SQLException {
 		super();
 		setLayout(null);
 		this.setBounds(pos.x, pos.y, d.width, d.height);

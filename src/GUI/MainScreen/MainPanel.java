@@ -27,6 +27,7 @@ import GUI.Classes.RemovablePanel;
 import GUI.Classes.SwitchPaneThread;
 import GUI.CustomersManager.CustomersPanel;
 import GUI.MedicinesManager.MedicinesPanel;
+import java.sql.SQLException;
 
 class TimeThread extends Thread {
 	CustomLabel dateTime;
@@ -48,7 +49,7 @@ public class MainPanel extends RemovablePanel {
 	public Color leftPanelColor = Color.GRAY;
 	public Color rightPanelColor = Color.GRAY;
 	public int leftPanelWidth = 200;
-	public MainPanel(final CustomFrame parentFrame, Dimension dimension) {
+	public MainPanel(final CustomFrame parentFrame, Dimension dimension) throws ClassNotFoundException, SQLException {
 		super(parentFrame);
 		
 		this.dimension = Configure.DEFAULT_SIZE;
@@ -72,20 +73,51 @@ public class MainPanel extends RemovablePanel {
 //				SwingConstants.CENTER, SwingConstants.CENTER, leftPanel));
 //		dateTimeThread.start();
 		
+		CustomButton close = new CustomButton(new ImageIcon(
+				"src/GUI/Resources/Closes.bin"), "", Color.WHITE,
+				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 10),
+				false, false, rightPanelColor, true, new Point(
+						dimension.width - 227, 0), new Dimension(20, 20),
+				rightPanel, SwingConstants.CENTER, SwingConstants.CENTER);
+		close.setRolloverIcon(new ImageIcon(
+				"src/GUI/Resources/CloseRollover.bin"));
 		
-		final AccountPanel accountManager = new AccountPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 20, rightPanel.getHeight() - 50));
+		close.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		
+		CustomButton minimize = new CustomButton(new ImageIcon(
+				"src/GUI/Resources/Minimize.bin"), "", Color.WHITE,
+				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 10),
+				false, false, rightPanelColor, true, new Point(
+						dimension.width - 247, 0), new Dimension(20, 20),
+				rightPanel, SwingConstants.CENTER, SwingConstants.CENTER);
+		minimize.setRolloverIcon(new ImageIcon(
+				"src/GUI/Resources/MinimizeRollover.bin"));
+		
+		minimize.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parentFrame.setState(parentFrame.ICONIFIED);
+			}
+		});
+		
+		final AccountPanel accountManager = new AccountPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
 		accountManager.setBackground(Color.WHITE);
 		accountManager.setVisible(false);
 		
-		final MedicinesPanel medicinesManager = new MedicinesPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 20, rightPanel.getHeight() - 50));
+		final MedicinesPanel medicinesManager = new MedicinesPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
 		medicinesManager.setBackground(Color.WHITE);
 		medicinesManager.setVisible(true);
 		
-		final CustomersPanel customersManager = new CustomersPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 20, rightPanel.getHeight() - 50));
+		final CustomersPanel customersManager = new CustomersPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
 		customersManager.setBackground(Color.WHITE);
 		customersManager.setVisible(false);
 		
-		final BillingHistoryPanel billingHistoryManager = new BillingHistoryPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 20, rightPanel.getHeight() - 50));
+		final BillingHistoryPanel billingHistoryManager = new BillingHistoryPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
 		billingHistoryManager.setBackground(Color.WHITE);
 		billingHistoryManager.setVisible(false);
 		
@@ -129,7 +161,7 @@ public class MainPanel extends RemovablePanel {
 				new Dimension(leftPanelWidth, 40), leftPanel);	
 		
 		JPanel progressPanel = new JPanel();
-		progressPanel.setBounds(leftPanelWidth, 540, dimension.width - leftPanelWidth - 20, 40);
+		progressPanel.setBounds(leftPanelWidth, 550, dimension.width - leftPanelWidth - 10, 40);
 		progressPanel.setBackground(Configure.DEFAULT_RIGHT_PANEL_COLOR);
 		ImageIcon progressIcon = new ImageIcon("src/GUI/Resources/progress.bin");
 		final CustomLabel progress = new CustomLabel(progressIcon, new Point(0, 0), new Dimension(dimension.width - leftPanelWidth - 20, 40), false, progressPanel);
@@ -195,27 +227,26 @@ public class MainPanel extends RemovablePanel {
 		this.add(leftPanel);
 		
 		
-//		ImageIcon closeIcon = new ImageIcon("src/GUI/Resources/close.bin");
-//		JButton close = new JButton(closeIcon);
-//		close.setRolloverIcon(new ImageIcon("src/GUI/Resources/closeRollover.bin"));
-//		close.setBackground(rightPanelColor);
-//		close.setFocusPainted(false);
-//		close.setBorderPainted(false);
-//		
-//		
-//		close.setBounds(10, 10, closeIcon.getIconWidth(), closeIcon.getIconHeight());
-//		close.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				parentFrame.setSize(Configure.MINIMIZE_SIZE);
-//				changeState(medicines, customers, billingHistory, account);
-//				medicines.setBackground(leftPanelColor);
-//				medicines.setForeground(Color.WHITE);
-//				medicines.setEnabled(true);
-//			}
-//		});
-//		rightPanel.add(close);
+		ImageIcon closeIcon = new ImageIcon("src/GUI/Resources/close.bin");
+		JButton closes = new JButton(closeIcon);
+		closes.setRolloverIcon(new ImageIcon("src/GUI/Resources/closeRollover.bin"));
+		closes.setBackground(rightPanelColor);
+		closes.setFocusPainted(false);
+		closes.setBorderPainted(false);
 		
+		
+		closes.setBounds(leftPanelWidth + 5 , 5, closeIcon.getIconWidth(), closeIcon.getIconHeight());
+		closes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				parentFrame.setSize(Configure.MINIMIZE_SIZE);
+				changeState(medicines, customers, billingHistory, account);
+				medicines.setBackground(leftPanelColor);
+				medicines.setForeground(Color.WHITE);
+				medicines.setEnabled(true);
+			}
+		});
+		MainPanel.this.add(closes);
 		this.add(rightPanel);
 		
 	}

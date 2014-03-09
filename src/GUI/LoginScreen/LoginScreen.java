@@ -77,12 +77,12 @@ public class LoginScreen extends CustomFrame {
 				
 			}
 		});
-
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception ex) {
-			System.out.println("Unable to load Windows look and feel");
-		}
+//
+//		try {
+//			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//		} catch (Exception ex) {
+//			System.out.println("Unable to load Windows look and feel");
+//		}
 
 		final CustomCheckbox remember = new CustomCheckbox("",
 				Configure.LOGIN_SCREEN_COLOR, false, false,

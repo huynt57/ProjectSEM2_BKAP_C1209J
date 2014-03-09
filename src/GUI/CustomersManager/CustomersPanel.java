@@ -41,7 +41,7 @@ public class CustomersPanel extends JPanel {
 		CustomTable table = new CustomTable(new Point(40, 180), new Dimension(d.width-40, d.height-40), CustomersPanel.this);
 		
 		JScrollPane x = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		x.setBounds(40, 180, d.width - 70, d.height-210);
+		x.setBounds(40, 180, d.width - 70, d.height-200);
 		this.add(x);
 		
 	}

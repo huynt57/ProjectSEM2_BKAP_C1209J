@@ -49,18 +49,18 @@ public class UpdateProfile extends JPanel {
         Users objUser;
 
         // TODO: Update DB with new user's info 
-        objUser = new Users();
-        while (rs.next()) {
-            objUser.firstName = rs.getString(1);
-            objUser.lastName = rs.getString(2);
-
-            objUser.userAddress = rs.getString(3);
-            objUser.userPhone = rs.getString(4);
-            objUser.userEmail = rs.getString(5);
-
-            v.add(objUser);
-        }
-        Users u = (Users) v.get(0);
+//        objUser = new Users();
+//        while (rs.next()) {
+//            objUser.firstName = rs.getString(1);
+//            objUser.lastName = rs.getString(2);
+//
+//            objUser.userAddress = rs.getString(3);
+//            objUser.userPhone = rs.getString(4);
+//            objUser.userEmail = rs.getString(5);
+//
+//            v.add(objUser);
+//        }
+//        Users u = (Users) v.get(0);
 //        final String first = u.getFirstName();
 //        final String last = u.getLastName();
 //        final String email = u.getUserEmail();
