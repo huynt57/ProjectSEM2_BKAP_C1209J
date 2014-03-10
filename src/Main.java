@@ -5,9 +5,10 @@ import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException, SQLException {
     	
     	LoginScreen loginFrame = null;
     	MainScreen mainFrame = null;

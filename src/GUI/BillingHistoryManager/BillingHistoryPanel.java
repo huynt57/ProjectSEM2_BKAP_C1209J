@@ -39,6 +39,14 @@ public class BillingHistoryPanel extends JPanel {
 		
 		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 100), new Dimension(200, 30), BillingHistoryPanel.this, false);
 		
+		int totalWidth = d.width - 230;
+		int nameSize = totalWidth / 3;
+		int typeSize = totalWidth / 6;
+		int addressSize = totalWidth / 3;
+		int phoneSize = totalWidth / 6;
+		int idSize = 50;
+		int optionSize = 111;
+		Color BACK_GROUND = Color.GRAY; 
 		
 		CustomTable table = new CustomTable(new Point(40, 180), new Dimension(d.width-40, d.height-40), BillingHistoryPanel.this);
 		
