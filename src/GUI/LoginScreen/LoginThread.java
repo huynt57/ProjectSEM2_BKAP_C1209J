@@ -109,7 +109,7 @@ public class LoginThread extends Thread {
             }
 
             if (loginSuccessful) {
-                loginFrame.setVisible(false);
+                loginFrame.dispose();
                 mainFrame.setVisible(true);
                 this.stop();
             } else {
