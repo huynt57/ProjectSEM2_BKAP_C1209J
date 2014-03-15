@@ -24,9 +24,11 @@ import GUI.Classes.CustomTable;
 import GUI.Classes.CustomTextField;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class MedicinesPanel extends JPanel {
-	public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) {
+	public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) throws SQLException, ClassNotFoundException {
 		super();
 		this.setBounds(pos.x, pos.y, d.width, d.height);
 		setLayout(null);
@@ -66,8 +68,13 @@ public class MedicinesPanel extends JPanel {
 		x.setBounds(40, 150, d.width - 70, d.height-170);
 		this.add(x);
 		
+                
+                //vector here
+                Vector<Medicines> loadMedicine = Medicines.getAllMedicine(); 
+                
+                
 		ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
-		for(int i=0; i<50; i++) medicines.add(new Medicine("" + i, "Name " + i, "Type " + i, "Supplier " + i, "Remain " + i));
+		for(int i=0; i<loadMedicine.size(); i++) medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName() , loadMedicine.get(i).getAvaiableAmount()+""));
 		
 		
 		table.setPreferredSize(new Dimension(1000, medicines.size() * 40));
