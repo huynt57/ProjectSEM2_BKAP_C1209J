@@ -55,7 +55,7 @@ public class AccountPanel extends JPanel {
 		logout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-                            
+                            Dialog2Button confirmDialog = new Dialog2Button(new Dimension(200, 50),AccountPanel.this);
 			}
 		});
 		

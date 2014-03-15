@@ -28,16 +28,16 @@ public class BillingRow extends JPanel {
 		super();
 		setLayout(null);
 		setBackground(Color.WHITE);
-		setBounds(pos.x, pos.y, idSize + nameSize + typeSize + addressSize + priceSize + optionSize, 40);
+		setBounds(pos.x, pos.y, idSize + nameSize + typeSize + addressSize + priceSize + statusSize + optionSize, 40);
 		CustomLabel idLabel = new CustomLabel(id, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x, pos.y), new Dimension(idSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel nameLabel = new CustomLabel(name, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize, pos.y), new Dimension(nameSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel typeLabel = new CustomLabel(type, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize + nameSize, pos.y), new Dimension(typeSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel addressLabel = new CustomLabel(address, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize + typeSize + nameSize, pos.y), new Dimension(addressSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel priceLabel = new CustomLabel(price, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x +idSize + typeSize + addressSize + nameSize, pos.y), new Dimension(priceSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
-                CustomLabel statusLabel = new CustomLabel(price, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x +idSize + typeSize + addressSize + nameSize + priceSize, pos.y), new Dimension(statusSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
-		CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + typeSize + addressSize + priceSize + optionSize , 1), parentPanel);
+                CustomLabel statusLabel = new CustomLabel(status, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x +idSize + typeSize + addressSize + nameSize + priceSize, pos.y), new Dimension(statusSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
+		CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + optionSize , 1), parentPanel);
 		
-		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, Color.WHITE, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, Color.WHITE, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 , 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
 		CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, Color.WHITE, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));

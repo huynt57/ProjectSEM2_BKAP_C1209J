@@ -35,11 +35,11 @@ public class BillingHistoryPanel extends JPanel {
 				new Point(40, 20), new Dimension(d.width, 40), true,
 				SwingConstants.LEFT, SwingConstants.CENTER, BillingHistoryPanel.this);
 		
-		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.ORANGE, true, new Point(40, 100), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-		CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.BLUE, true, new Point(150, 100), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-		CustomButton sort = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Sort", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(260, 100), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.ORANGE, true, new Point(40, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+		CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.BLUE, true, new Point(150, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+		CustomButton sort = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Sort", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(260, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
 		
-		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 100), new Dimension(200, 30), BillingHistoryPanel.this, false);
+		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 80), new Dimension(200, 30), BillingHistoryPanel.this, false);
 		
 		int totalWidth = d.width - 230;
 		int nameSize = totalWidth / 4;
@@ -51,10 +51,19 @@ public class BillingHistoryPanel extends JPanel {
 		int optionSize = 111;
 		Color BACK_GROUND = Color.GRAY; 
 		
+                CustomButton id = new CustomButton("ID", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40, 120), new Dimension(idSize, 30), BillingHistoryPanel.this);
+		CustomButton name = new CustomButton("Name", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + idSize, 120), new Dimension(nameSize, 30),BillingHistoryPanel.this);
+		CustomButton type = new CustomButton("Type", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize +idSize, 120), new Dimension(typeSize, 30), BillingHistoryPanel.this);
+		CustomButton address = new CustomButton("Address", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + idSize, 120), new Dimension(addressSize, 30), BillingHistoryPanel.this);
+		CustomButton price = new CustomButton("Price", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + addressSize + idSize, 120), new Dimension(priceSize, 30), BillingHistoryPanel.this);
+                CustomButton status = new CustomButton("Status", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + addressSize + idSize + priceSize, 120), new Dimension(priceSize, 30), BillingHistoryPanel.this);
+		CustomButton options = new CustomButton("Options", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + addressSize + priceSize + idSize + statusSize, 120), new Dimension(optionSize, 30),BillingHistoryPanel.this);
+		
+                
 		CustomTable table = new CustomTable(new Point(40, 180), new Dimension(d.width-40, d.height-40), BillingHistoryPanel.this);
 		
 		JScrollPane x = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		x.setBounds(40, 180, d.width - 70, d.height-200);
+		x.setBounds(40, 150, d.width - 70, d.height-170);
 		this.add(x);
                 
                 ArrayList<BillingHistoryPanel.Billing> billing = new ArrayList<BillingHistoryPanel.Billing>();

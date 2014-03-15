@@ -30,7 +30,8 @@ public class Main {
 	    	if(rememberState.equals("0")) loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, false, false);
 	    	else loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, true, false);
     	} else {
-    		mainFrame = new MainScreen("MSB Portal", true, true, false, Configure.DEFAULT_SIZE);    		
+    		mainFrame = new MainScreen("MSB Portal", false, true, false, Configure.DEFAULT_SIZE); 
+                mainFrame.setVisible(true);
     	}
 	}
 }

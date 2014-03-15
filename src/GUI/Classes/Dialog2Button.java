@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class Dialog2Button extends JFrame {
 
-    public Dialog2Button(Dimension dimension, JFrame parentFrame)  {
+    public Dialog2Button(Dimension dimension, final JPanel parentFrame)  {
         super();
         setUndecorated(true);
         setLocationRelativeTo(null);
@@ -26,16 +26,14 @@ public class Dialog2Button extends JFrame {
 				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
 				false, false, Color.GRAY, true, new Point(dimension.width-120, 20),
 				new Dimension(dimension.width/2-20, 40), content);
-		ok.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-                            
-			}
-		});
-        }
-
-    public Dialog2Button(Dimension dimension, AccountPanel aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ok.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                        Dialog2Button.this.dispose();
+                        parentFrame.setEnabled(true);
+                }
+        });
+        
     }
-    
+
 }
