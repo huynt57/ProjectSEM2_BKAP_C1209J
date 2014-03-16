@@ -14,13 +14,15 @@ import GUI.Classes.CustomButton;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.MedicinesManager.MedicineRow;
+import static GUI.MedicinesManager.MedicineRow.white;
 
 public class CustomerRow extends JPanel {
+        public static boolean white = true;
 	public CustomerRow(String id, String name, String type, String address, String phone, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
 		Color BackGround = null;
-		if(Integer.parseInt(id) % 2 == 1) BackGround = Color.WHITE;
+		if(white) BackGround = Color.WHITE;
                 else BackGround = Color.getHSBColor(20, 12, 21);
                 setBackground(BackGround);
 		setBounds(pos.x, pos.y, idSize + nameSize + typeSize + addressSize + phoneSize + optionSize, 40);
