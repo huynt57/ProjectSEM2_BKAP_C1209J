@@ -47,6 +47,21 @@ public class MedicinesPanel extends JPanel {
 		
 		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
 		
+                add.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        MedicinesPanel.this.setEnabled(false);
+                        
+                        
+                        Vector x = new Vector();
+                        for(int i=1; i<=10; i++) x.add(i);
+                        
+                        
+                        AddFrame addMedicines = new AddFrame("", false, false, false, new Dimension(400, 550), x, x, x);
+                        addMedicines.setVisible(true);
+                    }
+                });
+                
 		HintTextField search = new HintTextField(" Search medicine", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-272, 80), new Dimension(200, 30), MedicinesPanel.this, false);
                 CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width-72, 80), new Dimension(40, 30), MedicinesPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 		
@@ -216,17 +231,17 @@ public class MedicinesPanel extends JPanel {
         }
         
 	public class Medicine {
-		String id;
-		String name;
-		String type;
-		String supplier;
-		String remain;
-		public Medicine(String id, String name, String type, String supplier, String remain) {
-			this.id = id;
-			this.name = name;
-			this.type = type;
-			this.supplier = supplier;
-			this.remain = remain;
-		}
+            String id;
+            String name;
+            String type;
+            String supplier;
+            String remain;
+            public Medicine(String id, String name, String type, String supplier, String remain) {
+                this.id = id;
+                this.name = name;
+                this.type = type;
+                this.supplier = supplier;
+                this.remain = remain;
+            }
 	}
 }

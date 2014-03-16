@@ -18,8 +18,6 @@ import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTable;
 import GUI.Classes.HintTextField;
 import GUI.MedicinesManager.MedicineRow;
-import GUI.MedicinesManager.MedicinesPanel;
-import static GUI.MedicinesManager.MedicinesPanel.nameSort;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -33,7 +31,7 @@ public class CustomersPanel extends JPanel {
         this.setBounds(pos.x, pos.y, d.width, d.height);
         setLayout(null);
         parentPanel.add(this);
-
+        
         CustomLabel titleLabel = new CustomLabel("Customers manager",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),
@@ -90,7 +88,7 @@ public class CustomersPanel extends JPanel {
                                 }      
                         nameSort = !nameSort;
                         table.removeAll();
-                        MedicineRow.white = true;
+                        CustomerRow.white = true;
                         for(int i=0; i<customers.size(); i++)
                 	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
                         table.repaint();
@@ -113,7 +111,7 @@ public class CustomersPanel extends JPanel {
                                 }      
                         nameSort = !nameSort;
                         table.removeAll();
-                        MedicineRow.white = true;
+                        CustomerRow.white = true;
                         for(int i=0; i<customers.size(); i++)
                 	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
                         table.repaint();
@@ -136,7 +134,7 @@ public class CustomersPanel extends JPanel {
                                 }      
                         nameSort = !nameSort;
                         table.removeAll();
-                        MedicineRow.white = true;
+                        CustomerRow.white = true;
                         for(int i=0; i<customers.size(); i++)
                 	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
                         table.repaint();
@@ -159,7 +157,7 @@ public class CustomersPanel extends JPanel {
                                 }      
                         nameSort = !nameSort;
                         table.removeAll();
-                        MedicineRow.white = true;
+                        CustomerRow.white = true;
                         for(int i=0; i<customers.size(); i++)
                 	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
                         table.repaint();
@@ -182,7 +180,7 @@ public class CustomersPanel extends JPanel {
                                 }      
                         nameSort = !nameSort;
                         table.removeAll();
-                        MedicineRow.white = true;
+                        CustomerRow.white = true;
                         for(int i=0; i<customers.size(); i++)
                 	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
                         table.repaint();

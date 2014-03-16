@@ -36,9 +36,7 @@ public class BillingHistoryPanel extends JPanel {
 				SwingConstants.LEFT, SwingConstants.CENTER, BillingHistoryPanel.this);
 
 		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.ORANGE, true, new Point(40, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-		CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.BLUE, true, new Point(150, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-		CustomButton sort = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Sort", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(260, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-
+		
 		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 80), new Dimension(200, 30), BillingHistoryPanel.this, false);
 
 		int totalWidth = d.width - 230;

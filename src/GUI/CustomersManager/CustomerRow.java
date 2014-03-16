@@ -25,6 +25,7 @@ public class CustomerRow extends JPanel {
 		if(white) BackGround = Color.WHITE;
                 else BackGround = Color.getHSBColor(20, 12, 21);
                 setBackground(BackGround);
+                white = !white;
 		setBounds(pos.x, pos.y, idSize + nameSize + typeSize + addressSize + phoneSize + optionSize, 40);
 		CustomLabel idLabel = new CustomLabel(id, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x, pos.y), new Dimension(idSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel nameLabel = new CustomLabel(name, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize, pos.y), new Dimension(nameSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
