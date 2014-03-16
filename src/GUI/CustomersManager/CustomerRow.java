@@ -19,7 +19,7 @@ public class CustomerRow extends JPanel {
 	public CustomerRow(String id, String name, String type, String address, String phone, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
-		 Color BackGround = null;
+		Color BackGround = null;
 		if(Integer.parseInt(id) % 2 == 1) BackGround = Color.WHITE;
                 else BackGround = Color.getHSBColor(20, 12, 21);
                 setBackground(BackGround);

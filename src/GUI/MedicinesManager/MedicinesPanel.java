@@ -24,9 +24,14 @@ import GUI.Classes.CustomTable;
 import GUI.Classes.CustomTextField;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.Action;
 
 public class MedicinesPanel extends JPanel {
-	public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) {
+	public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) throws SQLException, ClassNotFoundException {
 		super();
 		this.setBounds(pos.x, pos.y, d.width, d.height);
 		setLayout(null);
@@ -45,12 +50,12 @@ public class MedicinesPanel extends JPanel {
 		HintTextField search = new HintTextField(" Search medicine", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 70), new Dimension(200, 30), MedicinesPanel.this, false);
 		
 		int totalWidth = d.width - 230;
-		int nameSize = totalWidth / 3;
-		int typeSize = totalWidth / 6;
-		int supplierSize = totalWidth / 3;
-		int remainSize = totalWidth / 6;
-		int idSize = 50;
-		int optionSize = 111;
+		final int nameSize = totalWidth / 3;
+		final int typeSize = totalWidth / 6;
+		final int supplierSize = totalWidth / 3;
+		final int remainSize = totalWidth / 6;
+		final int idSize = 50;
+		final int optionSize = 111;
 		Color BACK_GROUND = Color.GRAY; 
 		
 		CustomButton id = new CustomButton("ID", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40, 120), new Dimension(idSize, 30), MedicinesPanel.this);
@@ -60,22 +65,155 @@ public class MedicinesPanel extends JPanel {
 		CustomButton remain = new CustomButton("Remain", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + supplierSize + idSize, 120), new Dimension(remainSize, 30), MedicinesPanel.this);
 		CustomButton options = new CustomButton("Options", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + supplierSize + remainSize + idSize, 120), new Dimension(optionSize, 30), MedicinesPanel.this);
 		
-		
-		CustomTable table = new CustomTable(new Point(40, 180), new Dimension(d.width-40, d.height-40), MedicinesPanel.this);
+		final CustomTable table = new CustomTable(new Point(40, 180), new Dimension(d.width-40, d.height-40), MedicinesPanel.this);
 		JScrollPane x = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		x.setBounds(40, 150, d.width - 70, d.height-170);
 		this.add(x);
 		
-		ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
-		for(int i=0; i<50; i++) medicines.add(new Medicine("" + i, "Name " + i, "Type " + i, "Supplier " + i, "Remain " + i));
+                
+                //vector here
+                final Vector<Medicines> loadMedicine = Medicines.getAllMedicine(); 
+		final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for(int i=0; i<loadMedicine.size(); i++) medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName() , loadMedicine.get(i).getAvaiableAmount()+""));   
+                table.setPreferredSize(new Dimension(1000, medicines.size() * 40));	
 		
-		
-		table.setPreferredSize(new Dimension(1000, medicines.size() * 40));
-		
-		for(int i=0; i<medicines.size(); i++)
+                for(int i=0; i<medicines.size(); i++)
 		table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
-		
+		    
+                name.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        for(int i=0; i<medicines.size()-1; i++)
+                            for(int j=i+1; j<medicines.size(); j++) 
+                                if(nameSort) {
+                                    if(medicines.get(i).name.compareTo(medicines.get(j).name) < 0) {
+                                        swap(medicines, i, j);
+                                    } 
+                                } else {
+                                    if(medicines.get(i).name.compareTo(medicines.get(j).name) > 0) {
+                                       swap(medicines, i, j);
+                                    } 
+                                }      
+                        nameSort = !nameSort;
+                        table.removeAll();
+                        MedicineRow.white = true;
+                        for(int i=0; i<medicines.size(); i++)
+                	table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                        table.repaint();
+                    }
+                });
+                
+                 id.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        for(int i=0; i<medicines.size()-1; i++)
+                            for(int j=i+1; j<medicines.size(); j++) 
+                                if(nameSort) {
+                                    if(medicines.get(i).id.compareTo(medicines.get(j).id) < 0) {
+                                        swap(medicines, i, j);
+                                    } 
+                                } else {
+                                    if(medicines.get(i).id.compareTo(medicines.get(j).id) > 0) {
+                                       swap(medicines, i, j);
+                                    } 
+                                }      
+                        nameSort = !nameSort;
+                        table.removeAll();
+                        MedicineRow.white = true;
+                        for(int i=0; i<medicines.size(); i++)
+                	table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                        table.repaint();
+                    }
+                });
+                 
+                 type.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        for(int i=0; i<medicines.size()-1; i++)
+                            for(int j=i+1; j<medicines.size(); j++) 
+                                if(nameSort) {
+                                    if(medicines.get(i).type.compareTo(medicines.get(j).type) < 0) {
+                                        swap(medicines, i, j);
+                                    } 
+                                } else {
+                                    if(medicines.get(i).type.compareTo(medicines.get(j).type) > 0) {
+                                       swap(medicines, i, j);
+                                    } 
+                                }      
+                        nameSort = !nameSort;
+                        System.out.println(nameSort);
+                        table.removeAll();
+                        MedicineRow.white = true;
+                        for(int i=0; i<medicines.size(); i++)
+                	table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                        table.repaint();
+                    }
+                });
+                 
+                supplier.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        for(int i=0; i<medicines.size()-1; i++)
+                            for(int j=i+1; j<medicines.size(); j++) 
+                                if(nameSort) {
+                                    if(medicines.get(i).supplier.compareTo(medicines.get(j).supplier) < 0) {
+                                        swap(medicines, i, j);
+                                    } 
+                                } else {
+                                    if(medicines.get(i).supplier.compareTo(medicines.get(j).supplier) > 0) {
+                                       swap(medicines, i, j);
+                                    } 
+                                }      
+                        nameSort = !nameSort;
+                        System.out.println(nameSort);
+                        table.removeAll();
+                        MedicineRow.white = true;
+                        for(int i=0; i<medicines.size(); i++)
+                	table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                        table.repaint();
+                    }
+                });
+                
+                remain.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        for(int i=0; i<medicines.size()-1; i++)
+                            for(int j=i+1; j<medicines.size(); j++) 
+                                if(nameSort) {
+                                    if(medicines.get(i).remain.compareTo(medicines.get(j).remain) < 0) {
+                                        swap(medicines, i, j);
+                                    } 
+                                } else {
+                                    if(medicines.get(i).remain.compareTo(medicines.get(j).remain) > 0) {
+                                       swap(medicines, i, j);
+                                    } 
+                                }      
+                        nameSort = !nameSort;
+                        System.out.println(nameSort);
+                        table.removeAll();
+                        MedicineRow.white = true;
+                        for(int i=0; i<medicines.size(); i++)
+                	table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                        table.repaint();
+                    }
+                });
 	}
+
+        public static boolean nameSort = true;
+        public void swap(ArrayList<Medicine> medicines, int i, int j) {
+            Medicine temp = new Medicine(medicines.get(i).id,medicines.get(i).name,medicines.get(i).type,medicines.get(i).supplier,medicines.get(i).remain);
+            medicines.get(i).id = medicines.get(j).id;
+            medicines.get(i).name = medicines.get(j).name;
+            medicines.get(i).type = medicines.get(j).type;
+            medicines.get(i).supplier = medicines.get(j).supplier;
+            medicines.get(i).remain = medicines.get(j).remain;
+            medicines.get(j).id = temp.id;
+            medicines.get(j).name = temp.name;
+            medicines.get(j).type = temp.type;
+            medicines.get(j).supplier = temp.supplier;
+            medicines.get(j).remain = temp.remain;
+        }
+        
 	public class Medicine {
 		String id;
 		String name;

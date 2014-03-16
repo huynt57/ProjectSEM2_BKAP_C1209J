@@ -50,7 +50,7 @@ public class UpdateProfile extends JPanel {
 
         // TODO: Update DB with new user's info 
 //        objUser = new Users();
-//        while (rs.next()) { 
+//        while (rs.next()) {
 //            objUser.firstName = rs.getString(1);
 //            objUser.lastName = rs.getString(2);
 //

@@ -28,7 +28,6 @@ import GUI.Classes.CustomButton;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTextField;
-import GUI.Classes.Dialog2Button;
 import GUI.Classes.RemovablePanel;
 import java.sql.SQLException;
 
@@ -55,7 +54,7 @@ public class AccountPanel extends JPanel {
 		logout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-                            Dialog2Button confirmDialog = new Dialog2Button(new Dimension(200, 50),AccountPanel.this);
+				
 			}
 		});
 		
@@ -113,6 +112,8 @@ public class AccountPanel extends JPanel {
 				changeState(managerUser, overview, profile, changePass,  preferences, userManager, updateProfile, overView, changePassword,  preferencesPane);
 			}
 		});
+		
+
 	}
 	
 	public void changeState(JButton b1, JButton b2, JButton b3, JButton b4, JButton b5, JPanel p1, JPanel p2, JPanel p3, JPanel p4, JPanel p5) {

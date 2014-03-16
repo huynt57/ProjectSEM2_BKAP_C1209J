@@ -27,7 +27,6 @@ import GUI.Classes.RemovablePanel;
 import GUI.Classes.SwitchPaneThread;
 import GUI.CustomersManager.CustomersPanel;
 import GUI.MedicinesManager.MedicinesPanel;
-import java.awt.Toolkit;
 import java.sql.SQLException;
 
 class TimeThread extends Thread {
@@ -81,7 +80,7 @@ public class MainPanel extends RemovablePanel {
 						dimension.width - 227, 0), new Dimension(20, 20),
 				rightPanel, SwingConstants.CENTER, SwingConstants.CENTER);
 		close.setRolloverIcon(new ImageIcon(
-				"src/GUI/Resources/ClosesRollover.bin"));
+				"src/GUI/Resources/CloseRollover.bin"));
 		
 		close.addActionListener(new ActionListener() {
 			@Override
@@ -94,7 +93,7 @@ public class MainPanel extends RemovablePanel {
 				"src/GUI/Resources/Minimize.bin"), "", Color.WHITE,
 				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 10),
 				false, false, rightPanelColor, true, new Point(
-						dimension.width - 267, 0), new Dimension(20, 20),
+						dimension.width - 247, 0), new Dimension(20, 20),
 				rightPanel, SwingConstants.CENTER, SwingConstants.CENTER);
 		minimize.setRolloverIcon(new ImageIcon(
 				"src/GUI/Resources/MinimizeRollover.bin"));
@@ -103,29 +102,6 @@ public class MainPanel extends RemovablePanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parentFrame.setState(parentFrame.ICONIFIED);
-			}
-		});
-                
-                CustomButton maximum = new CustomButton(new ImageIcon(
-				"src/GUI/Resources/Maximum.bin"), "", Color.WHITE,
-				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 10),
-				false, false, rightPanelColor, true, new Point(
-						dimension.width - 247, 0), new Dimension(20, 20),
-				rightPanel, SwingConstants.CENTER, SwingConstants.CENTER);
-		maximum.setRolloverIcon(new ImageIcon(
-				"src/GUI/Resources/MaximumRollover.bin"));
-		
-		maximum.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-//				if(parentFrame.getWidth() < (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth())) {
-//                                    parentFrame.setSize((int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()), (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight()));
-//                                    parentFrame.repaint();
-//                                    parentFrame.setLocationRelativeTo(null);
-//                                } else {
-//                                    parentFrame.setSize(1000, 600);
-//                                    parentFrame.setLocationRelativeTo(null);
-//                                }
 			}
 		});
 		
