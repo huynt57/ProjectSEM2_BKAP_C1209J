@@ -41,7 +41,15 @@ public class MeasurePanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, MeasurePanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MeasurePanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+        add.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent ae) { 
+                
+                MeasureNew addMeasure = new MeasureNew("", false, false, false, new Dimension(400, 150));
+                addMeasure.setVisible(true);
+            }
+        });
         HintTextField search = new HintTextField(" Search measures", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MeasurePanel.this, false);
         CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MeasurePanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
