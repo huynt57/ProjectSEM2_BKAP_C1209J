@@ -60,11 +60,11 @@ CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/se
         x.setBounds(40, 150, d.width - 70, d.height - 170);
         this.add(x);
 
-//        Vector<Customers> loadMedicineTypes;
+        Vector<MedicineTypes> loadMedicineType =  MedicineTypes.getAllMedicineType();
         final ArrayList<MedicineTypePanel.MedicineType> measures = new ArrayList<MedicineTypePanel.MedicineType>();
-//        for (int i = 0; i < loadMedicineType.size(); i++) {
-//            measures.add(new MedicineType(loadMedicineType.get(i).getMedicineTypeCode() + "", loadMedicineType.get(i).getMedicineTypeName(), loadMedicineType.get(i).getMedicineTypeType() + "", loadMedicineType.get(i).getMedicineTypeAddress(), loadMedicineType.get(i).getMedicineTypePhone()));
-//        }
+        for (int i = 0; i < loadMedicineType.size(); i++) {
+            measures.add(new MedicineType(loadMedicineType.get(i).getMedicineTypeCode() + "", loadMedicineType.get(i).getMedicineTypeName()));
+        }
         table.setPreferredSize(new Dimension(1000, measures.size() * 40));
         for (int i = 0; i < measures.size(); i++) {
             table.add(new MedicineTypeRow(measures.get(i).id, measures.get(i).name, idSize, nameSize, optionSize, new Point(0, i * 40), table));
