@@ -27,15 +27,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MedicinesPanel extends JPanel {
 
-
-    
     public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) throws SQLException, ClassNotFoundException {
         super();
-        
+
         this.setBounds(pos.x, pos.y, d.width, d.height);
         setLayout(null);
         parentPanel.add(this);
@@ -47,8 +46,9 @@ public class MedicinesPanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, MedicinesPanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-//        CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-        add.addActionListener(new ActionListener() {
+       CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+      
+       add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 MedicinesPanel.this.setEnabled(false);
@@ -56,13 +56,12 @@ public class MedicinesPanel extends JPanel {
                 Vector x = new Vector();
                 for (int i = 1; i <= 10; i++) {
                     x.add(i);
-                    
-                    
+
                 }
 
                 AddFrame addMedicines = new AddFrame("", false, false, false, new Dimension(400, 550), x, x, x);
                 addMedicines.setVisible(true);
-                
+
             }
         });
 
@@ -89,21 +88,24 @@ public class MedicinesPanel extends JPanel {
         x.setBounds(40, 150, d.width - 70, d.height - 170);
         this.add(x);
 
-        
-        final Vector<Medicines> loadMedicine = Medicines.getAllMedicine();
-        final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
-        for (int i = 0; i < loadMedicine.size(); i++) {
-            medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
-        }
-        table.setPreferredSize(new Dimension(1000, medicines.size() * 40));
+        updateTable(table, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize);
 
-        for (int i = 0; i < medicines.size(); i++) {
-            table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
-        }
         //vector here
         name.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Vector<Medicines> loadMedicine = null;
+                try {
+                    loadMedicine = Medicines.getAllMedicine();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for (int i = 0; i < loadMedicine.size(); i++) {
+                    medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                }
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
@@ -130,6 +132,18 @@ public class MedicinesPanel extends JPanel {
         id.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Vector<Medicines> loadMedicine = null;
+                try {
+                    loadMedicine = Medicines.getAllMedicine();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for (int i = 0; i < loadMedicine.size(); i++) {
+                    medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                }
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
@@ -156,6 +170,18 @@ public class MedicinesPanel extends JPanel {
         type.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Vector<Medicines> loadMedicine = null;
+                try {
+                    loadMedicine = Medicines.getAllMedicine();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for (int i = 0; i < loadMedicine.size(); i++) {
+                    medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                }
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
@@ -183,6 +209,18 @@ public class MedicinesPanel extends JPanel {
         supplier.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Vector<Medicines> loadMedicine = null;
+                try {
+                    loadMedicine = Medicines.getAllMedicine();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for (int i = 0; i < loadMedicine.size(); i++) {
+                    medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                }
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
@@ -207,9 +245,34 @@ public class MedicinesPanel extends JPanel {
             }
         });
 
+         refresh.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable(table, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+        });
+        
         remain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                Vector<Medicines> loadMedicine = null;
+                try {
+                    loadMedicine = Medicines.getAllMedicine();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                for (int i = 0; i < loadMedicine.size(); i++) {
+                    medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                }
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
@@ -233,6 +296,27 @@ public class MedicinesPanel extends JPanel {
                 table.repaint();
             }
         });
+    }
+
+    public void updateTable(CustomTable table, int idSize, int nameSize, int typeSize, int supplierSize, int remainSize, int optionSize) throws SQLException {
+        table.removeAll();
+
+        Vector<Medicines> loadMedicine = null;
+        try {
+            loadMedicine = Medicines.getAllMedicine();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+        for (int i = 0; i < loadMedicine.size(); i++) {
+            medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+        }
+        table.setPreferredSize(new Dimension(1000, medicines.size() * 40));
+
+        for (int i = 0; i < medicines.size(); i++) {
+            table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+        }
+        table.repaint();
     }
 
     public static boolean nameSort = true;
