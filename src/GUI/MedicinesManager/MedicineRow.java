@@ -11,8 +11,13 @@ import javax.swing.SwingConstants;
 
 import GUI.Classes.Configure;
 import GUI.Classes.CustomButton;
+import GUI.Classes.CustomDialog;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+import javax.swing.Action;
 
 public class MedicineRow extends JPanel {
         public static boolean white = true;
@@ -34,9 +39,43 @@ public class MedicineRow extends JPanel {
 		 
 		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround , true, new Point(idSize + nameSize + typeSize + supplierSize + remainSize + (optionSize-80)/2, 5), new Dimension(20, 30), MedicineRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
-		CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + supplierSize + remainSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), MedicineRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
-		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
+		details.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        
+                        
+                    }
+                });
+                CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + supplierSize + remainSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), MedicineRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		edit.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                       Vector x = new Vector();
+                        for(int i=1; i<=10; i++) x.add(i);
+                      
+                        
+                        
+//                        detailsFrame.setVisible(true);
+                    }
+                });
+                
+                edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
 		CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + supplierSize + remainSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), MedicineRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));
+                delete.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                         CustomDialog dialog = new CustomDialog("Are you sure ?", true, true, false, new Dimension(200, 100), new ActionListener() {
+
+                             @Override
+                             public void actionPerformed(ActionEvent e) {
+                                 
+                                 // DELETE
+                                 
+                                 
+                             }
+                         });
+                    }
+                });
 	}
 }
