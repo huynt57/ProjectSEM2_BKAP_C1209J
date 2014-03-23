@@ -66,9 +66,8 @@ public class MedicinesPanel extends JPanel {
             }
         });
 
-        HintTextField search = new HintTextField(" Search medicine", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 272, 80), new Dimension(200, 30), MedicinesPanel.this, false);
+        HintTextField search = new HintTextField(" Search Medicines", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MedicinesPanel.this, false);
         CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MedicinesPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
-
         int totalWidth = d.width - 230;
         final int nameSize = totalWidth / 3;
         final int typeSize = totalWidth / 6;

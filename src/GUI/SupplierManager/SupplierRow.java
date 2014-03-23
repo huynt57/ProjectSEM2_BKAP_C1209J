@@ -1,6 +1,5 @@
 package GUI.SupplierManager;
 
-import GUI.CustomersManager.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -40,6 +39,8 @@ public class SupplierRow extends JPanel {
 		details.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
+                        
+                        
                     }
                 });
                 CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + emailSize + addressSize + phoneSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), SupplierRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
@@ -47,7 +48,8 @@ public class SupplierRow extends JPanel {
 		edit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+                        
                     }
                 });
                 CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + emailSize + addressSize + phoneSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), SupplierRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
@@ -55,7 +57,8 @@ public class SupplierRow extends JPanel {
                 delete.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        
+                        
                     }
                 });
         }

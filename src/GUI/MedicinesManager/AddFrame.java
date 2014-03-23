@@ -34,7 +34,7 @@ public class AddFrame extends CustomFrame {
         this.setContentPane(contenPane);
         setLayout(null);
 //        type, supplier, measure,,  origine,  user guide, 
-        CustomLabel titleLabel = new CustomLabel("Add medicine",
+        CustomLabel titleLabel = new CustomLabel("Add new medicine",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
@@ -53,19 +53,19 @@ public class AddFrame extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
                 new Point(20, 230), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-        CustomComboBox supplier = new CustomComboBox(supplierVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 230), new Dimension(dim.width - 120, 30), contenPane);
+        final CustomComboBox supplier = new CustomComboBox(supplierVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 230), new Dimension(dim.width - 120, 30), contenPane);
         CustomLabel measureLabel = new CustomLabel("Measure",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
                 new Point(20, 270), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-        CustomComboBox measure = new CustomComboBox(measureVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 270), new Dimension(dim.width - 120, 30), contenPane);
+        final CustomComboBox measure = new CustomComboBox(measureVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 270), new Dimension(dim.width - 120, 30), contenPane);
         CustomLabel typeLabel = new CustomLabel("Type",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
                 new Point(20, 310), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-        CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 310), new Dimension(dim.width - 120, 30), contenPane);
+       final  CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 310), new Dimension(dim.width - 120, 30), contenPane);
 
         final JRadioButton domestic = new JRadioButton("");
         domestic.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
@@ -111,8 +111,29 @@ public class AddFrame extends CustomFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-              
+//              name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
+//        final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+//        final HintTextField termOfUse = new HintTextField(" Term of user", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+//        final HintTextField number = new HintTextField(" Available amount", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+//        final HintTextField registerNumber = new HintTextField(" Register number", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+//        final HintTextField used = 
 //            TODO: OK Here
+                
+                String namex = name.getText().toString();
+                String supplierx = supplier.getSelectedItem().toString();
+                String pricex = price.getText();
+                String termofUsed = termOfUse.getText().toString();
+                String regNum = registerNumber.getText().toString();
+                String num = number.getText().toString();
+                String usedx = used.getText().toString();
+                String measurex = measure.getSelectedItem().toString();
+                String typex = type.getSelectedItem().toString();
+                String origin;
+                if (domestic.isSelected()) origin = "domestic";
+                else origin = "foreign";
+                
+                
+                
             }
         });
 

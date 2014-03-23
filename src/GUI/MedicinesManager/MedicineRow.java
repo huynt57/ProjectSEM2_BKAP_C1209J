@@ -57,8 +57,7 @@ public class MedicineRow extends JPanel {
                         for(int i=1; i<=10; i++) x.add(i);
                       
                         
-                        
-//                        detailsFrame.setVisible(true);
+
                     }
                 });
                 

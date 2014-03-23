@@ -1,5 +1,6 @@
-package GUI.MeasureManager;
+package GUI.MedicineTypeManager;
 
+import GUI.MeasureManager.*;
 import GUI.CustomersManager.*;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,9 +20,9 @@ import static GUI.MedicinesManager.MedicineRow.white;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MeasureRow extends JPanel {
+public class MedicineTypeRow extends JPanel {
         public static boolean white = true;
-	public MeasureRow(String id, String name, int idSize, int nameSize, int optionSize, Point pos, JPanel parentPanel) {
+	public MedicineTypeRow(String id, String name, int idSize, int nameSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
 		Color BackGround = null;
@@ -33,7 +34,7 @@ public class MeasureRow extends JPanel {
 		CustomLabel idLabel = new CustomLabel(id, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x, pos.y), new Dimension(idSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel nameLabel = new CustomLabel(name, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize, pos.y), new Dimension(nameSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		
-		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2, 5), new Dimension(20, 30), MedicineTypeRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
 		
                 details.addActionListener(new ActionListener() {
@@ -42,7 +43,7 @@ public class MeasureRow extends JPanel {
   
                     }
                 });
-                CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+                CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), MedicineTypeRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
 		edit.addActionListener(new ActionListener() {
                     @Override
@@ -50,7 +51,7 @@ public class MeasureRow extends JPanel {
   
                     }
                 });
-                CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+                CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), MedicineTypeRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));
                 delete.addActionListener(new ActionListener() {
                     @Override

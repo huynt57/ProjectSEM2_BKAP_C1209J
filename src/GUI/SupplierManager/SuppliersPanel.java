@@ -39,8 +39,18 @@ public class SuppliersPanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, SuppliersPanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), SuppliersPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-      
+        add.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                
+                SupplierNew addSupplier = new SupplierNew("", false, false, false, new Dimension(400, 330));
+                addSupplier.setVisible(true);
+            }
+        });
         HintTextField search = new HintTextField(" Search Suppliers", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), SuppliersPanel.this, false);
+        CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), SuppliersPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
         int totalWidth = d.width - 230;
         final int nameSize = totalWidth / 5;
@@ -48,7 +58,7 @@ public class SuppliersPanel extends JPanel {
         final int addressSize = totalWidth / 15 * 4;
         final int phoneSize = totalWidth / 15 * 4;
         final int idSize = 50;
-        final int optionSize = 111;
+        final int optionSize = 113;
         Color BACK_GROUND = Color.GRAY;
 
         CustomButton id = new CustomButton("ID", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40, 120), new Dimension(idSize, 30), SuppliersPanel.this);

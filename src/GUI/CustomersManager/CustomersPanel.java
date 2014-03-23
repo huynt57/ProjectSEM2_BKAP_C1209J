@@ -41,6 +41,7 @@ public class CustomersPanel extends JPanel {
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), CustomersPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
       
         HintTextField search = new HintTextField(" Search customer", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), CustomersPanel.this, false);
+CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), CustomersPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
         int totalWidth = d.width - 230;
         final int nameSize = totalWidth / 3;

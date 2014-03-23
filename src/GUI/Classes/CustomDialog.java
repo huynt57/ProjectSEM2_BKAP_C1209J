@@ -43,7 +43,6 @@ public class CustomDialog extends CustomFrame {
                 CustomDialog.this.dispose();
             }
         });
-
         
     }
 

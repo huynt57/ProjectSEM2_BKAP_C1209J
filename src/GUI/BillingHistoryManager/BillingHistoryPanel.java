@@ -18,8 +18,6 @@ import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTable;
 import GUI.Classes.HintTextField;
 import GUI.CustomersManager.CustomersPanel;
-import GUI.MedicinesManager.MedicineRow;
-import GUI.MedicinesManager.MedicinesPanel;
 import java.util.ArrayList;
 
 public class BillingHistoryPanel extends JPanel {
@@ -35,7 +33,7 @@ public class BillingHistoryPanel extends JPanel {
 				new Point(40, 20), new Dimension(d.width, 40), true,
 				SwingConstants.LEFT, SwingConstants.CENTER, BillingHistoryPanel.this);
 
-		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.ORANGE, true, new Point(40, 80), new Dimension(100, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
 		
 		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 80), new Dimension(200, 30), BillingHistoryPanel.this, false);
 
