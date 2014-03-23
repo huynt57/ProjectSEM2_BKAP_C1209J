@@ -18,8 +18,7 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTable;
 import GUI.Classes.HintTextField;
-import GUI.MedicinesManager.MedicineRow;
-import GUI.MedicinesManager.MedicinesPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -60,11 +59,11 @@ public class MeasurePanel extends JPanel {
         x.setBounds(40, 150, d.width - 70, d.height - 170);
         this.add(x);
 
-//        Vector<Customers> loadMeasures;
+        Vector<Measures> loadMeasure = Measures.getAllMeasure();
         final ArrayList<MeasurePanel.Measure> measures = new ArrayList<MeasurePanel.Measure>();
-//        for (int i = 0; i < loadMeasure.size(); i++) {
-//            measures.add(new Measure(loadMeasure.get(i).getMeasureCode() + "", loadMeasure.get(i).getMeasureName(), loadMeasure.get(i).getMeasureType() + "", loadMeasure.get(i).getMeasureAddress(), loadMeasure.get(i).getMeasurePhone()));
-//        }
+        for (int i = 0; i < loadMeasure.size(); i++) {
+            measures.add(new Measure(loadMeasure.get(i).getMeasureCode() + "", loadMeasure.get(i).getMeasureName()));
+        }
         table.setPreferredSize(new Dimension(1000, measures.size() * 40));
         for (int i = 0; i < measures.size(); i++) {
             table.add(new MeasureRow(measures.get(i).id, measures.get(i).name, idSize, nameSize, optionSize, new Point(0, i * 40), table));

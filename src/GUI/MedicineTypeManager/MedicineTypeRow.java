@@ -30,9 +30,10 @@ public class MedicineTypeRow extends JPanel {
                 else BackGround = Color.getHSBColor(20, 12, 21);
                 setBackground(BackGround);
                 white = !white;
-		setBounds(pos.x, pos.y, idSize + nameSize , 40);
+		setBounds(pos.x, pos.y, idSize + nameSize + optionSize , 40);
 		CustomLabel idLabel = new CustomLabel(id, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x, pos.y), new Dimension(idSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomLabel nameLabel = new CustomLabel(name, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize, pos.y), new Dimension(nameSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
+		CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + optionSize , 1), parentPanel);
 		
 		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize-80)/2, 5), new Dimension(20, 30), MedicineTypeRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));

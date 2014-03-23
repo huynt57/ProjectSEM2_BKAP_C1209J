@@ -73,14 +73,14 @@ public class SuppliersPanel extends JPanel {
         x.setBounds(40, 150, d.width - 70, d.height - 170);
         this.add(x);
         
-//        Vector<Supplier> loadSupplier = null;
+        Vector<Suppliers> loadSupplier = Suppliers.getAllSupplier();
  
         final ArrayList<SuppliersPanel.Supplier> suppliers = new ArrayList<SuppliersPanel.Supplier>();
-//        for(int i=0; i<loadSupplier.size(); i++) suppliers.add(new Supplier(loadSupplier.get(i).getSupplierCode() + "", loadSupplier.get(i).getSupplierName(), loadSupplier.get(i).getSupplierType() + "", loadSupplier.get(i).getSupplierAddress() , loadSupplier.get(i).getSupplierPhone()));   
-//        table.setPreferredSize(new Dimension(1000, suppliers.size() * 40));	
-//        for(int i=0; i<suppliers.size(); i++)
-//        table.add(new SupplierRow(suppliers.get(i).id, suppliers.get(i).name, suppliers.get(i).email, suppliers.get(i).address, suppliers.get(i).phone, idSize, nameSize, emailSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
-//        table.setPreferredSize(new Dimension(1000, suppliers.size() * 40));
+        for(int i=0; i<loadSupplier.size(); i++) suppliers.add(new Supplier(loadSupplier.get(i).getSupplierCode() + "", loadSupplier.get(i).getSupplierName()+"",loadSupplier.get(i).getSupplierAddress(), loadSupplier.get(i).getSupplierPhone(), loadSupplier.get(i).getSupplierEmail()+""));   
+        table.setPreferredSize(new Dimension(1000, suppliers.size() * 40));	
+        for(int i=0; i<suppliers.size(); i++)
+        table.add(new SupplierRow(suppliers.get(i).id, suppliers.get(i).name, suppliers.get(i).email, suppliers.get(i).address, suppliers.get(i).phone, idSize, nameSize, emailSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+        table.setPreferredSize(new Dimension(1000, suppliers.size() * 40));
        
         name.addActionListener(new ActionListener() {
                     @Override
