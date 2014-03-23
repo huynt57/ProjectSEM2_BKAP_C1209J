@@ -27,15 +27,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Action;
+
 
 public class MedicinesPanel extends JPanel {
 
 
+    
     public MedicinesPanel(JPanel parentPanel, Point pos, Dimension d) throws SQLException, ClassNotFoundException {
         super();
+        
         this.setBounds(pos.x, pos.y, d.width, d.height);
         setLayout(null);
         parentPanel.add(this);
@@ -47,7 +47,7 @@ public class MedicinesPanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, MedicinesPanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-
+//        CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -56,10 +56,13 @@ public class MedicinesPanel extends JPanel {
                 Vector x = new Vector();
                 for (int i = 1; i <= 10; i++) {
                     x.add(i);
+                    
+                    
                 }
 
                 AddFrame addMedicines = new AddFrame("", false, false, false, new Dimension(400, 550), x, x, x);
                 addMedicines.setVisible(true);
+                
             }
         });
 

@@ -229,6 +229,14 @@ public class Medicines {
         }
         return v;
     }
+    
+    public static void DeleteMedicine(String id) throws SQLException, ClassNotFoundException
+    {
+       Connection con = DBHelper.connect();
+          Statement sta = con.createStatement();
+
+             sta.execute("DELETE FROM Medicine WHERE medicineCode = "+id); 
+    }
 
     public static Vector searchMedicineByOrigin(Vector vList) throws SQLException {
         Vector v = new Vector();

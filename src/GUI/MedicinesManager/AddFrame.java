@@ -111,14 +111,7 @@ public class AddFrame extends CustomFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                if (tag.equals("1")) {
-                    // add new medicie
-                } else if (tag.equals("2")) {
-                    // details
-                } else if (tag.equals("3")) {
-                    // edit
-                }
-
+              
 //            TODO: OK Here
             }
         });

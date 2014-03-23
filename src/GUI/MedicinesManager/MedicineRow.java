@@ -16,12 +16,15 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 
 public class MedicineRow extends JPanel {
         public static boolean white = true;
-	public MedicineRow(String id, String name, String type, String supplier, String remain, int idSize, int nameSize, int typeSize, int supplierSize, int remainSize, int optionSize, Point pos, JPanel parentPanel) {
+	public MedicineRow(final String id, String name, String type, String supplier, String remain, int idSize, int nameSize, int typeSize, int supplierSize, int remainSize, int optionSize, Point pos, final JPanel parentPanel) {
 		super();
 		setLayout(null);
                 Color BackGround = null;
@@ -69,10 +72,16 @@ public class MedicineRow extends JPanel {
 
                              @Override
                              public void actionPerformed(ActionEvent e) {
-                                 
-                                 // DELETE
-                                 
-                                 
+                                 try {
+                                     // DELETE
+                                     System.out.println(id);
+                                     Medicines.DeleteMedicine(id);
+                                 } catch (SQLException ex) {
+                                     Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
+                                 } catch (ClassNotFoundException ex) {
+                                     Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
+                                 }
+                             
                              }
                          });
                     }
