@@ -1,6 +1,6 @@
 package GUI.Classes;
 
-import GUI.MedicinesManager.AddFrame;
+import GUI.MedicinesManager.MedicineNew;
 import GUI.MedicinesManager.Medicines;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,9 +14,9 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class CustomDialog extends CustomFrame {
+public class MedicineDialog extends CustomFrame {
 
-    public CustomDialog(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dim, final String id) {
+    public MedicineDialog(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dim, final String id) {
         super(title, visible, undecorate, resizeable, dim);
         RemovablePanel contenPane = new RemovablePanel(this);
         Color BackGround = Color.GRAY;
@@ -40,11 +40,11 @@ public class CustomDialog extends CustomFrame {
                 try {
                     Medicines.DeleteMedicine(id);
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MedicineDialog.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(CustomDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MedicineDialog.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                CustomDialog.this.dispose();
+                MedicineDialog.this.dispose();
             }
         });
         final CustomButton cancel = new CustomButton("No", Color.WHITE,
@@ -54,7 +54,7 @@ public class CustomDialog extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                CustomDialog.this.dispose();
+                MedicineDialog.this.dispose();
             }
         });
         

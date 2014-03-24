@@ -41,9 +41,16 @@ public class MedicineTypePanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, MedicineTypePanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicineTypePanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+add.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                 MedicineTypeNew addMedicine = new MedicineTypeNew("", false, false, false, new Dimension(400, 150));
+                addMedicine.setVisible(true);
+            }
+        });
         HintTextField search = new HintTextField(" Search medicine types", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MedicineTypePanel.this, false);
-CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MedicineTypePanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
+    CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MedicineTypePanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
         int totalWidth = d.width - 180;
         final int nameSize = totalWidth / 2;
@@ -103,11 +110,11 @@ CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/se
                 for (int i = 0; i < measures.size() - 1; i++) {
                     for (int j = i + 1; j < measures.size(); j++) {
                         if (nameSort) {
-                            if (measures.get(i).id.compareTo(measures.get(j).id) < 0) {
+                            if (Integer.parseInt(measures.get(i).id) < Integer.parseInt(measures.get(j).id)) {
                                 swap(measures, i, j);
                             }
                         } else {
-                            if (measures.get(i).id.compareTo(measures.get(j).id) > 0) {
+                            if (Integer.parseInt(measures.get(i).id) > Integer.parseInt(measures.get(j).id)) {
                                 swap(measures, i, j);
                             }
                         }
@@ -126,10 +133,12 @@ CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/se
 
     public static boolean nameSort = true;
 
-    public void swap(ArrayList<MedicineTypePanel.MedicineType> measures, int i, int j) {
-        MedicineTypePanel.MedicineType temp = new MedicineTypePanel.MedicineType(measures.get(i).id, measures.get(i).name);
-        measures.get(i).id = measures.get(j).id;
-        measures.get(i).name = measures.get(j).name;
+    public void swap(ArrayList<MedicineTypePanel.MedicineType> medicineTypes, int i, int j) {
+        MedicineTypePanel.MedicineType temp = new MedicineTypePanel.MedicineType(medicineTypes.get(i).id, medicineTypes.get(i).name);
+        medicineTypes.get(i).id = medicineTypes.get(j).id;
+        medicineTypes.get(i).name = medicineTypes.get(j).name;
+        medicineTypes.get(j).id = temp.id;
+        medicineTypes.get(j).name = temp.name;
     }
 
     public class MedicineType {

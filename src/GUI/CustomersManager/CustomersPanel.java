@@ -102,11 +102,11 @@ CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/se
                         for(int i=0; i<customers.size()-1; i++)
                             for(int j=i+1; j<customers.size(); j++) 
                                 if(nameSort) {
-                                    if(customers.get(i).id.compareTo(customers.get(j).id) < 0) {
+                                    if(Integer.parseInt(customers.get(i).id) < Integer.parseInt(customers.get(j).id)) {
                                         swap(customers, i, j);
                                     } 
                                 } else {
-                                    if(customers.get(i).id.compareTo(customers.get(j).id) > 0) {
+                                    if(Integer.parseInt(customers.get(i).id) > Integer.parseInt(customers.get(j).id)) {
                                        swap(customers, i, j);
                                     } 
                                 }      

@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 
 public class SupplierRow extends JPanel {
         public static boolean white = true;
-	public SupplierRow(String id, String name, String email, String address, String phone, int idSize, int nameSize, int emailSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
+	public SupplierRow(final String id, String name, String email, String address, String phone, int idSize, int nameSize, int emailSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
 		Color BackGround = null;
@@ -40,7 +40,8 @@ public class SupplierRow extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
                         
-                        
+                        SupplierDetails supplierDetail = new SupplierDetails(id, false, true, false,new Dimension(400, 330));
+                        supplierDetail.setVisible(true);
                     }
                 });
                 CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + emailSize + addressSize + phoneSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), SupplierRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
@@ -49,6 +50,8 @@ public class SupplierRow extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
 
+                        SupplierEdit addSupplier = new SupplierEdit("", false, false, false, new Dimension(400, 330));
+                    addSupplier.setVisible(true);
                         
                     }
                 });
@@ -57,8 +60,7 @@ public class SupplierRow extends JPanel {
                 delete.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
-                        
-                        
+                        SupplierDialog dialog = new SupplierDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
                     }
                 });
         }

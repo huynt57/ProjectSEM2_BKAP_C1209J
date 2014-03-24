@@ -19,9 +19,9 @@ import java.util.Vector;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-public class SupplierNew extends CustomFrame {
+public class SupplierEdit extends CustomFrame {
 
-    public SupplierNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public SupplierEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -29,7 +29,7 @@ public class SupplierNew extends CustomFrame {
         contenPane.setBackground(BackGround);
         this.setContentPane(contenPane);
         setLayout(null); 
-        CustomLabel titleLabel = new CustomLabel("Add new supplier",
+        CustomLabel titleLabel = new CustomLabel("Edit supplier",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
@@ -57,7 +57,7 @@ public class SupplierNew extends CustomFrame {
             // TODO: Add supplier to db
                 
                 
-                SupplierNew.this.dispose();
+                SupplierEdit.this.dispose();
             }
         });
 
@@ -69,7 +69,7 @@ public class SupplierNew extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                SupplierNew.this.dispose();
+                SupplierEdit.this.dispose();
             }
         });
     }

@@ -67,16 +67,9 @@ public class LoginThread extends Thread {
 
             Users u = new Users();
             boolean flag = false;
-            //    System.out.println("1");
-           // System.out.println(v.size());
             for (int i = 0; i < v.size(); i++) {
                 u = (Users) v.get(i);
-              //  System.out.println("1");
                 if (u.getNameLogin().equals(userName) && u.getPassword().equals(password)) {
-
-              //  userTypeCode = u.getuserTypeCode();
-                    //   nameLogin = u.getnameLogin(); 
-                    //  active = u.getuserActive();
                     System.out.println(u.getNameLogin());
                     System.out.println("1");
                     flag = true;
