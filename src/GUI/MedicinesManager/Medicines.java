@@ -12,6 +12,7 @@ import database.DBHelper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Medicines {
 
@@ -174,38 +175,29 @@ public class Medicines {
     public Medicines() {
     }
 
-    public static int insertMedicine(Medicines objMedicine) throws SQLException {
-        int i = 0;
+    public static void InsertMedicine(String name, String supplier, String price, String termofuse, String num, String regnum, String used, String measure, String type, String origin, String guide) throws SQLException, ClassNotFoundException {
         try {
-            Vector paramList = new Vector();
-            paramList.addElement(objMedicine.medicineName);
-            paramList.addElement(objMedicine.medicineTypeCode);
-            paramList.addElement(objMedicine.supplierCode);
-            i = DBHelper.executeUpdate("spInsertMedicine", paramList);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return i;
-    }
+            Vector v = new Vector();
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+            String sql1 = "INSERT INTO Medicine VALUES ('" + name + "'," + type + "," + supplier + ")";
+            sta.execute(sql1);
+            String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '" + name + "'";
+            ResultSet rs = sta.executeQuery(sql3);
 
-    public static int insertMedicineDetails(Medicines objMedicine) throws SQLException {
-        int i = 0;
-        try {
-            Vector paramList = new Vector();
-            paramList.addElement(objMedicine.medicineCode);
-            paramList.addElement(objMedicine.measure);
-            paramList.addElement(objMedicine.pricePerUnit);
-            paramList.addElement(objMedicine.avaiableAmount);
-            paramList.addElement(objMedicine.registerNumber);
-            paramList.addElement(objMedicine.Origin);
-            paramList.addElement(objMedicine.used);
-            paramList.addElement(objMedicine.termsOfUse);
-            paramList.addElement(objMedicine.useGuide);
-            i = DBHelper.executeUpdate("spInsertMedicineDetails", paramList);
+            int code = 0;
+            while(rs.next())
+                   {
+                       code = rs.getInt("medicineCode");
+            }
+
+            String sql2 = "INSERT INTO MedicineDetails VALUES ("+code+"," + measure + "," + price + "," + num + "," + regnum + ",'" + origin + "',		" + used + "," + termofuse + ",		'" + guide + "')";
+            sta.execute(sql2);
+
         } catch (SQLException ex) {
-            ex.printStackTrace();
+
         }
-        return i;
+
     }
 
     public static Vector getAllMedicine() throws SQLException, ClassNotFoundException {
@@ -229,24 +221,19 @@ public class Medicines {
         }
         return v;
     }
-    
-    public static void DeleteMedicine(String id) throws SQLException, ClassNotFoundException
-    {
-       Connection con = DBHelper.connect();
-          Statement sta = con.createStatement();
 
-             sta.execute("DELETE FROM Medicine WHERE medicineCode = "+id); 
+    public static void DeleteMedicine(String id) throws SQLException, ClassNotFoundException {
+        Connection con = DBHelper.connect();
+        Statement sta = con.createStatement();
+
+        sta.execute("DELETE FROM Medicine WHERE medicineCode = " + id);
     }
 
-     public static void AddMedicine(String name, String supplier, String price, String term, String regnum, String num, String used, String measure, String type, String origin) throws SQLException, ClassNotFoundException
-    {
-       Connection con = DBHelper.connect();
-          Statement sta = con.createStatement();
-String sql = "UPDATE";
-             sta.execute(sql); 
+    public static void AddMedicine(String name, String supplier, String price, String term, String regnum, String num, String used, String measure, String type, String origin) throws SQLException, ClassNotFoundException {
+        Connection con = DBHelper.connect();
+        Statement sta = con.createStatement();
+        String sql = "UPDATE";
+        sta.execute(sql);
     }
 
-    
-
-    
 }

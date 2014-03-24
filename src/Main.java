@@ -4,11 +4,13 @@ import GUI.MainScreen.MainScreen;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String args[]) throws ClassNotFoundException, SQLException {
+    public static void main(String args[]) throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
     	
     	LoginScreen loginFrame = null;
     	MainScreen mainFrame = null;
