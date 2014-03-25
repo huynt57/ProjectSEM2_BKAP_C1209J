@@ -110,9 +110,7 @@ public class MedicineDetails extends CustomFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
                 MedicineDetails.this.dispose();
-                
             }
         });
 

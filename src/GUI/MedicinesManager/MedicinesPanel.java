@@ -46,22 +46,14 @@ public class MedicinesPanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, MedicinesPanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-       CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-      
-       add.addActionListener(new ActionListener() {
+        CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+
+        add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 MedicinesPanel.this.setEnabled(false);
-
-                Vector x = new Vector();
-                for (int i = 1; i <= 10; i++) {
-                    x.add(i);
-
-                }
-
-                AddFrame addMedicines = new AddFrame("", false, false, false, new Dimension(400, 550), x, x, x);
+                MedicineNew addMedicines = new MedicineNew("", false, false, false, new Dimension(400, 550));
                 addMedicines.setVisible(true);
-
             }
         });
 
@@ -147,11 +139,11 @@ public class MedicinesPanel extends JPanel {
                 for (int i = 0; i < medicines.size() - 1; i++) {
                     for (int j = i + 1; j < medicines.size(); j++) {
                         if (nameSort) {
-                            if (medicines.get(i).id.compareTo(medicines.get(j).id) < 0) {
+                            if (Integer.parseInt(medicines.get(i).id) < Integer.parseInt(medicines.get(j).id)) {
                                 swap(medicines, i, j);
                             }
                         } else {
-                            if (medicines.get(i).id.compareTo(medicines.get(j).id) > 0) {
+                            if (Integer.parseInt(medicines.get(i).id) > Integer.parseInt(medicines.get(j).id)) {
                                 swap(medicines, i, j);
                             }
                         }
@@ -245,8 +237,7 @@ public class MedicinesPanel extends JPanel {
             }
         });
 
-         refresh.addActionListener(new ActionListener() {
-
+        refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -255,9 +246,8 @@ public class MedicinesPanel extends JPanel {
                     Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
         });
-        
+
         remain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -318,7 +308,6 @@ public class MedicinesPanel extends JPanel {
         }
         table.repaint();
     }
-
     public static boolean nameSort = true;
 
     public void swap(ArrayList<Medicine> medicines, int i, int j) {

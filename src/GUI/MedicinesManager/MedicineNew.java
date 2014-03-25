@@ -26,9 +26,9 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-public class AddFrame extends CustomFrame {
+public class MedicineNew extends CustomFrame {
 
-    public AddFrame( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, Vector supplierVt, Vector typeVt, Vector measureVt) {
+    public MedicineNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -43,6 +43,16 @@ public class AddFrame extends CustomFrame {
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
 
+        Vector supplierVt = new Vector();
+        Vector typeVt = new Vector();
+        Vector measureVt = new Vector();
+        
+        for(int i=0; i<100; i++) {
+            supplierVt.add(i);
+            typeVt.add(i);
+            measureVt.add(i);
+        }
+        
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
@@ -114,13 +124,6 @@ public class AddFrame extends CustomFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-//              name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
-//        final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-//        final HintTextField termOfUse = new HintTextField(" Term of user", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-//        final HintTextField number = new HintTextField(" Available amount", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-//        final HintTextField registerNumber = new HintTextField(" Register number", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-//        final HintTextField used = 
-//            TODO: OK Here
                 
                 String namex = name.getText().toString();
                 String supplierx = supplier.getSelectedItem().toString();
@@ -144,6 +147,7 @@ public class AddFrame extends CustomFrame {
                 }
                 
                 
+                MedicineNew.this.dispose();
                 
             }
         });
@@ -156,7 +160,7 @@ public class AddFrame extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                AddFrame.this.dispose();
+                MedicineNew.this.dispose();
             }
         });
     }

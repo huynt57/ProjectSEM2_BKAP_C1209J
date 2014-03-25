@@ -110,11 +110,11 @@ public class MeasurePanel extends JPanel {
                 for (int i = 0; i < measures.size() - 1; i++) {
                     for (int j = i + 1; j < measures.size(); j++) {
                         if (nameSort) {
-                            if (measures.get(i).id.compareTo(measures.get(j).id) < 0) {
+                            if (Integer.parseInt(measures.get(i).id) < Integer.parseInt(measures.get(j).id)) {
                                 swap(measures, i, j);
                             }
                         } else {
-                            if (measures.get(i).id.compareTo(measures.get(j).id) > 0) {
+                            if (Integer.parseInt(measures.get(i).id) > Integer.parseInt(measures.get(j).id)) {
                                 swap(measures, i, j);
                             }
                         }
@@ -137,6 +137,8 @@ public class MeasurePanel extends JPanel {
         MeasurePanel.Measure temp = new MeasurePanel.Measure(measures.get(i).id, measures.get(i).name);
         measures.get(i).id = measures.get(j).id;
         measures.get(i).name = measures.get(j).name;
+        measures.get(j).id = temp.id;
+        measures.get(j).name = temp.name;
     }
 
     public class Measure {

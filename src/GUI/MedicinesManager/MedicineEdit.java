@@ -131,6 +131,7 @@ public class MedicineEdit extends CustomFrame {
                     origin = "foreign";
                 }
 
+                MedicineEdit.this.dispose();
             }
         });
 

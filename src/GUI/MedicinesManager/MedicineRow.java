@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 
 import GUI.Classes.Configure;
 import GUI.Classes.CustomButton;
-import GUI.Classes.CustomDialog;
+import GUI.Classes.MedicineDialog;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import java.awt.event.ActionEvent;
@@ -50,7 +50,6 @@ public class MedicineRow extends JPanel {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 MedicineDetails addMedicines = new MedicineDetails("", false, false, false, new Dimension(400, 500));
                 addMedicines.setVisible(true);
             }
@@ -76,7 +75,7 @@ public class MedicineRow extends JPanel {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CustomDialog dialog = new CustomDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
+                MedicineDialog dialog = new MedicineDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
             }
         });
     }
