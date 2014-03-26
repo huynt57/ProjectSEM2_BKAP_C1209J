@@ -141,9 +141,9 @@ public class MedicineNew extends CustomFrame {
                 try {
                     Medicines.InsertMedicine(namex, supplierx, pricex, termofUsed, num, regNum, usedx, measurex, typex, origin,guide);
                 } catch (SQLException ex) {
-                    Logger.getLogger(AddFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MedicineNew.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AddFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MedicineNew.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 

@@ -93,16 +93,15 @@ public class Suppliers {
 
     public Suppliers() {
     }
-    
-    
-     public static Vector getAllSupplier() throws SQLException, ClassNotFoundException{
+
+    public static Vector getAllSupplier() throws SQLException, ClassNotFoundException {
         Vector v = new Vector();
         try {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
             ResultSet rs = sta.executeQuery("SELECT * FROM Supplier");
-            while(rs.next()){
+            while (rs.next()) {
                 Suppliers objSupplier = new Suppliers();
                 objSupplier.supplierCode = rs.getInt(1);
                 objSupplier.supplierName = rs.getString(2);
@@ -118,6 +117,71 @@ public class Suppliers {
             ex.printStackTrace();
         }
         return v;
+    }
+
+    public static void insertSupplier(String name, String fullname, String address, String phone, String fax, String email, String website) throws SQLException, ClassNotFoundException {
+
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("INSERT INTO Supplier VALUES ('" + name + "', '" + fullname + "','" + address + "','" + phone + "','" + fax + "','" + email + "','" + website + "')");
+
+        } catch (SQLException ex) {
+        }
+
+    }
+
+    public static void deleteSupplier(String id) throws SQLException, ClassNotFoundException {
+
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("DELETE FROM Supplier WHERE supplierCode = " + id);
+
+        } catch (SQLException ex) {
+        }
+
+    }
+
+    public static void editSuppliers(String name, String fullname, String address, String phone, String fax, String email, String website, String id) throws SQLException, ClassNotFoundException {
+
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("UPDATE Supplier VALUES ('" + name + "', '" + fullname + "','" + address + "','" + phone + "','" + fax + "','" + email + "','" + website + "') WHERE supplierCode = " + id);
+
+        } catch (SQLException ex) {
+        }
+
+    }
+
+    public static Vector viewSupplier(String id) throws SQLException, ClassNotFoundException {
+
+        Vector v = new Vector();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            ResultSet rs = sta.executeQuery("SELECT * FROM Supplier WHERE medicineTypeCode = " + id);
+            while (rs.next()) {
+                Suppliers objSupplier = new Suppliers();
+                objSupplier.supplierCode = rs.getInt(1);
+                objSupplier.supplierName = rs.getString(2);
+                objSupplier.supplierfullName = rs.getString(3);
+                objSupplier.supplierAddress = rs.getString(4);
+                objSupplier.supplierPhone = rs.getString(5);
+                objSupplier.supplierFax = rs.getString(6);
+                objSupplier.supplierEmail = rs.getString(7);
+                objSupplier.supplierWebsite = rs.getString(8);
+                v.add(objSupplier);
+            }
+        } catch (SQLException ex) {
+        }
+        return v;
+
     }
 
 }

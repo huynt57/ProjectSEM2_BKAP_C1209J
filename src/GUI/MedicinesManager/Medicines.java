@@ -199,6 +199,31 @@ public class Medicines {
         }
 
     }
+    
+     public static void UpdateMedicine(String name, String supplier, String price, String termofuse, String num, String regnum, String used, String measure, String type, String origin, String guide, String id) throws SQLException, ClassNotFoundException {
+        try {
+            Vector v = new Vector();
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+            String sql1 = "UPDATE Medicine VALUES ('" + name + "'," + type + "," + supplier + ") WHERE medicineCode = "+id;
+            sta.execute(sql1);
+            String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '" + name + "'";
+            ResultSet rs = sta.executeQuery(sql3);
+
+            int code = 0;
+            while(rs.next())
+                   {
+                       code = rs.getInt("medicineCode");
+            }
+
+            String sql2 = "UPDATE MedicineDetails VALUES ("+code+"," + measure + "," + price + "," + num + "," + regnum + ",'" + origin + "',		" + used + "," + termofuse + ",		'" + guide + "') WHERE medicineCode = "+id;
+            sta.execute(sql2);
+
+        } catch (SQLException ex) {
+
+        }
+
+    }
 
     public static Vector getAllMedicine() throws SQLException, ClassNotFoundException {
         Vector v = new Vector();
@@ -229,11 +254,26 @@ public class Medicines {
         sta.execute("DELETE FROM Medicine WHERE medicineCode = " + id);
     }
 
-    public static void AddMedicine(String name, String supplier, String price, String term, String regnum, String num, String used, String measure, String type, String origin) throws SQLException, ClassNotFoundException {
-        Connection con = DBHelper.connect();
-        Statement sta = con.createStatement();
-        String sql = "UPDATE";
-        sta.execute(sql);
+   public static Vector viewMedicine(String id) throws SQLException, ClassNotFoundException {
+        Vector v = new Vector();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            ResultSet rs = sta.executeQuery("SELECT * FROM Medicine join MedicineDetails ON Medicine.medicineCode = MedicineDetails.medicineCode join Supplier ON Medicine.SupplierCode = Supplier.SupplierCode join MedicineType ON Medicine.medicineTypeCode = MedicineType.medicineTypeCode WHERE medicineCode = "+id);
+            while (rs.next()) {
+                Medicines objMedicine = new Medicines();
+                objMedicine.medicineCode = rs.getInt("medicineCode");
+                objMedicine.medicineName = rs.getString("medicineName");
+                objMedicine.medicineTypeName = rs.getString("medicineTypeName");
+                objMedicine.supplierName = rs.getString("supplierName");
+                objMedicine.avaiableAmount = rs.getInt("avaiableAmount");
+                v.add(objMedicine);
+            }
+        } catch (SQLException ex) {
+
+        }
+        return v;
     }
 
 }
