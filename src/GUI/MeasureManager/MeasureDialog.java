@@ -43,8 +43,13 @@ public class MeasureDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
+                try {
+                    Measures.deleteMeasure(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MeasureDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MeasureDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 MeasureDialog.this.dispose();
             }

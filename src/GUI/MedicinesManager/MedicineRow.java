@@ -50,7 +50,14 @@ public class MedicineRow extends JPanel {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MedicineDetails addMedicines = new MedicineDetails("", false, false, false, new Dimension(400, 500));
+                MedicineDetails addMedicines = null;
+                try {
+                    addMedicines = new MedicineDetails("", false, false, false, new Dimension(500, 500), id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 addMedicines.setVisible(true);
             }
         });
@@ -58,12 +65,14 @@ public class MedicineRow extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Vector x = new Vector();
-                for (int i = 1; i <= 10; i++) {
-                    x.add(i);
+                MedicineEdit editMedicine = null;
+                try {
+                    editMedicine = new MedicineEdit("", false, false, false, new Dimension(400, 550), id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineRow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                MedicineEdit editMedicine = new MedicineEdit("", false, false, false, new Dimension(400, 550), x, x, x);
                 editMedicine.setVisible(true);
 
             }
@@ -75,7 +84,7 @@ public class MedicineRow extends JPanel {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MedicineDialog dialog = new MedicineDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
+                MedicineDialog dialog = new MedicineDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id);
             }
         });
     }

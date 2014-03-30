@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.Action;
 import javax.swing.JComboBox;
@@ -26,7 +27,7 @@ import javax.swing.UIManager;
 
 public class MedicineDetails extends CustomFrame {
 
-    public MedicineDetails( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public MedicineDetails( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, String id) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -70,7 +71,7 @@ public class MedicineDetails extends CustomFrame {
         CustomLabel termOfUseLabel = new CustomLabel("Term of use",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-               new Point(205, 110), new Dimension((dim.width - 40) / 2 - 5, 30), true,
+               new Point(205, 110), new Dimension((dim.width - 40) / 2 , 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
           CustomLabel supplierLabel = new CustomLabel("Supplier",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
@@ -80,17 +81,17 @@ public class MedicineDetails extends CustomFrame {
         CustomLabel measureLabel = new CustomLabel("Measure",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-                new Point(20, 270), new Dimension(100, 30), true,
+                new Point(20, 270), new Dimension(dim.width - 40, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         CustomLabel typeLabel = new CustomLabel("Type",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-                new Point(20, 310), new Dimension(100, 30), true,
+                new Point(20, 310), new Dimension(dim.width - 40, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         CustomLabel origineLabel = new CustomLabel("Origin",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-                new Point(20, 350), new Dimension(60, 20), true,
+                new Point(20, 350), new Dimension(dim.width - 40, 20), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         CustomLabel userGuideLabel = new CustomLabel("User guide",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
@@ -101,7 +102,22 @@ public class MedicineDetails extends CustomFrame {
         
 //        supplierLabel.setText("Supplier: " + xxx);
         
+Medicines medicineDetails = Medicines.getMedicineById(id);
 
+        //System.out.println(id);
+
+
+        nameLabel.setText("Name: "+medicineDetails.getMedicineName());
+        priceLabel.setText("Price: "+medicineDetails.getPricePerUnit() + "");
+        termOfUseLabel.setText("Term of use: "+medicineDetails.getTermsOfUse());
+        userLabel.setText("Available: "+medicineDetails.getAvaiableAmount() + "");
+        registerNumberLabel.setText("Register number: "+medicineDetails.getRegisterNumber());
+        userGuideLabel.setText("User guide: "+medicineDetails.getUseGuide());
+        origineLabel.setText("Origin: "+medicineDetails.getOrigin());
+        typeLabel.setText("Type Medicine: "+medicineDetails.getMedicineTypeName());
+        measureLabel.setText("Measure: "+medicineDetails.getMeasureName());
+        supplierLabel.setText("Supplier: "+medicineDetails.getSupplierName());
+        
         final CustomButton ok = new CustomButton("OK", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.GRAY, true, new Point(20, 450),

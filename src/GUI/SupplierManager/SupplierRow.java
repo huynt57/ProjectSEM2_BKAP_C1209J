@@ -15,6 +15,9 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SupplierRow extends JPanel {
         public static boolean white = true;
@@ -40,7 +43,14 @@ public class SupplierRow extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
                         
-                        SupplierDetails supplierDetail = new SupplierDetails(id, false, true, false,new Dimension(400, 330));
+                        SupplierDetails supplierDetail = null;
+                        try {
+                            supplierDetail = new SupplierDetails(id, false, true, false,new Dimension(400, 330), id);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(SupplierRow.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(SupplierRow.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         supplierDetail.setVisible(true);
                     }
                 });
@@ -50,7 +60,14 @@ public class SupplierRow extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
 
-                        SupplierEdit addSupplier = new SupplierEdit("", false, false, false, new Dimension(400, 330));
+                        SupplierEdit addSupplier = null;
+                        try {
+                            addSupplier = new SupplierEdit("", false, false, false, new Dimension(400, 330), id);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(SupplierRow.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(SupplierRow.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     addSupplier.setVisible(true);
                         
                     }

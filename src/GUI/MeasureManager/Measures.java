@@ -63,6 +63,24 @@ public class Measures {
         return v;
     }
     
+    public static Measures getMeasureById(String id) throws SQLException, ClassNotFoundException {
+       Measures objMeasure = new Measures();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            ResultSet rs = sta.executeQuery("SELECT * FROM Measure WHERE measureCode = '"+id+"'");
+            while (rs.next()) {
+                
+                objMeasure.measureCode = rs.getInt(1);
+                objMeasure.measureName = rs.getString(2);
+                
+            }
+        } catch (SQLException ex) {
+        }
+        return objMeasure;
+    }
+    
      public static void insertMeasure(String name) throws SQLException, ClassNotFoundException {
         
         try {
@@ -95,7 +113,7 @@ public class Measures {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            sta.executeQuery("UPDATE Measure VALUES ('" + name + "') WHERE measureCode = "+id);
+            sta.executeQuery("UPDATE Measure SET measureName = '"+name+"' WHERE measureCode = "+id);
            
         } catch (SQLException ex) {
         }

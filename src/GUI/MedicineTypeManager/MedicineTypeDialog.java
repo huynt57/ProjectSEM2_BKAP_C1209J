@@ -42,8 +42,14 @@ public class MedicineTypeDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
+                try {
+                    //
+                    MedicineTypes.deleteMedicineType(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineTypeDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineTypeDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 MedicineTypeDialog.this.dispose();
             }

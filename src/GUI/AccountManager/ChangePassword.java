@@ -83,18 +83,19 @@ public class ChangePassword extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
 
-                oldPass.getText();
-                newPass.getText();
-                confirmField.getText();
+                String old = oldPass.getText();
+                String newp = newPass.getText();
+                String confirmp = confirmField.getText();
 
                 //  System.out.println(firstName.getText());
                 try {
+                    if (newp.equals(confirmp)){
                     Connection con = database.DBHelper.connect();
                     Statement sta = con.createStatement();
                     String sql = "UPDATE    Users "
-                            + "SET              ";
+                            + "SET      password = "+confirmp+"        ";
                     // System.out.println(sql);
-                    sta.executeUpdate(sql);
+                    sta.executeUpdate(sql);}
 
                     // TODO: Update DB with new user's info 
                 } catch (ClassNotFoundException ex) {
