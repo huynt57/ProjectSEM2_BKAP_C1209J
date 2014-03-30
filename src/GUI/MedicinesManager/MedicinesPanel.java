@@ -39,12 +39,7 @@ public class MedicinesPanel extends JPanel {
         setLayout(null);
         parentPanel.add(this);
 
-        CustomLabel titleLabel = new CustomLabel("Medicines manager",
-                Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
-                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),
-                new Point(40, 20), new Dimension(d.width, 40), true,
-                SwingConstants.LEFT, SwingConstants.CENTER, MedicinesPanel.this);
-
+        CustomLabel titleLabel = new CustomLabel("Medicines manager",Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),new Point(40, 20), new Dimension(d.width, 40), true,SwingConstants.LEFT, SwingConstants.CENTER, MedicinesPanel.this);
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
         CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), MedicinesPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
 

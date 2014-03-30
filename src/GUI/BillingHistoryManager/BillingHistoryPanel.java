@@ -27,11 +27,11 @@ public class BillingHistoryPanel extends JPanel {
 		setLayout(null);
 		parentPanel.add(this);
 
-		CustomLabel titleLabel = new CustomLabel("Billing History",
-				Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
-				CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),
-				new Point(40, 20), new Dimension(d.width, 40), true,
-				SwingConstants.LEFT, SwingConstants.CENTER, BillingHistoryPanel.this);
+		CustomLabel titleLabel = new CustomLabel("Bill",
+                            Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
+                            CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),
+                            new Point(40, 20), new Dimension(d.width, 40), true,
+                            SwingConstants.LEFT, SwingConstants.CENTER, BillingHistoryPanel.this);
 
 		CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), BillingHistoryPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
 		

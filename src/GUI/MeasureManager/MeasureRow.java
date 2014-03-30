@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
 
 public class MeasureRow extends JPanel {
         public static boolean white = true;
-	public MeasureRow(String id, String name, int idSize, int nameSize, int optionSize, Point pos, JPanel parentPanel) {
+	public MeasureRow(final String id, String name, int idSize, int nameSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
 		Color BackGround = null;
@@ -34,29 +34,21 @@ public class MeasureRow extends JPanel {
 		CustomLabel nameLabel = new CustomLabel(name, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize, pos.y), new Dimension(nameSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + optionSize , 1), parentPanel);
 		
-		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize - 80)/2, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
-		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
-		
-                details.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-  
-                    }
-                });
-                CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize - 80)/2 + 25, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+                CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize - 80)/2 + 17, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
 		edit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-  
+                           MeasureEdit addMeasure = new MeasureEdit("", false, false, false, new Dimension(250, 150));
+                           addMeasure.setVisible(true);
                     }
                 });
-                CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize - 80)/2 + 48, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+                CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + (optionSize - 80)/2 + 40, 5), new Dimension(20, 30), MeasureRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));
                 delete.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        
+                        MeasureDialog dialog = new MeasureDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
                     }
                 });
 	}

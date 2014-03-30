@@ -211,7 +211,7 @@ public class Medicines {
             
             String sql1 = "INSERT INTO Medicine VALUES ('" + name + "'," + medicinetypecode + "," + suppliercode + ")";
             sta.execute(sql1);
-            String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '"+name+"'";
+            String sql3 = "SELECT MAX (medicineCode) AS medicineCode  FROM Medicine";
 
             ResultSet rs = sta.executeQuery(sql3);
 

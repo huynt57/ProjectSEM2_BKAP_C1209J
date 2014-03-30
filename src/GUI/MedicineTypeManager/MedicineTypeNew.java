@@ -31,21 +31,22 @@ public class MedicineTypeNew extends CustomFrame {
         setLayout(null);
         CustomLabel titleLabel = new CustomLabel("Add new medicine type",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
-                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 19),
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 60), new Dimension(dim.width - 40, 30), contenPane, false);
-
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.GRAY, true, new Point(20, 100),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
-
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                
+                 // Add medicine type
+                
+                MedicineTypeNew.this.dispose();
             }
         });
 
@@ -53,7 +54,6 @@ public class MedicineTypeNew extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.LIGHT_GRAY, true, new Point(20 + 10 + (dim.width - 50) / 2, 100),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
-
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

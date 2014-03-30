@@ -15,10 +15,12 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.MedicinesManager.MedicineRow;
 import static GUI.MedicinesManager.MedicineRow.white;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomerRow extends JPanel {
         public static boolean white = true;
-	public CustomerRow(String id, String name, String type, String address, String phone, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
+	public CustomerRow(final String id, String name, String type, String address, String phone, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize, Point pos, JPanel parentPanel) {
 		super();
 		setLayout(null);
 		Color BackGround = null;
@@ -40,5 +42,29 @@ public class CustomerRow extends JPanel {
 		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
 		CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + phoneSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), CustomerRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));
-	}
+	
+                details.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    CustomerDetails addCustomer = new CustomerDetails("", false, false, false, new Dimension(400, 340));
+                    addCustomer.setVisible(true);
+                }
+                });
+
+            edit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    CustomerNew addCustomers = new CustomerNew("", false, false, false, new Dimension(400, 340));
+                    addCustomers.setVisible(true);
+                }
+                 });
+            
+            delete.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        CustomerDialog dialog = new CustomerDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
+                }
+             });
+                
+        }
 }

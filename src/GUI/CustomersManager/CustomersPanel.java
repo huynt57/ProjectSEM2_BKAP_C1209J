@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomersPanel extends JPanel {
 
@@ -39,9 +41,17 @@ public class CustomersPanel extends JPanel {
                 SwingConstants.LEFT, SwingConstants.CENTER, CustomersPanel.this);
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), CustomersPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
-      
+        CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), CustomersPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                CustomersPanel.this.setEnabled(false);
+                CustomerNew addCustomers = new CustomerNew("", false, false, false, new Dimension(400, 340));
+                addCustomers.setVisible(true);
+            }
+        });
         HintTextField search = new HintTextField(" Search customer", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), CustomersPanel.this, false);
-CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), CustomersPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
+        CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), CustomersPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
         int totalWidth = d.width - 230;
         final int nameSize = totalWidth / 3;
@@ -187,9 +197,35 @@ CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/se
                         table.repaint();
                     }
                 });
+        
+       refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable(table, idSize,nameSize, typeSize, addressSize, phoneSize, optionSize);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomersPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CustomersPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
     }
 
     public static boolean nameSort = true;
+    
+    public void updateTable(CustomTable table, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize) throws SQLException, ClassNotFoundException {
+        table.removeAll();
+        Vector<Customers> loadCustomer = Customers.getAllCustomer();
+        final ArrayList<CustomersPanel.Customer> customers = new ArrayList<CustomersPanel.Customer>();
+        for(int i=0; i<loadCustomer.size(); i++) customers.add(new Customer(loadCustomer.get(i).getCustomerCode() + "", loadCustomer.get(i).getCustomerName(), loadCustomer.get(i).getCustomerType() + "", loadCustomer.get(i).getCustomerAddress() , loadCustomer.get(i).getCustomerPhone()));   
+        table.setPreferredSize(new Dimension(1000, customers.size() * 40));	
+        for(int i=0; i<customers.size(); i++)
+        table.add(new CustomerRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+        table.repaint();
+    }
+    
         public void swap(ArrayList<CustomersPanel.Customer> customers, int i, int j) {
             CustomersPanel.Customer temp = new CustomersPanel.Customer(customers.get(i).id,customers.get(i).name,customers.get(i).type,customers.get(i).address,customers.get(i).phone);
             customers.get(i).id = customers.get(j).id;

@@ -24,6 +24,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MeasurePanel extends JPanel {
 
@@ -41,14 +43,14 @@ public class MeasurePanel extends JPanel {
 
         CustomButton add = new CustomButton(new ImageIcon("src/GUI/Resources/add.bin"), "Add", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(40, 80), new Dimension(80, 30), MeasurePanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
         add.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) { 
-                
-                MeasureNew addMeasure = new MeasureNew("", false, false, false, new Dimension(400, 150));
+                MeasureNew addMeasure = new MeasureNew("", false, false, false, new Dimension(250, 150));
                 addMeasure.setVisible(true);
             }
         });
+        CustomButton refresh = new CustomButton(new ImageIcon("src/GUI/Resources/refresh.bin"), "Refresh", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(130, 80), new Dimension(100, 30), MeasurePanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
+
         HintTextField search = new HintTextField(" Search measures", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MeasurePanel.this, false);
         CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MeasurePanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
 
@@ -129,10 +131,37 @@ public class MeasurePanel extends JPanel {
                 table.repaint();
             }
         });
+        
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    updateTable(table, idSize, nameSize, optionSize);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MeasurePanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MeasurePanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     public static boolean nameSort = true;
 
+    public void updateTable(CustomTable table, int idSize, int nameSize, int optionSize) throws SQLException, ClassNotFoundException {
+        table.removeAll();
+        Vector<Measures> loadMeasure = Measures.getAllMeasure();
+        final ArrayList<MeasurePanel.Measure> measures = new ArrayList<MeasurePanel.Measure>();
+        for (int i = 0; i < loadMeasure.size(); i++) {
+            measures.add(new Measure(loadMeasure.get(i).getMeasureCode() + "", loadMeasure.get(i).getMeasureName()));
+        }
+        table.setPreferredSize(new Dimension(1000, measures.size() * 40));
+        for (int i = 0; i < measures.size(); i++) {
+            table.add(new MeasureRow(measures.get(i).id, measures.get(i).name, idSize, nameSize, optionSize, new Point(0, i * 40), table));
+        }
+        table.repaint();
+    }
+    
     public void swap(ArrayList<MeasurePanel.Measure> measures, int i, int j) {
         MeasurePanel.Measure temp = new MeasurePanel.Measure(measures.get(i).id, measures.get(i).name);
         measures.get(i).id = measures.get(j).id;

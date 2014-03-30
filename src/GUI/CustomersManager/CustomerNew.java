@@ -26,7 +26,7 @@ public class CustomerNew extends CustomFrame {
         contenPane.setBackground(BackGround);
         this.setContentPane(contenPane);
         setLayout(null); 
-        CustomLabel titleLabel = new CustomLabel("Add new supplier",
+        CustomLabel titleLabel = new CustomLabel("Add new customer",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
@@ -34,12 +34,12 @@ public class CustomerNew extends CustomFrame {
 
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
-        final HintTextField price = new HintTextField(" Fullname", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40 , 30), contenPane, false);
-        final HintTextField number = new HintTextField(" Address", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension(dim.width - 40, 30), contenPane, false);
+        final HintTextField type = new HintTextField(" Type", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40 , 30), contenPane, false);
+        final HintTextField relationShip = new HintTextField(" Relationship", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension(dim.width - 40, 30), contenPane, false);
          final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
          final HintTextField fax = new HintTextField(" Fax", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);        
          final HintTextField email = new HintTextField(" Email", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-        final HintTextField web = new HintTextField(" Website", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+        final HintTextField address = new HintTextField(" Address", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
 
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
@@ -52,9 +52,7 @@ public class CustomerNew extends CustomFrame {
 
     
             
-                
-                
-                
+                CustomerNew.this.dispose();
             }
         });
 
