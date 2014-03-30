@@ -18,9 +18,9 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 import javax.swing.SwingConstants;
 
-public class UserManagerNew extends CustomFrame {
+public class UserManagerEdit extends CustomFrame {
 
-    public UserManagerNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public UserManagerEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -43,7 +43,6 @@ public class UserManagerNew extends CustomFrame {
         Vector typeVt = new Vector();
         typeVt.add("Choose user type");
         
-        
         for(int i=0; i<10; i++) typeVt.add(i);
         
         final  CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),  new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30 ), contenPane);
@@ -63,7 +62,7 @@ public class UserManagerNew extends CustomFrame {
 
     
             
-                UserManagerNew.this.dispose();
+                UserManagerEdit.this.dispose();
             }
         });
 
@@ -75,7 +74,7 @@ public class UserManagerNew extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                UserManagerNew.this.dispose();
+                UserManagerEdit.this.dispose();
             }
         });
     }
