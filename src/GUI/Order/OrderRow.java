@@ -44,7 +44,6 @@ public class OrderRow extends JPanel {
         CustomLabel addressToDeliverLabel = new CustomLabel(addressToDeliver, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize + priceSize + nameSize, pos.y), new Dimension(addressToDeliverSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
         CustomLabel ramainLabel = new CustomLabel(overDate, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x + idSize + priceSize + addressToDeliverSize + nameSize, pos.y), new Dimension(overDateSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
         CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + priceSize + addressToDeliverSize + overDateSize + optionSize, 1), parentPanel);
-
         CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + priceSize + addressToDeliverSize + overDateSize + (optionSize - 80) / 2, 5), new Dimension(20, 30), OrderRow.this, SwingConstants.CENTER, SwingConstants.CENTER);
         details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
         details.addActionListener(new ActionListener() {
@@ -58,17 +57,10 @@ public class OrderRow extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                Vector x = new Vector();
-                for (int i = 1; i <= 10; i++) {
-                    x.add(i);
-                }
-                OrderEdit editOrder = new OrderEdit("", false, false, false, new Dimension(400, 550), x, x, x);
+                OrderEdit editOrder = new OrderEdit("", false, false, false, new Dimension(400, 380));
                 editOrder.setVisible(true);
-
             }
         });
-
         edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
         CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + priceSize + addressToDeliverSize + overDateSize + (optionSize - 80) / 2 + 48, 5), new Dimension(20, 30), OrderRow.this, SwingConstants.CENTER, SwingConstants.CENTER);
         delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));

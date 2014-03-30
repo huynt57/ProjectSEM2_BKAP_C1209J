@@ -19,23 +19,23 @@ import java.util.ArrayList;
 
 public class Medicines {
 
-    private int medicineCode;
-    private String medicineName;
-    private int medicineTypeCode;
-    private int supplierCode;
-    private String termsOfUse;
-    private int measure;
-    private float pricePerUnit;
+    public int medicineCode;
+    public String medicineName;
+    public int medicineTypeCode;
+    public int supplierCode;
+    public String termsOfUse;
+    public int measure;
+    public float pricePerUnit;
 
-    private int avaiableAmount;
-    private String registerNumber;
-    private String Origin;
-    private String used;
-    private String useGuide;
+    public int avaiableAmount;
+    public String registerNumber;
+    public String Origin;
+    public String used;
+    public String useGuide;
 
-    private String medicineTypeName;
-    private String supplierName;
-    private String measureName;
+    public String medicineTypeName;
+    public String supplierName;
+    public String measureName;
 
     public int getMedicineCode() {
         return medicineCode;
