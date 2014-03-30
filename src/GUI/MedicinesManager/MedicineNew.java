@@ -15,7 +15,10 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -110,8 +113,10 @@ public class MedicineNew extends CustomFrame {
                 domestic.setSelected(false);
             }
         });
-        HintTextField userGuide = new HintTextField(" User guide", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 380), new Dimension(dim.width - 40, 100), contenPane, false);
+
+        final HintTextField userGuide = new HintTextField(" User guide", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 380), new Dimension(dim.width - 40, 100), contenPane, false);
         userGuide.setCaretPosition(0);
+
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.GRAY, true, new Point(20, 500),
@@ -132,8 +137,16 @@ public class MedicineNew extends CustomFrame {
                 String measurex = measure.getSelectedItem().toString();
                 String typex = type.getSelectedItem().toString();
                 String origin;
+                String guide = userGuide.getText().toString();
                 if (domestic.isSelected()) origin = "domestic";
                 else origin = "foreign";
+                try {
+                    Medicines.InsertMedicine(namex, supplierx, pricex, termofUsed, num, regNum, usedx, measurex, typex, origin,guide);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 
                 MedicineNew.this.dispose();

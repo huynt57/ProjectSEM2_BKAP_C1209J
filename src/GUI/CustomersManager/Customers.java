@@ -129,4 +129,61 @@ public class Customers {
         return v;
     }
 
+    public static Vector viewCustomer(String id) throws SQLException, ClassNotFoundException {
+        Vector v = new Vector();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+            ResultSet rs = sta.executeQuery("SELECT * FROM Customer WHERE customerCode = " + id);
+
+            while (rs.next()) {
+                Customers objCustomer = new Customers();
+                objCustomer.customerCode = rs.getInt("customerCode");
+                objCustomer.customerName = rs.getString("customerName");
+                objCustomer.customerType = rs.getString("customerType");
+                objCustomer.customerPhone = rs.getString("customerPhone");
+
+                objCustomer.customerAddress = rs.getString("customerAddress");
+
+                v.add(objCustomer);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return v;
+    }
+
+    public static void DeleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        Connection con = DBHelper.connect();
+        Statement sta = con.createStatement();
+
+        sta.execute("DELETE FROM Customer WHERE customerCode = " + id);
+    }
+
+    public static void insertCustomer(String name, String type, String phone, String fax, String email, String address, String rel) throws SQLException, ClassNotFoundException {
+
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("INSERT INTO Customer VALUES ('" + name + "','" + type + "'," + phone + "','" + fax + "','" + email + "','" + address + "','" + rel + "')");
+
+        } catch (SQLException ex) {
+        }
+
+    }
+
+    public static void editCustomer(String name, String type, String phone, String fax, String email, String address, String rel, String id) throws SQLException, ClassNotFoundException {
+
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("Update Customer VALUES ('" + name + "','" + type + "'," + phone + "','" + fax + "','" + email + "','" + address + "','" + rel + "') WHERE customerCode = " + id);
+
+        } catch (SQLException ex) {
+        }
+
+    }
+
 }

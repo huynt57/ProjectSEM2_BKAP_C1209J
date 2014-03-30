@@ -62,5 +62,64 @@ public class Measures {
         }
         return v;
     }
+    
+     public static void insertMeasure(String name) throws SQLException, ClassNotFoundException {
+        
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("INSERT INTO Measure VALUES ('" + name + "')");
+           
+        } catch (SQLException ex) {
+        }
+       
+    }
+     
+     public static void deleteMeasure(String id) throws SQLException, ClassNotFoundException {
+        
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("DELETE FROM Measure WHERE measureCode = "+id);
+           
+        } catch (SQLException ex) {
+        }
+       
+    }
+     
+      public static void editMeasure(String name, String id) throws SQLException, ClassNotFoundException {
+        
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            sta.executeQuery("UPDATE Measure VALUES ('" + name + "') WHERE measureCode = "+id);
+           
+        } catch (SQLException ex) {
+        }
+       
+    }
+      
+      public static Vector viewMeasure(String id) throws SQLException, ClassNotFoundException {
+        
+        Vector v = new Vector();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            ResultSet rs = sta.executeQuery("SELECT * FROM Measure WHERE measureCode = "+id);
+            while (rs.next()) {
+                Measures objMeasure = new Measures();
+                objMeasure.measureCode = rs.getInt(1);
+                objMeasure.measureName = rs.getString(2);
+                v.add(objMeasure);
+            }
+        } catch (SQLException ex) {
+        }
+        return v;
+       
+    }
 
 }
