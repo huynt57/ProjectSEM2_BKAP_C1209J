@@ -72,10 +72,6 @@ public class AccountPanel extends JPanel {
         overView.setVisible(true);
         final ChangePassword changePassword = new ChangePassword(new Point(240, 95), new Dimension(d.width - 260, d.height - 110), AccountPanel.this);
         changePassword.setVisible(false);
-        final Preferences preferencesPane = new Preferences(new Point(240, 95), new Dimension(d.width - 260, d.height - 110), AccountPanel.this);
-        preferencesPane.setVisible(false);
-        final UsersManager userManager = new UsersManager(new Point(240, 95), new Dimension(d.width - 260, d.height - 110), AccountPanel.this);
-        userManager.setVisible(false);
 
         final CustomButton overview = new CustomButton(new ImageIcon("src/GUI/Resources/settingWhiteIcon.bin"), " Overview", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14), false, false, Color.ORANGE, true, new Point(40, 340), new Dimension(200, 30), AccountPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);
         final CustomButton profile = new CustomButton(new ImageIcon("src/GUI/Resources/settingWhiteIcon.bin"), " Update profile", Color.GRAY, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14), false, false, Color.WHITE, true, new Point(40, 370), new Dimension(200, 30), AccountPanel.this, SwingConstants.LEFT, SwingConstants.CENTER);

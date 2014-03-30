@@ -1,6 +1,7 @@
 package GUI.Classes;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,6 +22,7 @@ public class RemovablePanel extends JPanel implements MouseListener, MouseMotion
 		beginPoint = new Point();
 		endPoint = new Point();
 	}
+        
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(canRemove) {
