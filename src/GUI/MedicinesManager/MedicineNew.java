@@ -28,7 +28,7 @@ import javax.swing.UIManager;
 
 public class MedicineNew extends CustomFrame {
 
-    public MedicineNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public MedicineNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -44,8 +44,11 @@ public class MedicineNew extends CustomFrame {
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
 
         Vector supplierVt = new Vector();
+        supplierVt = GUI.SupplierManager.Suppliers.getAllSupplier();
         Vector typeVt = new Vector();
+        typeVt = GUI.MedicineTypeManager.MedicineTypes.getAllMedicineType();
         Vector measureVt = new Vector();
+        measureVt = GUI.MeasureManager.Measures.getAllMeasure();
         
         for(int i=0; i<100; i++) {
             supplierVt.add(i);

@@ -42,35 +42,38 @@ public class UpdateProfile extends JPanel {
         Connection con = database.DBHelper.connect();
         Statement sta = con.createStatement();
         String sql = "SELECT * FROM Users WHERE Users.nameLogin ='" + Util.getId() + "'";
-      //  System.out.println(sql);
+        //  System.out.println(sql);
         ResultSet rs;
         Vector v = new Vector();
         rs = sta.executeQuery(sql);
         Users objUser;
 
         // TODO: Update DB with new user's info 
-//        objUser = new Users();
-//        while (rs.next()) {
-//            objUser.firstName = rs.getString(1);
-//            objUser.lastName = rs.getString(2);
-//
-//            objUser.userAddress = rs.getString(3);
-//            objUser.userPhone = rs.getString(4);
-//            objUser.userEmail = rs.getString(5);
-//
-//            v.add(objUser);
-//        }
-//        Users u = (Users) v.get(0);
-//        final String first = u.getFirstName();
-//        final String last = u.getLastName();
-//        final String email = u.getUserEmail();
-//        final String address =u.getUserAddress();
-//        final String phone = u.getUserPhone();
-        final String first = "";
-        final String last = "";
-        final String email = "";
-        final String address ="";
-        final String phone = "";
+        objUser = new Users();
+        while (rs.next()) {
+            objUser.firstName = rs.getString(1);
+            objUser.lastName = rs.getString(2);
+
+            objUser.userAddress = rs.getString(3);
+            objUser.userPhone = rs.getString(4);
+            objUser.userEmail = rs.getString(5);
+
+            v.add(objUser);
+        }
+        Users u = null;
+        for (int i = 0; i < v.size(); i++) {
+            u = (Users) v.get(i);
+        }
+        final String first = u.getFirstName();
+        final String last = u.getLastName();
+        final String email = u.getUserEmail();
+        final String address = u.getUserAddress();
+        final String phone = u.getUserPhone();
+//        final String first = "";
+//        final String last = "";
+//        final String email = "";
+//        final String address ="";
+//        final String phone = "";
 
         CustomLabel firstNameLabel = new CustomLabel("First name: ",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
