@@ -44,7 +44,7 @@ public class OrderPanel extends JPanel {
         add.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
                 OrderPanel.this.setEnabled(false);
-                OrderNew addOrder = new OrderNew("", false, false, false, new Dimension(400, 550));
+                OrderNew addOrder = new OrderNew("", false, false, false, new Dimension(400, 380));
                 addOrder.setVisible(true);
             }
         });
@@ -78,154 +78,154 @@ public class OrderPanel extends JPanel {
         name.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                Vector<Order> loadOrder = null;
-//                try {
-//                    loadOrder = Medicines.getAllMedicine();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//                for (int i = 0; i < loadOrder.size(); i++) {
-//                    orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//                }
-//                for (int i = 0; i < orders.size() - 1; i++) {
-//                    for (int j = i + 1; j < orders.size(); j++) {
-//                        if (nameSort) {
-//                            if (orders.get(i).name.compareTo(orders.get(j).name) < 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        } else {
-//                            if (orders.get(i).name.compareTo(orders.get(j).name) > 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        }
-//                    }
-//                }
-//                nameSort = !nameSort;
-//                table.removeAll();
-//                OrderRow.white = true;
-//                for (int i = 0; i < orders.size(); i++) {
-//                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//                }
-//                table.repaint();
+                Vector<Orders> loadOrder = null;
+                try {
+                    loadOrder = Orders.getAllOrder();
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+                for (int i = 0; i < loadOrder.size(); i++) {
+                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                }
+                for (int i = 0; i < orders.size() - 1; i++) {
+                    for (int j = i + 1; j < orders.size(); j++) {
+                        if (nameSort) {
+                            if (orders.get(i).name.compareTo(orders.get(j).name) < 0) {
+                                swap(orders, i, j);
+                            }
+                        } else {
+                            if (orders.get(i).name.compareTo(orders.get(j).name) > 0) {
+                                swap(orders, i, j);
+                            }
+                        }
+                    }
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                OrderRow.white = true;
+                for (int i = 0; i < orders.size(); i++) {
+                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
             }
         });
 
         id.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                Vector<Order> loadOrder = null;
-//                try {
-//                    loadOrder = Medicines.getAllMedicine();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//                for (int i = 0; i < loadOrder.size(); i++) {
-//                    orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//                }
-//                for (int i = 0; i < orders.size() - 1; i++) {
-//                    for (int j = i + 1; j < orders.size(); j++) {
-//                        if (nameSort) {
-//                            if (Integer.parseInt(orders.get(i).id) < Integer.parseInt(orders.get(j).id)) {
-//                                swap(orders, i, j);
-//                            }
-//                        } else {
-//                            if (Integer.parseInt(orders.get(i).id) > Integer.parseInt(orders.get(j).id)) {
-//                                swap(orders, i, j);
-//                            }
-//                        }
-//                    }
-//                }
-//                nameSort = !nameSort;
-//                table.removeAll();
-//                OrderRow.white = true;
-//                for (int i = 0; i < orders.size(); i++) {
-//                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//                }
-//                table.repaint();
+                Vector<Orders> loadOrder = null;
+                try {
+                    loadOrder = Orders.getAllOrder();
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+                for (int i = 0; i < loadOrder.size(); i++) {
+                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                }
+                for (int i = 0; i < orders.size() - 1; i++) {
+                    for (int j = i + 1; j < orders.size(); j++) {
+                        if (nameSort) {
+                            if (Integer.parseInt(orders.get(i).id) < Integer.parseInt(orders.get(j).id)) {
+                                swap(orders, i, j);
+                            }
+                        } else {
+                            if (Integer.parseInt(orders.get(i).id) > Integer.parseInt(orders.get(j).id)) {
+                                swap(orders, i, j);
+                            }
+                        }
+                    }
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                OrderRow.white = true;
+                for (int i = 0; i < orders.size(); i++) {
+                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
             }
         });
 
         price.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                Vector<Order> loadOrder = null;
-//                try {
-//                    loadOrder = Medicines.getAllMedicine();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//                for (int i = 0; i < loadOrder.size(); i++) {
-//                    orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//                }
-//                for (int i = 0; i < orders.size() - 1; i++) {
-//                    for (int j = i + 1; j < orders.size(); j++) {
-//                        if (nameSort) {
-//                            if (orders.get(i).price.compareTo(orders.get(j).price) < 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        } else {
-//                            if (orders.get(i).price.compareTo(orders.get(j).price) > 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        }
-//                    }
-//                }
-//                nameSort = !nameSort;
-//                System.out.println(nameSort);
-//                table.removeAll();
-//                OrderRow.white = true;
-//                for (int i = 0; i < orders.size(); i++) {
-//                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//                }
-//                table.repaint();
+                Vector<Orders> loadOrder = null;
+                try {
+                    loadOrder = Orders.getAllOrder();
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+                for (int i = 0; i < loadOrder.size(); i++) {
+                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                }
+                for (int i = 0; i < orders.size() - 1; i++) {
+                    for (int j = i + 1; j < orders.size(); j++) {
+                        if (nameSort) {
+                            if (orders.get(i).price.compareTo(orders.get(j).price) < 0) {
+                                swap(orders, i, j);
+                            }
+                        } else {
+                            if (orders.get(i).price.compareTo(orders.get(j).price) > 0) {
+                                swap(orders, i, j);
+                            }
+                        }
+                    }
+                }
+                nameSort = !nameSort;
+                System.out.println(nameSort);
+                table.removeAll();
+                OrderRow.white = true;
+                for (int i = 0; i < orders.size(); i++) {
+                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
             }
         });
 
         addressToDeliver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                Vector<Order> loadOrder = null;
-//                try {
-//                    loadOrder = Medicines.getAllMedicine();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//                for (int i = 0; i < loadOrder.size(); i++) {
-//                    orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//                }
-//                for (int i = 0; i < orders.size() - 1; i++) {
-//                    for (int j = i + 1; j < orders.size(); j++) {
-//                        if (nameSort) {
-//                            if (orders.get(i).addressToDeliver.compareTo(orders.get(j).addressToDeliver) < 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        } else {
-//                            if (orders.get(i).addressToDeliver.compareTo(orders.get(j).addressToDeliver) > 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        }
-//                    }
-//                }
-//                nameSort = !nameSort;
-//                System.out.println(nameSort);
-//                table.removeAll();
-//                OrderRow.white = true;
-//                for (int i = 0; i < orders.size(); i++) {
-//                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//                }
-//                table.repaint();
+                Vector<Orders> loadOrder = null;
+                try {
+                    loadOrder = Orders.getAllOrder();
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+                for (int i = 0; i < loadOrder.size(); i++) {
+                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                }
+                for (int i = 0; i < orders.size() - 1; i++) {
+                    for (int j = i + 1; j < orders.size(); j++) {
+                        if (nameSort) {
+                            if (orders.get(i).addressToDeliver.compareTo(orders.get(j).addressToDeliver) < 0) {
+                                swap(orders, i, j);
+                            }
+                        } else {
+                            if (orders.get(i).addressToDeliver.compareTo(orders.get(j).addressToDeliver) > 0) {
+                                swap(orders, i, j);
+                            }
+                        }
+                    }
+                }
+                nameSort = !nameSort;
+                System.out.println(nameSort);
+                table.removeAll();
+                OrderRow.white = true;
+                for (int i = 0; i < orders.size(); i++) {
+                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
             }
         });
 
@@ -243,39 +243,39 @@ public class OrderPanel extends JPanel {
         dateOver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                Vector<Order> loadOrder = null;
-//                try {
-//                    loadOrder = Medicines.getAllMedicine();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//                for (int i = 0; i < loadOrder.size(); i++) {
-//                    orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//                }
-//                for (int i = 0; i < orders.size() - 1; i++) {
-//                    for (int j = i + 1; j < orders.size(); j++) {
-//                        if (nameSort) {
-//                            if (orders.get(i).dateOver.compareTo(orders.get(j).dateOver) < 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        } else {
-//                            if (orders.get(i).dateOver.compareTo(orders.get(j).dateOver) > 0) {
-//                                swap(orders, i, j);
-//                            }
-//                        }
-//                    }
-//                }
-//                nameSort = !nameSort;
-//                System.out.println(nameSort);
-//                table.removeAll();
-//                OrderRow.white = true;
-//                for (int i = 0; i < orders.size(); i++) {
-//                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//                }
-//                table.repaint();
+                Vector<Orders> loadOrder = null;
+                try {
+                    loadOrder = Orders.getAllOrder();
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+                for (int i = 0; i < loadOrder.size(); i++) {
+                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                }
+                for (int i = 0; i < orders.size() - 1; i++) {
+                    for (int j = i + 1; j < orders.size(); j++) {
+                        if (nameSort) {
+                            if (orders.get(i).dateOver.compareTo(orders.get(j).dateOver) < 0) {
+                                swap(orders, i, j);
+                            }
+                        } else {
+                            if (orders.get(i).dateOver.compareTo(orders.get(j).dateOver) > 0) {
+                                swap(orders, i, j);
+                            }
+                        }
+                    }
+                }
+                nameSort = !nameSort;
+                System.out.println(nameSort);
+                table.removeAll();
+                OrderRow.white = true;
+                for (int i = 0; i < orders.size(); i++) {
+                    table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
             }
         });
     }
@@ -283,22 +283,22 @@ public class OrderPanel extends JPanel {
     public void updateTable(CustomTable table, int idSize, int nameSize, int priceSize, int addressToDeliverSize, int dateOverSize, int optionSize) throws SQLException {
         table.removeAll();
 
-//        Vector<Order> loadOrder = null;
-//        try {
-//            loadOrder = Medicines.getAllMedicine();
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
-//        for (int i = 0; i < loadOrder.size(); i++) {
-//            orders.add(new Order(loadOrder.get(i).getMedicineCode() + "", loadOrder.get(i).getMedicineName(), loadOrder.get(i).getMedicineTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
-//        }
-//        table.setPreferredSize(new Dimension(1000, orders.size() * 40));
-//
-//        for (int i = 0; i < orders.size(); i++) {
-//            table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
-//        }
-//        table.repaint();
+        Vector<Orders> loadOrder = null;
+        try {
+            loadOrder = Orders.getAllOrder();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
+        for (int i = 0; i < loadOrder.size(); i++) {
+            orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+        }
+        table.setPreferredSize(new Dimension(1000, orders.size() * 40));
+
+        for (int i = 0; i < orders.size(); i++) {
+            table.add(new OrderRow(orders.get(i).id, orders.get(i).name, orders.get(i).price, orders.get(i).addressToDeliver, orders.get(i).dateOver, idSize, nameSize, priceSize, addressToDeliverSize, dateOverSize, optionSize, new Point(0, i * 40), table));
+        }
+        table.repaint();
     }
     public static boolean nameSort = true;
 
