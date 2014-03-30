@@ -30,7 +30,10 @@ import GUI.MedicinesManager.MedicinesPanel;
 import java.sql.SQLException;
 import GUI.MeasureManager.MeasurePanel;
 import GUI.MedicineTypeManager.MedicineTypePanel;
+import GUI.Order.OrderPanel;
+import GUI.Report.ReportPanel;
 import GUI.SupplierManager.SuppliersPanel;
+import GUI.UserManager.UserManagerPanel;
 
 class TimeThread extends Thread {
 
@@ -137,6 +140,18 @@ public class MainPanel extends RemovablePanel {
         final MedicineTypePanel medicinetypeManager = new MedicineTypePanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
         medicinetypeManager.setBackground(Color.WHITE);
         medicinetypeManager.setVisible(false);
+        
+        final UserManagerPanel userManagerManager = new UserManagerPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
+        userManagerManager.setBackground(Color.WHITE);
+        userManagerManager.setVisible(false);
+        
+         final OrderPanel orderManager = new OrderPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
+        orderManager.setBackground(Color.WHITE);
+        orderManager.setVisible(false);
+        
+        final ReportPanel reportPanel = new ReportPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
+        reportPanel.setBackground(Color.WHITE);
+        reportPanel.setVisible(false);
 
 
         final BillingHistoryPanel billingHistoryManager = new BillingHistoryPanel(rightPanel, new Point(0, 20), new Dimension(rightPanel.getWidth() - 10, rightPanel.getHeight() - 50));
@@ -162,7 +177,7 @@ public class MainPanel extends RemovablePanel {
                 30), true, SwingConstants.RIGHT,
                 SwingConstants.CENTER, leftPanel);
 
-        int numberOfTab = 9;
+        int numberOfTab = 11;
         int step = 40;
         int begin = (dimension.height - numberOfTab * step) / 2 + 10;
         int i = 0;
@@ -189,17 +204,23 @@ public class MainPanel extends RemovablePanel {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
                 leftPanelColor, true, new Point(0, begin + step * (i++)),
                 new Dimension(leftPanelWidth, 40), leftPanel);
-
-        final CustomButton billingHistory = new CustomButton("Billing History", Color.WHITE,
+        final CustomButton billingHistory = new CustomButton("Bill", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
                 leftPanelColor, true, new Point(0, begin + step * (i++)),
                 new Dimension(leftPanelWidth, 40), leftPanel);
-
+        final CustomButton order = new CustomButton("Order", Color.WHITE,
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
+                leftPanelColor, true, new Point(0, begin + step * (i++)),
+                new Dimension(leftPanelWidth, 40), leftPanel);
+         final CustomButton report = new CustomButton("Report", Color.WHITE,
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
+                leftPanelColor, true, new Point(0, begin + step * (i++)),
+                new Dimension(leftPanelWidth, 40), leftPanel);
         final CustomButton account = new CustomButton("My Account", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
                 leftPanelColor, true, new Point(0, begin + step * (i++)),
                 new Dimension(leftPanelWidth, 40), leftPanel);
-        final CustomButton userManaer = new CustomButton("User Manager", Color.WHITE,
+        final CustomButton userManager = new CustomButton("User Manager", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 20), false, false,
                 leftPanelColor, true, new Point(0, begin + step * (i++)),
                 new Dimension(leftPanelWidth, 40), leftPanel);
@@ -213,9 +234,9 @@ public class MainPanel extends RemovablePanel {
         medicines.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(medicines, account, customers, suppliers, measure, medicinetype, billingHistory);
+                changeState(medicines, account, customers, suppliers,report, userManager, order, measure, medicinetype, billingHistory);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, medicinesManager, customersManager, billingHistoryManager, accountManager, suppliersManager, measureManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, medicinesManager, reportPanel,customersManager, billingHistoryManager, accountManager, suppliersManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
 
@@ -225,9 +246,9 @@ public class MainPanel extends RemovablePanel {
         customers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(customers, account, medicines, suppliers, measure, medicinetype, billingHistory);
+                changeState(customers, account, medicines, suppliers,report,userManager, order, measure, medicinetype, billingHistory);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, customersManager, medicinesManager, billingHistoryManager, accountManager, suppliersManager, measureManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, customersManager,reportPanel, medicinesManager, billingHistoryManager, accountManager, suppliersManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -236,9 +257,9 @@ public class MainPanel extends RemovablePanel {
         suppliers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(suppliers, account, medicines, customers, measure, medicinetype, billingHistory);
+                changeState(suppliers, account, medicines, userManager, report,order, customers, measure, medicinetype, billingHistory);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, suppliersManager, medicinesManager, customersManager, billingHistoryManager, accountManager, measureManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, suppliersManager,reportPanel, medicinesManager, customersManager, billingHistoryManager, accountManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -247,9 +268,9 @@ public class MainPanel extends RemovablePanel {
         measure.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(measure, account, medicines, customers, suppliers, medicinetype, billingHistory);
+                changeState(measure, account, medicines, userManager,report, order, customers, suppliers, medicinetype, billingHistory);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, measureManager, medicinesManager, customersManager, billingHistoryManager, accountManager, suppliersManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, measureManager, reportPanel,medicinesManager, customersManager, billingHistoryManager, accountManager, suppliersManager, medicinetypeManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -258,9 +279,9 @@ public class MainPanel extends RemovablePanel {
         medicinetype.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(medicinetype, account, medicines, customers, suppliers, measure, billingHistory);
+                changeState(medicinetype, account, medicines, report,userManager, order, customers, suppliers, measure, billingHistory);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, medicinetypeManager, medicinesManager, customersManager, billingHistoryManager, accountManager, suppliersManager, measureManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, medicinetypeManager,reportPanel, medicinesManager, customersManager, billingHistoryManager, accountManager, suppliersManager, measureManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -269,9 +290,9 @@ public class MainPanel extends RemovablePanel {
         billingHistory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(billingHistory, account, medicines, customers, suppliers, measure, medicinetype);
+                changeState(billingHistory, account, medicines,report, userManager, order, customers, suppliers, measure, medicinetype);
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, billingHistoryManager, medicinesManager, customersManager, accountManager, suppliersManager, measureManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, billingHistoryManager,reportPanel, medicinesManager, customersManager, accountManager, suppliersManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -280,9 +301,42 @@ public class MainPanel extends RemovablePanel {
         account.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                changeState(account, medicines, customers, suppliers, measure, medicinetype, billingHistory);
+                changeState(account, medicines, customers,report, suppliers, measure, medicinetype, billingHistory, userManager, order );
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, accountManager,reportPanel, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
+                progress.setVisible(true);
+                switchPane.start();
+            }
+        });
+        
+         report.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                changeState(report, account, medicines, customers, suppliers, measure, medicinetype, billingHistory, userManager, order );
+                parentFrame.setSize(Configure.DEFAULT_SIZE);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, reportPanel,accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager, orderManager, userManagerManager);
+                progress.setVisible(true);
+                switchPane.start();
+            }
+        });
+        
+        order.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                changeState(order, account, medicines, customers,report, suppliers, measure, medicinetype, billingHistory, userManager );
+                parentFrame.setSize(Configure.DEFAULT_SIZE);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, orderManager,reportPanel, accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager,  userManagerManager);
+                progress.setVisible(true);
+                switchPane.start();
+            }
+        });
+        
+        userManager.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                changeState(userManager, account, medicines, customers, report,suppliers, measure, medicinetype, billingHistory, order );
+                parentFrame.setSize(Configure.DEFAULT_SIZE);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress, reportPanel,  userManagerManager, accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager, orderManager);
                 progress.setVisible(true);
                 switchPane.start();
             }
@@ -316,7 +370,7 @@ public class MainPanel extends RemovablePanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 parentFrame.setSize(Configure.MINIMIZE_SIZE);
-                changeState(account, medicines, customers, suppliers, measure, medicinetype, billingHistory);
+                changeState(account, medicines, customers, suppliers, measure, medicinetype, billingHistory, order, userManager, report);
                 medicines.setBackground(leftPanelColor);
                 medicines.setForeground(Color.WHITE);
                 medicines.setEnabled(true);
@@ -327,7 +381,7 @@ public class MainPanel extends RemovablePanel {
 
     }
 
-    public void changeState(JButton bt1, JButton bt2, JButton bt3, JButton bt4, JButton bt5, JButton bt6, JButton bt7) {
+    public void changeState(JButton bt1, JButton bt2, JButton bt3, JButton bt4, JButton bt5, JButton bt6, JButton bt7, JButton bt8, JButton bt9, JButton bt10) {
         bt1.setBackground(Color.WHITE);
         bt1.setForeground(leftPanelColor);
         bt1.setEnabled(false);
@@ -349,6 +403,15 @@ public class MainPanel extends RemovablePanel {
         bt7.setBackground(leftPanelColor);
         bt7.setForeground(Color.WHITE);
         bt7.setEnabled(true);
+        bt8.setBackground(leftPanelColor);
+        bt8.setForeground(Color.WHITE);
+        bt8.setEnabled(true);
+        bt9.setBackground(leftPanelColor);
+        bt9.setForeground(Color.WHITE);
+        bt9.setEnabled(true);
+        bt10.setBackground(leftPanelColor);
+        bt10.setForeground(Color.WHITE);
+        bt10.setEnabled(true);
     }
 
     public static String getDate() {

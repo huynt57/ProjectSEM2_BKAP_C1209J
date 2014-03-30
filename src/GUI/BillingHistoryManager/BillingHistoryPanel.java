@@ -37,18 +37,18 @@ public class BillingHistoryPanel extends JPanel {
 		
 		HintTextField search = new HintTextField(" Search bill", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width-280, 80), new Dimension(200, 30), BillingHistoryPanel.this, false);
 
-		int totalWidth = d.width - 230;
+		int totalWidth = d.width - 250;
 		int nameSize = totalWidth / 4;
 		int typeSize = totalWidth / 6;
 		int addressSize = totalWidth / 4;
 		int priceSize = totalWidth / 6;
                 int statusSize = totalWidth / 6;
 		int idSize = 50;
-		int optionSize = 111;
+		int optionSize = 131;
 		Color BACK_GROUND = Color.GRAY; 
 
                 CustomButton id = new CustomButton("ID", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40, 120), new Dimension(idSize, 30), BillingHistoryPanel.this);
-		CustomButton name = new CustomButton("Name", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + idSize, 120), new Dimension(nameSize, 30),BillingHistoryPanel.this);
+		CustomButton name = new CustomButton("Customer", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + idSize, 120), new Dimension(nameSize, 30),BillingHistoryPanel.this);
 		CustomButton type = new CustomButton("Type", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize +idSize, 120), new Dimension(typeSize, 30), BillingHistoryPanel.this);
 		CustomButton address = new CustomButton("Address", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + idSize, 120), new Dimension(addressSize, 30), BillingHistoryPanel.this);
 		CustomButton price = new CustomButton("Price", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + typeSize + addressSize + idSize, 120), new Dimension(priceSize, 30), BillingHistoryPanel.this);

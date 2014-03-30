@@ -30,11 +30,13 @@ public class BillingRow extends JPanel {
                 CustomLabel statusLabel = new CustomLabel(status, Color.GRAY, Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(pos.x +idSize + typeSize + addressSize + nameSize + priceSize, pos.y), new Dimension(statusSize, 40), true, SwingConstants.CENTER, SwingConstants.CENTER, parentPanel);
 		CustomButton devider = new CustomButton("", Color.WHITE, null, false, false, Color.LIGHT_GRAY, true, new Point(pos.x, pos.y + 39), new Dimension(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + optionSize , 1), parentPanel);
 
-		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 , 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+                CustomButton pay = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 - 20, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		pay.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
+		CustomButton details = new CustomButton(new ImageIcon("src/GUI/Resources/details.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 5 , 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		details.setRolloverIcon(new ImageIcon("src/GUI/Resources/detailsRollover.bin"));
-		CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false,BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 25, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		CustomButton edit = new CustomButton(new ImageIcon("src/GUI/Resources/edit.bin"), "", Color.WHITE, null, false, false,BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 30, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		edit.setRolloverIcon(new ImageIcon("src/GUI/Resources/editRollover.bin"));
-		CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 48, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
+		CustomButton delete = new CustomButton(new ImageIcon("src/GUI/Resources/delete.bin"), "", Color.WHITE, null, false, false, BackGround, true, new Point(idSize + nameSize + typeSize + addressSize + priceSize + statusSize + (optionSize-80)/2 + 53, 5), new Dimension(20, 30), BillingRow.this,SwingConstants.CENTER, SwingConstants.CENTER);
 		delete.setRolloverIcon(new ImageIcon("src/GUI/Resources/deleteRollover.bin"));
 	}
 }

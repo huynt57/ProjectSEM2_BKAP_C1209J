@@ -1,4 +1,6 @@
-package GUI.MedicinesManager;
+
+package GUI.Order;
+
 
 import GUI.AccountManager.AccountPanel;
 import GUI.Classes.Configure;
@@ -23,9 +25,9 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-public class MedicineNew extends CustomFrame {
+public class OrderNew extends CustomFrame {
 
-    public MedicineNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public OrderNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -136,7 +138,7 @@ public class MedicineNew extends CustomFrame {
                 else origin = "foreign";
                 
                 
-                MedicineNew.this.dispose();
+                OrderNew.this.dispose();
                 
             }
         });
@@ -149,7 +151,7 @@ public class MedicineNew extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                MedicineNew.this.dispose();
+                OrderNew.this.dispose();
             }
         });
     }

@@ -1,20 +1,6 @@
 package GUI.Classes;
 
-import GUI.AccountManager.AccountPanel;
-import GUI.BillingHistoryManager.BillingHistoryPanel;
-import java.io.FileWriter;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import GUI.Classes.CustomFrame;
-import GUI.Classes.CustomLabel;
-import GUI.CustomersManager.CustomersPanel;
-import GUI.MeasureManager.MeasurePanel;
-import GUI.MedicineTypeManager.MedicineTypePanel;
-import GUI.MedicinesManager.MedicinesPanel;
-import GUI.SupplierManager.SuppliersPanel;
 
 public class SwitchPaneThread extends Thread {
 
@@ -26,9 +12,10 @@ public class SwitchPaneThread extends Thread {
     public JPanel p4;
     public JPanel p5;
     public JPanel p6;
-      //  public JPanel p7;
-
-    public SwitchPaneThread(CustomLabel progress, JPanel newPane, JPanel p1, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6) {
+    public JPanel p7;
+    public JPanel p8;
+    public JPanel p9;
+    public SwitchPaneThread(CustomLabel progress, JPanel newPane, JPanel p1, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9) {
         super();
         this.progress = progress;
         this.newPane = newPane;
@@ -38,6 +25,9 @@ public class SwitchPaneThread extends Thread {
         this.p4 = p4;
         this.p5 = p5;
         this.p6 = p6;
+        this.p7 = p7;
+        this.p8 = p8;
+        this.p9 = p9;
     }
 
     @Override
@@ -52,7 +42,9 @@ public class SwitchPaneThread extends Thread {
             p4.setVisible(false);
             p5.setVisible(false);
             p6.setVisible(false);
-            // p7.setVisible(false);
+            p7.setVisible(false);
+            p8.setVisible(false);
+            p9.setVisible(false);
             newPane.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();

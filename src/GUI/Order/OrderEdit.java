@@ -1,4 +1,6 @@
-package GUI.MedicinesManager;
+
+package GUI.Order;
+
 
 import GUI.AccountManager.AccountPanel;
 import GUI.Classes.Configure;
@@ -23,9 +25,9 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-public class MedicineNew extends CustomFrame {
+public class OrderEdit extends CustomFrame {
 
-    public MedicineNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public OrderEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, Vector supplierVt, Vector typeVt, Vector measureVt) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -34,22 +36,12 @@ public class MedicineNew extends CustomFrame {
         this.setContentPane(contenPane);
         setLayout(null);
 //        type, supplier, measure,,  origine,  user guide, 
-        CustomLabel titleLabel = new CustomLabel("Add new medicine",
+        CustomLabel titleLabel = new CustomLabel("Edit medicine",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
 
-        Vector supplierVt = new Vector();
-        Vector typeVt = new Vector();
-        Vector measureVt = new Vector();
-        
-        for(int i=0; i<100; i++) {
-            supplierVt.add(i);
-            typeVt.add(i);
-            measureVt.add(i);
-        }
-        
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
@@ -75,7 +67,7 @@ public class MedicineNew extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
                 new Point(20, 310), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-       final  CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 310), new Dimension(dim.width - 120, 30), contenPane);
+        final CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 310), new Dimension(dim.width - 120, 30), contenPane);
 
         final JRadioButton domestic = new JRadioButton("");
         domestic.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
@@ -111,7 +103,7 @@ public class MedicineNew extends CustomFrame {
             }
         });
         HintTextField userGuide = new HintTextField(" User guide", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 380), new Dimension(dim.width - 40, 100), contenPane, false);
-        userGuide.setCaretPosition(0);
+
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.GRAY, true, new Point(20, 500),
@@ -120,8 +112,6 @@ public class MedicineNew extends CustomFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
-                
                 String namex = name.getText().toString();
                 String supplierx = supplier.getSelectedItem().toString();
                 String pricex = price.getText();
@@ -132,12 +122,13 @@ public class MedicineNew extends CustomFrame {
                 String measurex = measure.getSelectedItem().toString();
                 String typex = type.getSelectedItem().toString();
                 String origin;
-                if (domestic.isSelected()) origin = "domestic";
-                else origin = "foreign";
-                
-                
-                MedicineNew.this.dispose();
-                
+                if (domestic.isSelected()) {
+                    origin = "domestic";
+                } else {
+                    origin = "foreign";
+                }
+
+                OrderEdit.this.dispose();
             }
         });
 
@@ -149,10 +140,9 @@ public class MedicineNew extends CustomFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                MedicineNew.this.dispose();
+                OrderEdit.this.dispose();
             }
         });
     }
 
-    
 }
