@@ -44,6 +44,12 @@ public class MedicineEdit extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
+//        Vector supplierVt = new Vector();
+//        supplierVt = GUI.SupplierManager.Suppliers.getAllSupplier();
+//        Vector typeVt = new Vector();
+//        typeVt = GUI.MedicineTypeManager.MedicineTypes.getAllMedicineType();
+//        Vector measureVt = new Vector();
+//        measureVt = GUI.MeasureManager.Measures.getAllMeasure();
 
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);

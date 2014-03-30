@@ -5,6 +5,9 @@
  */
 package GUI.MedicinesManager;
 
+import GUI.MeasureManager.Measures;
+import GUI.MedicineTypeManager.MedicineTypes;
+import GUI.SupplierManager.Suppliers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -182,7 +185,7 @@ public class Medicines {
             Statement sta = con.createStatement();
             String sql1 = "INSERT INTO Medicine VALUES ('" + name + "'," + type + "," + supplier + ")";
             sta.execute(sql1);
-            String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '" + name + "'";
+            String sql3 = "SELECT MAX (medicineCode) FROM Medicine";
             ResultSet rs = sta.executeQuery(sql3);
 
             int code = 0;
@@ -246,12 +249,13 @@ public class Medicines {
         }
         return v;
     }
-
+ 
     public static void DeleteMedicine(String id) throws SQLException, ClassNotFoundException {
         Connection con = DBHelper.connect();
         Statement sta = con.createStatement();
 
         sta.execute("DELETE FROM Medicine WHERE medicineCode = " + id);
+        sta.execute("DELETE FROM MedicineDetails WHERE medicineCode = " + id);
     }
 
    public static Vector viewMedicine(String id) throws SQLException, ClassNotFoundException {
@@ -275,5 +279,108 @@ public class Medicines {
         }
         return v;
     }
+   
+   
+//    public static void InsertBill(String billtype, String customercode, String address, String datestart, String expiretime, String tax, String price, String status, String usercode, String medicinecode, String measurecode, String quantity) throws SQLException, ClassNotFoundException {
+//        try {
+//            Vector v = new Vector();
+//            Connection con = DBHelper.connect();
+//            Statement sta = con.createStatement();
+//            String sql1 = "INSERT INTO Bill VALUES ('" + billtype + "','" + customercode + "','" + address + "','"+datestart+"','"+expiretime+"','"+tax+"','"+price+"','"+status+"','"+usercode+"')";
+//            sta.execute(sql1);
+//            String sql3 = "SELECT Bill FROM Medicine WHERE addressToDeliver = '" + address + "'";
+//            ResultSet rs = sta.executeQuery(sql3);
+//
+//            int code = 0;
+//            while(rs.next())
+//                   {
+//                       code = rs.getInt("billCode");
+//            }
+//
+//            String sql2 = "INSERT INTO MedicineDetails VALUES ("+code+"," + medicinecode + "," + measurecode + "," + quantity + ")";
+//            sta.execute(sql2);
+//
+//        } catch (SQLException ex) {
+//
+//        }
+//
+//    }
+//    
+//      public static void UpdateBill(String billtype, String customercode, String address, String datestart, String expiretime, String tax, String price, String status, String usercode, String medicinecode, String measurecode, String quantity, String id) throws SQLException, ClassNotFoundException {
+//        try {
+//            Vector v = new Vector();
+//            Connection con = DBHelper.connect();
+//            Statement sta = con.createStatement();
+//            String sql1 = "UPDATE Bill VALUES ('" + billtype + "','" + customercode + "','" + address + "','"+datestart+"','"+expiretime+"','"+tax+"','"+price+"','"+status+"','"+usercode+"') WHERE billCode = "+id;
+//            sta.execute(sql1);
+//            String sql3 = "SELECT Bill FROM Medicine WHERE addressToDeliver = '" + address + "'";
+//            ResultSet rs = sta.executeQuery(sql3);
+//
+//            int code = 0;
+//            while(rs.next())
+//                   {
+//                       code = rs.getInt("billCode");
+//            }
+//
+//            String sql2 = "UPDATE BillDetails VALUES ("+code+"," + medicinecode + "," + measurecode + "," + quantity + ") WHERE billCode = "+id;
+//            sta.execute(sql2);
+//
+//        } catch (SQLException ex) {
+//
+//        }
+//
+//    }
+//
+//    public static Vector getAlBill() throws SQLException, ClassNotFoundException {
+//        Vector v = new Vector();
+//        try {
+//            Connection con = DBHelper.connect();
+//            Statement sta = con.createStatement();
+//
+//            ResultSet rs = sta.executeQuery("SELECT * FROM Bill join BillDetails ON Bill.billCode = BillDetails.billCode");
+//            while (rs.next()) {
+//                Medicines objMedicine = new Medicines();
+//                objMedicine.medicineCode = rs.getInt("medicineCode");
+//                objMedicine.medicineName = rs.getString("medicineName");
+//                objMedicine.medicineTypeName = rs.getString("medicineTypeName");
+//                objMedicine.supplierName = rs.getString("supplierName");
+//                objMedicine.avaiableAmount = rs.getInt("avaiableAmount");
+//                v.add(objMedicine);
+//            }
+//        } catch (SQLException ex) {
+//
+//        }
+//        return v;
+//    }
+//
+//    public static void DeleteBill(String id) throws SQLException, ClassNotFoundException {
+//        Connection con = DBHelper.connect();
+//        Statement sta = con.createStatement();
+//
+//        sta.execute("DELETE FROM Bill WHERE billCode = " + id);
+//        sta.execute("DELETE FROM BillDetails WHERE billCode = " + id);
+//    }
+//
+//   public static Vector viewBill(String id) throws SQLException, ClassNotFoundException {
+//        Vector v = new Vector();
+//        try {
+//            Connection con = DBHelper.connect();
+//            Statement sta = con.createStatement();
+//
+//            ResultSet rs = sta.executeQuery("SELECT * FROM Medicine join MedicineDetails ON Medicine.medicineCode = MedicineDetails.medicineCode join Supplier ON Medicine.SupplierCode = Supplier.SupplierCode join MedicineType ON Medicine.medicineTypeCode = MedicineType.medicineTypeCode WHERE medicineCode = "+id);
+//            while (rs.next()) {
+//                Medicines objMedicine = new Medicines();
+//                objMedicine.medicineCode = rs.getInt("medicineCode");
+//                objMedicine.medicineName = rs.getString("medicineName");
+//                objMedicine.medicineTypeName = rs.getString("medicineTypeName");
+//                objMedicine.supplierName = rs.getString("supplierName");
+//                objMedicine.avaiableAmount = rs.getInt("avaiableAmount");
+//                v.add(objMedicine);
+//            }
+//        } catch (SQLException ex) {
+//
+//        }
+//        return v;
+//    }
 
 }

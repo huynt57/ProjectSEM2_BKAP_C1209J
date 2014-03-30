@@ -52,7 +52,14 @@ public class MedicinesPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 MedicinesPanel.this.setEnabled(false);
-                MedicineNew addMedicines = new MedicineNew("", false, false, false, new Dimension(400, 550));
+                MedicineNew addMedicines = null;
+                try {
+                    addMedicines = new MedicineNew("", false, false, false, new Dimension(400, 550));
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 addMedicines.setVisible(true);
             }
         });
