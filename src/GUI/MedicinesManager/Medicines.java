@@ -183,43 +183,69 @@ public class Medicines {
             Vector v = new Vector();
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
-            String sql1 = "INSERT INTO Medicine VALUES ('" + name + "'," + type + "," + supplier + ")";
+            
+
+            String sqlmeasure = "SELECT measureCode FROM Measure WHERE measureName = '" + measure+"'";
+            ResultSet rsm = sta.executeQuery(sqlmeasure);
+
+            int measurecode = 0;
+            while (rsm.next()) {
+                measurecode = rsm.getInt("measureCode");
+            }
+
+            String sqlmetype = "SELECT medicineTypeCode FROM MedicineType WHERE medicineTypeName = '" + type+"'";
+            ResultSet rsmetype = sta.executeQuery(sqlmetype);
+
+            int medicinetypecode = 0;
+            while (rsmetype.next()) {
+                medicinetypecode = rsmetype.getInt("medicineTypeCode");
+            }
+
+            String sqlsupplier = "SELECT supplierCode FROM Supplier WHERE supplierName = '" + supplier+"'";
+            ResultSet rssupplier = sta.executeQuery(sqlsupplier);
+
+            int suppliercode = 0;
+            while (rssupplier.next()) {
+                suppliercode = rssupplier.getInt("supplierCode");
+            }
+            
+            String sql1 = "INSERT INTO Medicine VALUES ('" + name + "'," + medicinetypecode + "," + suppliercode + ")";
             sta.execute(sql1);
-            String sql3 = "SELECT MAX (medicineCode) FROM Medicine";
+            String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '"+name+"'";
+
             ResultSet rs = sta.executeQuery(sql3);
 
             int code = 0;
-            while(rs.next())
-                   {
-                       code = rs.getInt("medicineCode");
+            while (rs.next()) {
+                code = rs.getInt("medicineCode");
             }
-
-            String sql2 = "INSERT INTO MedicineDetails VALUES ("+code+"," + measure + "," + price + "," + num + "," + regnum + ",'" + origin + "',		" + used + "," + termofuse + ",		'" + guide + "')";
+            String sql2 = "INSERT INTO MedicineDetails VALUES (" + code + "," + measurecode + "," + price + "," + num + ",'" + regnum + "','" + origin + "'," + used + ",'" + termofuse + "',	'" + guide + "')";
+           
+            System.out.println("fcsdkjhf");
             sta.execute(sql2);
-
+            System.out.println(sql2);
         } catch (SQLException ex) {
 
         }
 
     }
-    
-     public static void UpdateMedicine(String name, String supplier, String price, String termofuse, String num, String regnum, String used, String measure, String type, String origin, String guide, String id) throws SQLException, ClassNotFoundException {
+
+    public static void UpdateMedicine(String name, String supplier, String price, String termofuse, String num, String regnum, String used, String measure, String type, String origin, String guide, String id) throws SQLException, ClassNotFoundException {
         try {
             Vector v = new Vector();
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
-            String sql1 = "UPDATE Medicine VALUES ('" + name + "'," + type + "," + supplier + ") WHERE medicineCode = "+id;
+            String sql1 = "UPDATE Medicine VALUES ('" + name + "'," + type + "," + supplier + ") WHERE medicineCode = " + id;
             sta.execute(sql1);
             String sql3 = "SELECT medicineCode FROM Medicine WHERE medicineName = '" + name + "'";
             ResultSet rs = sta.executeQuery(sql3);
 
             int code = 0;
-            while(rs.next())
-                   {
-                       code = rs.getInt("medicineCode");
+            while (rs.next()) {
+                code = rs.getInt("medicineCode");
             }
 
-            String sql2 = "UPDATE MedicineDetails VALUES ("+code+"," + measure + "," + price + "," + num + "," + regnum + ",'" + origin + "',		" + used + "," + termofuse + ",		'" + guide + "') WHERE medicineCode = "+id;
+            String sql2 = "UPDATE MedicineDetails VALUES (" + code + "," + measure + "," + price + "," + num + "," + regnum + ",'" + origin + "',		" + used + "," + termofuse + ",		'" + guide + "') WHERE medicineCode = " + id;
             sta.execute(sql2);
 
         } catch (SQLException ex) {
@@ -249,7 +275,7 @@ public class Medicines {
         }
         return v;
     }
- 
+
     public static void DeleteMedicine(String id) throws SQLException, ClassNotFoundException {
         Connection con = DBHelper.connect();
         Statement sta = con.createStatement();
@@ -258,13 +284,13 @@ public class Medicines {
         sta.execute("DELETE FROM MedicineDetails WHERE medicineCode = " + id);
     }
 
-   public static Vector viewMedicine(String id) throws SQLException, ClassNotFoundException {
+    public static Vector viewMedicine(String id) throws SQLException, ClassNotFoundException {
         Vector v = new Vector();
         try {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            ResultSet rs = sta.executeQuery("SELECT * FROM Medicine join MedicineDetails ON Medicine.medicineCode = MedicineDetails.medicineCode join Supplier ON Medicine.SupplierCode = Supplier.SupplierCode join MedicineType ON Medicine.medicineTypeCode = MedicineType.medicineTypeCode WHERE medicineCode = "+id);
+            ResultSet rs = sta.executeQuery("SELECT * FROM Medicine join MedicineDetails ON Medicine.medicineCode = MedicineDetails.medicineCode join Supplier ON Medicine.SupplierCode = Supplier.SupplierCode join MedicineType ON Medicine.medicineTypeCode = MedicineType.medicineTypeCode WHERE medicineCode = " + id);
             while (rs.next()) {
                 Medicines objMedicine = new Medicines();
                 objMedicine.medicineCode = rs.getInt("medicineCode");
@@ -279,8 +305,7 @@ public class Medicines {
         }
         return v;
     }
-   
-   
+
 //    public static void InsertBill(String billtype, String customercode, String address, String datestart, String expiretime, String tax, String price, String status, String usercode, String medicinecode, String measurecode, String quantity) throws SQLException, ClassNotFoundException {
 //        try {
 //            Vector v = new Vector();
@@ -382,5 +407,4 @@ public class Medicines {
 //        }
 //        return v;
 //    }
-
 }

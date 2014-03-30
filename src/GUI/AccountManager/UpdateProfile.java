@@ -16,7 +16,6 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.CustomTextField;
 import GUI.Classes.Util;
-import static GUI.LoginScreen.LoginThread.nameLogin;
 import GUI.LoginScreen.Users;
 import java.sql.Connection;
 import java.sql.ResultSet;

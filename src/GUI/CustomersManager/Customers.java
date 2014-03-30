@@ -118,9 +118,7 @@ public class Customers {
                 objCustomer.customerName = rs.getString("customerName");
                 objCustomer.customerType = rs.getString("customerType");
                 objCustomer.customerPhone = rs.getString("customerPhone");
-
                 objCustomer.customerAddress = rs.getString("customerAddress");
-
                 v.add(objCustomer);
             }
         } catch (SQLException ex) {

@@ -9,6 +9,9 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.MeasureManager.Measures;
+import GUI.MedicineTypeManager.MedicineTypes;
+import GUI.SupplierManager.Suppliers;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -43,19 +46,16 @@ public class MedicineNew extends CustomFrame {
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
 
-        Vector supplierVt = new Vector();
-        supplierVt = GUI.SupplierManager.Suppliers.getAllSupplier();
-        Vector typeVt = new Vector();
-        typeVt = GUI.MedicineTypeManager.MedicineTypes.getAllMedicineType();
-        Vector measureVt = new Vector();
-        measureVt = GUI.MeasureManager.Measures.getAllMeasure();
-        
-        for(int i=0; i<100; i++) {
-            supplierVt.add(i);
-            typeVt.add(i);
-            measureVt.add(i);
-        }
-        
+        Vector<String> supplierVt = new Vector<String>();
+        Vector<Suppliers> supplierTemp = GUI.SupplierManager.Suppliers.getAllSupplier();
+        for(int i=0; i<supplierTemp.size(); i++) supplierVt.add(supplierTemp.get(i).getSupplierName());
+        Vector<String> typeVt = new Vector<String>();
+        Vector<MedicineTypes> metypeTemp  = GUI.MedicineTypeManager.MedicineTypes.getAllMedicineType();
+         for(int i=0; i<metypeTemp.size(); i++) typeVt.add(metypeTemp.get(i).getMedicineTypeName());
+        Vector<String> measureVt = new Vector<String>();
+        Vector<Measures>measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+         for(int i=0; i<measuretemp.size(); i++) measureVt.add(measuretemp.get(i).getMeasureName());
+     
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);

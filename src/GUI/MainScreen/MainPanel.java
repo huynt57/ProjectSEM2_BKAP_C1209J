@@ -336,7 +336,7 @@ public class MainPanel extends RemovablePanel {
             public void actionPerformed(ActionEvent arg0) {
                 changeState(userManager, account, medicines, customers, report,suppliers, measure, medicinetype, billingHistory, order );
                 parentFrame.setSize(Configure.DEFAULT_SIZE);
-                SwitchPaneThread switchPane = new SwitchPaneThread(progress, reportPanel,  userManagerManager, accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager, orderManager);
+                SwitchPaneThread switchPane = new SwitchPaneThread(progress,   userManagerManager, reportPanel, accountManager, medicinesManager, customersManager, billingHistoryManager, suppliersManager, measureManager, medicinetypeManager, orderManager);
                 progress.setVisible(true);
                 switchPane.start();
             }

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class LoginThread extends Thread {
 
     public static String userTypeCode = "";
-    public static String nameLogin = "";
+    public String nameLogin = "";
     public static int active;
     public JLabel label;
     public String userName;
@@ -45,6 +45,7 @@ public class LoginThread extends Thread {
         this.logo = logo;
         this.image = image;
         this.appName = appName;
+        this.nameLogin = username;
     }
 
     @Override

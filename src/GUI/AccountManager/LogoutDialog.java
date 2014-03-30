@@ -6,8 +6,8 @@ import GUI.Classes.CustomFont;
 import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.RemovablePanel;
+import GUI.Classes.Util;
 import GUI.LoginScreen.LoginScreen;
-import static GUI.LoginScreen.LoginThread.nameLogin;
 import GUI.MainScreen.MainScreen;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -84,7 +84,7 @@ public class LogoutDialog extends CustomFrame {
                     writer.write("0\n");
                 }
                     writer.write("0\n");
-                writer.write(nameLogin);
+                writer.write(Util.getId());
                 writer.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
