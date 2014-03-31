@@ -24,9 +24,45 @@ public class Users {
     private String password;
     private String fullName;
 
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getUserAva() {
+        return userAva;
+    }
+
+    public void setUserAva(String userAva) {
+        this.userAva = userAva;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    private String userType;
     private String userTypeCode;
+    private String userTypeName;
 
     private String userAddress;
+    private String userAva;
+    private String firstName;
+    private String lastName;
 
     public Users(int userCode, String nameLogin, String password, String fullName, String userTypeCode, String userAddress, String userPhone, String userEmail, int userActive, String firstname, String lastname) {
         this.userCode = userCode;
@@ -150,6 +186,14 @@ public class Users {
         this.lastname = lastname;
     }
 
+    public String getUserTypeName() {
+        return userTypeName;
+    }
+
+    public void setUserTypeName(String userTypeName) {
+        this.userTypeName = userTypeName;
+    }
+
     public static Vector getAllUser() throws SQLException, ClassNotFoundException {
         Vector v = new Vector();
         try {
@@ -162,12 +206,16 @@ public class Users {
                 objUser.userCode = rs.getInt(1);
                 objUser.nameLogin = rs.getString(2);
                 objUser.password = rs.getString(3);
-                objUser.fullName = rs.getString(4);
-                objUser.userTypeCode = rs.getString(5);
-                objUser.userAddress = rs.getString(6);
-                objUser.userPhone = rs.getString(7);
-                objUser.userEmail = rs.getString(8);
-                objUser.userActive = rs.getInt(9);
+
+                objUser.userType = rs.getString(4);
+                objUser.userAddress = rs.getString(5);
+                objUser.userPhone = rs.getString(6);
+                objUser.userEmail = rs.getString(7);
+                objUser.userActive = rs.getInt(8);
+                objUser.userEmail = rs.getString(7);
+                objUser.userAva = rs.getString(8);
+                objUser.firstName = rs.getString(9);
+                objUser.lastName = rs.getString(10);
                 v.add(objUser);
             }
         } catch (SQLException ex) {
@@ -182,18 +230,22 @@ public class Users {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            ResultSet rs = sta.executeQuery("SELECT * FROM Users join UserType ON Users.userTypeCode = UserType.userTypeCode WHERE userCode = '" + id + "'");
+            ResultSet rs = sta.executeQuery("SELECT * FROM Users WHERE userCode = '" + id + "'");
             while (rs.next()) {
 
                 objUser.userCode = rs.getInt(1);
                 objUser.nameLogin = rs.getString(2);
                 objUser.password = rs.getString(3);
-                objUser.fullName = rs.getString(4);
-                objUser.userTypeCode = rs.getString(5);
-                objUser.userAddress = rs.getString(6);
-                objUser.userPhone = rs.getString(7);
-                objUser.userEmail = rs.getString(8);
-                objUser.userActive = rs.getInt(9);
+
+                objUser.userType = rs.getString(4);
+                objUser.userAddress = rs.getString(5);
+                objUser.userPhone = rs.getString(6);
+                objUser.userEmail = rs.getString(7);
+                objUser.userActive = rs.getInt(8);
+                objUser.userEmail = rs.getString(7);
+                objUser.userAva = rs.getString(8);
+                objUser.firstName = rs.getString(9);
+                objUser.lastName = rs.getString(10);
 
             }
         } catch (SQLException ex) {
@@ -206,7 +258,7 @@ public class Users {
         Connection con = DBHelper.connect();
         Statement sta = con.createStatement();
 
-        sta.execute("DELETE FROM Uses WHERE userCode = " + id);
+        sta.execute("DELETE FROM Users WHERE userCode = " + id);
 
     }
 
@@ -216,15 +268,7 @@ public class Users {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            String sqlutype = "SELECT userTypeCode FROM UserType WHERE userTypeName = '" + type + "'";
-            ResultSet rsm = sta.executeQuery(sqlutype);
-
-            int usertype = 0;
-            while (rsm.next()) {
-                usertype = rsm.getInt("userTypeCode");
-            }
-
-            sta.execute("UPDATE Users SET  nameLogin ='" + name + "', password ='" + pass + "', userTypeCode ='" + usertype + "', userAddress ='" + add + "', userphone ='" + phone + "', userEmail ='" + mail + "', userActive ='" + active + "', userAva ='" + ava + "', firstName ='" + fname + "', lastName = '" + lname + "' WHERE userCode = " + id);
+            sta.execute("UPDATE Users SET  nameLogin ='" + name + "', password ='" + pass + "', userType ='" + type + "', userAddress ='" + add + "', userphone ='" + phone + "', userEmail ='" + mail + "', userActive ='" + active + "', userAva ='" + ava + "', firstName ='" + fname + "', lastName = '" + lname + "' WHERE userCode = '" + id+"'");
 
         } catch (SQLException ex) {
         }
@@ -237,12 +281,12 @@ public class Users {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
             String sql = "INSERT INTO Users VALUES ('" + name + "','" + pass + "','" + type + "','" + add + "','" + phone + "','" + mail + "'," + active + ",'" + ava + "','" + fname + "','" + lname + "')";
-            sta.execute(sql);
+            sta.executeUpdate(sql);
             System.out.println(sql);
-            
 
         } catch (SQLException ex) {
         }
 
     }
+
 }

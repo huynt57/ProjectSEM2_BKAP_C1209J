@@ -176,7 +176,7 @@ public class Suppliers {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
             String sql = "UPDATE    Supplier SET supplierName ='" + name + "', fullName ='" + fullname + "', supplierAddress ='" + address + "', supplierPhone ='" + phone + "', supplierFax ='" + fax + "', supplierEmail ='" + email + "', supplierWebsite ='" + website + "' WHERE supplierCode = " + id;
-            sta.execute(sql);
+            sta.executeUpdate(sql);
 
         } catch (SQLException ex) {
         }

@@ -44,9 +44,14 @@ public class CustomerDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
-                
+                try {
+                    //
+                    Customers.DeleteCustomer(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 CustomerDialog.this.dispose();
             }
         });

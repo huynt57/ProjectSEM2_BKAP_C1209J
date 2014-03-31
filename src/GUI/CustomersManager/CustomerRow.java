@@ -17,6 +17,9 @@ import GUI.MedicinesManager.MedicineRow;
 import static GUI.MedicinesManager.MedicineRow.white;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomerRow extends JPanel {
         public static boolean white = true;
@@ -46,7 +49,14 @@ public class CustomerRow extends JPanel {
                 details.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    CustomerDetails addCustomer = new CustomerDetails("", false, false, false, new Dimension(400, 340));
+                    CustomerDetails addCustomer = null;
+                    try {
+                        addCustomer = new CustomerDetails("", false, false, false, new Dimension(400, 340), id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CustomerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(CustomerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     addCustomer.setVisible(true);
                 }
                 });
@@ -54,7 +64,14 @@ public class CustomerRow extends JPanel {
             edit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    CustomerNew addCustomers = new CustomerNew("", false, false, false, new Dimension(400, 340));
+                    CustomerEdit addCustomers = null;
+                    try {
+                        addCustomers = new CustomerEdit("", false, false, false, new Dimension(400, 340), id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CustomerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(CustomerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     addCustomers.setVisible(true);
                 }
                  });

@@ -1,4 +1,3 @@
-
 package GUI.CustomersManager;
 
 import GUI.Classes.Configure;
@@ -14,18 +13,21 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 
 public class CustomerNew extends CustomFrame {
 
-    public CustomerNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public CustomerNew(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
         Color BackGround = Color.getHSBColor(20, 12, 21);
         contenPane.setBackground(BackGround);
         this.setContentPane(contenPane);
-        setLayout(null); 
+        setLayout(null);
         CustomLabel titleLabel = new CustomLabel("Add new customer",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
@@ -34,11 +36,11 @@ public class CustomerNew extends CustomFrame {
 
         Dimension dim = dimension;
         final HintTextField name = new HintTextField(" Name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
-        final HintTextField type = new HintTextField(" Type", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40 , 30), contenPane, false);
+        final HintTextField type = new HintTextField(" Type", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField relationShip = new HintTextField(" Relationship", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension(dim.width - 40, 30), contenPane, false);
-         final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-         final HintTextField fax = new HintTextField(" Fax", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);        
-         final HintTextField email = new HintTextField(" Email", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+        final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+        final HintTextField fax = new HintTextField(" Fax", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+        final HintTextField email = new HintTextField(" Email", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
         final HintTextField address = new HintTextField(" Address", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 230), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
 
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
@@ -50,8 +52,20 @@ public class CustomerNew extends CustomFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-    
-            
+                String namex = name.getText().toString();
+                String typex = type.getText().toString();
+                String relx = relationShip.getText().toString();
+                String phonex = phone.getText().toString();
+                String faxx = fax.getText().toString();
+                String emailx = email.getText().toString();
+                String addressx = address.getText().toString();
+                try {
+                    Customers.insertCustomer(namex, typex, phonex, faxx, emailx, addressx, relx);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(CustomerNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 CustomerNew.this.dispose();
             }
         });
@@ -69,5 +83,4 @@ public class CustomerNew extends CustomFrame {
         });
     }
 
-    
 }

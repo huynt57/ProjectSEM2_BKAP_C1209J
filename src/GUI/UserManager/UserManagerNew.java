@@ -43,10 +43,10 @@ public class UserManagerNew extends CustomFrame {
 
         Vector typeVt = new Vector();
         typeVt.add("Choose user type");
-        Vector<UserType.UserTypes> utypeTemp = UserType.UserTypes.getAllUserType();
-        for (int i = 0; i < utypeTemp.size(); i++) {
-            typeVt.add(utypeTemp.get(i).getUsertypename());
-        }
+        typeVt.add("Manager");
+        typeVt.add("Seller");
+
+        
 
         final CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane);
         final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);

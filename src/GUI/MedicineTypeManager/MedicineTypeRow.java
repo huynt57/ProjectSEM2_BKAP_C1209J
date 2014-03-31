@@ -40,7 +40,7 @@ public class MedicineTypeRow extends JPanel {
 		edit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                          MedicineTypeEdit addMeasure = new MedicineTypeEdit("", false, false, false, new Dimension(250, 150));
+                          MedicineTypeEdit addMeasure = new MedicineTypeEdit("", false, false, false, new Dimension(250, 150), id);
                            addMeasure.setVisible(true);
                     }
                 });

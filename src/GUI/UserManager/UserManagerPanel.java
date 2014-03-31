@@ -85,7 +85,7 @@ public class UserManagerPanel extends JPanel {
 
         final ArrayList<UserManagerPanel.UserManager> users = new ArrayList<UserManagerPanel.UserManager>();
         for (int i = 0; i < loadUserManager.size(); i++) {
-            users.add(new UserManager(loadUserManager.get(i).getUserCode() + "", loadUserManager.get(i).getNameLogin(), loadUserManager.get(i).getUserTypeCode() + "", loadUserManager.get(i).getUserAddress(), loadUserManager.get(i).getUserPhone()));
+            users.add(new UserManager(loadUserManager.get(i).getUserCode()+ "", loadUserManager.get(i).getNameLogin(), loadUserManager.get(i).getUserTypeCode() + "", loadUserManager.get(i).getUserAddress(), loadUserManager.get(i).getUserPhone()));
         }
         table.setPreferredSize(new Dimension(1000, users.size() * 40));
         for (int i = 0; i < users.size(); i++) {

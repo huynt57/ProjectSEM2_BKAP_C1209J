@@ -88,7 +88,7 @@ public class OrderPanel extends JPanel {
                 }
                 final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
                 for (int i = 0; i < loadOrder.size(); i++) {
-                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                    orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
                 }
                 for (int i = 0; i < orders.size() - 1; i++) {
                     for (int j = i + 1; j < orders.size(); j++) {
@@ -126,7 +126,7 @@ public class OrderPanel extends JPanel {
                 }
                 final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
                 for (int i = 0; i < loadOrder.size(); i++) {
-                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                   orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
                 }
                 for (int i = 0; i < orders.size() - 1; i++) {
                     for (int j = i + 1; j < orders.size(); j++) {
@@ -164,7 +164,7 @@ public class OrderPanel extends JPanel {
                 }
                 final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
                 for (int i = 0; i < loadOrder.size(); i++) {
-                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                   orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
                 }
                 for (int i = 0; i < orders.size() - 1; i++) {
                     for (int j = i + 1; j < orders.size(); j++) {
@@ -203,7 +203,7 @@ public class OrderPanel extends JPanel {
                 }
                 final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
                 for (int i = 0; i < loadOrder.size(); i++) {
-                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                   orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
                 }
                 for (int i = 0; i < orders.size() - 1; i++) {
                     for (int j = i + 1; j < orders.size(); j++) {
@@ -253,7 +253,7 @@ public class OrderPanel extends JPanel {
                 }
                 final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
                 for (int i = 0; i < loadOrder.size(); i++) {
-                    orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+                   orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
                 }
                 for (int i = 0; i < orders.size() - 1; i++) {
                     for (int j = i + 1; j < orders.size(); j++) {
@@ -291,7 +291,7 @@ public class OrderPanel extends JPanel {
         }
         final ArrayList<Order> orders = new ArrayList<OrderPanel.Order>();
         for (int i = 0; i < loadOrder.size(); i++) {
-            orders.add(new Order(loadOrder.get(i).getOrderCode() + "", loadOrder.get(i).getOrderName(), loadOrder.get(i).getOrderTypeName(), loadOrder.get(i).getSupplierName(), loadOrder.get(i).getAvaiableAmount() + ""));
+           orders.add(new Order(loadOrder.get(i).getOderCode()+ "", loadOrder.get(i).getcustomerCode()+"", loadOrder.get(i).getpriceOrder()+"", loadOrder.get(i).getaddressToDeliver(), loadOrder.get(i).getdateOrder()));
         }
         table.setPreferredSize(new Dimension(1000, orders.size() * 40));
 

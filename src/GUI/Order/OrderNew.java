@@ -82,6 +82,8 @@ public class OrderNew extends CustomFrame {
             public void actionPerformed(ActionEvent ae) {
 
                 
+                String customerx = customerName.getText().toString();
+                String datex = dateOrder.getText().toString();
                 
                 
                 

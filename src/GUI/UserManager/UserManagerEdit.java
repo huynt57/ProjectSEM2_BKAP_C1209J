@@ -8,7 +8,7 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
-import UserType.UserTypes;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,11 +17,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 
 public class UserManagerEdit extends CustomFrame {
 
-    public UserManagerEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, String idz) throws SQLException, ClassNotFoundException {
+    public UserManagerEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, final String idz) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -42,10 +44,8 @@ public class UserManagerEdit extends CustomFrame {
         final HintTextField name = new HintTextField(" Full name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40, 30), contenPane, false);
         Vector typeVt = new Vector();
         typeVt.add("Choose user type");
-        Vector<UserTypes> utypeTemp = UserType.UserTypes.getAllUserType();
-        for (int i = 0; i < utypeTemp.size(); i++) {
-            typeVt.add(utypeTemp.get(i).getUsertypename());
-        }
+        typeVt.add("Manager");
+        typeVt.add("Seller");
 
         final CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane);
         final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
@@ -58,11 +58,35 @@ public class UserManagerEdit extends CustomFrame {
                 false, false, Color.GRAY, true, new Point(20, 280),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
 
+        Users usert = Users.getUserById(idz);
+        
+        username.setText(usert.getNameLogin());
+        password.setText(usert.getPassword());
+        name.setText(usert.getFirstname()+" "+usert.getLastname());
+        type.setSelectedItem(usert.getUserTypeName());
+        phone.setText(usert.getUserPhone());
+        active.setText(usert.getUserActive()+"");
+        email.setText(usert.getUserEmail());
+        address.setText(usert.getUserAddress());
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                
+                String usernamex = username.getText();
+                String passx = password.getText();
+                String namex = name.getText();
+                String typex = (String) type.getSelectedItem();
+                String phonex = phone.getText();
+                String activex = active.getText();
+                String emailx = email.getText();
+                String addx = address.getText();
+                try {
+                    Users.editUsers(usernamex, passx, typex, addx, phonex, emailx, activex, "no", namex, namex, idz);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserManagerEdit.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserManagerEdit.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 UserManagerEdit.this.dispose();
             }
         });

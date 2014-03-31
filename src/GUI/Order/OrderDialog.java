@@ -43,9 +43,14 @@ public class OrderDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
-                
+                try {
+                    //
+                    Orders.DeleteOrder(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 OrderDialog.this.dispose();
             }
         });

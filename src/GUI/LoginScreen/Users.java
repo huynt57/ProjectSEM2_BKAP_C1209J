@@ -20,17 +20,24 @@ import java.sql.Statement;
 public class Users {
 
     public int userCode;
-    private String nameLogin;
-    private String password;
+    public String nameLogin;
+    public String password;
     public String firstName;
     public String lastName;
-    private String userTypeCode;
+    public String userTypeCode;
     public String userAddress;
+ public String getUserType() {
+        return userType;
+    }
 
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+ public String userType;
     public String userPhone;
     public String userEmail;
-    private String userAva;
-    private int userActive;
+    public String userAva;
+    public int userActive;
 
     public Users(int userCode, String nameLogin, String password, String firstName, String lastName, String userTypeCode, String userAddress, String userPhone, String userEmail, String userAva, int userActive) {
         this.userCode = userCode;

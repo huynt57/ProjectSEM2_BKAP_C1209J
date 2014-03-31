@@ -15,11 +15,14 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 
 public class MedicineTypeEdit extends CustomFrame {
 
-    public MedicineTypeEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public MedicineTypeEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, final String id) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -43,7 +46,14 @@ public class MedicineTypeEdit extends CustomFrame {
             public void actionPerformed(ActionEvent ae) {
                 
                  // Add medicine type
-                
+                String namex = name.getText();
+                try {
+                    MedicineTypes.editMedicineType(namex, id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineTypeEdit.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineTypeEdit.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 MedicineTypeEdit.this.dispose();
             }
         });
