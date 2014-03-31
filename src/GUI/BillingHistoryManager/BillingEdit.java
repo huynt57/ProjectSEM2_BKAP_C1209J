@@ -11,12 +11,16 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.CustomersManager.Customers;
+import GUI.MeasureManager.Measures;
+import GUI.MedicinesManager.Medicines;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.Action;
 import javax.swing.JComboBox;
@@ -27,7 +31,7 @@ import javax.swing.UIManager;
 
 public class BillingEdit extends CustomFrame {
 
-    public BillingEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public BillingEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -52,11 +56,20 @@ public class BillingEdit extends CustomFrame {
         
         
         
-        // ADD DATA TO COMBOBOX
-        for(int i=0; i<100; i++) {
-            medicinesVt.add(i);
-            measuresVt.add(i);
-            customersVt.add(i);
+       Vector<Medicines> medicinetemp = GUI.MedicinesManager.Medicines.getAllMedicine();
+        for (int i = 0; i < medicinetemp.size(); i++) {
+            medicinesVt.add(medicinetemp.get(i).getMedicineName());
+        }
+        
+        Vector<Customers> custemp = GUI.CustomersManager.Customers.getAllCustomer();
+        for (int i = 0; i < custemp.size(); i++) {
+            customersVt.add(custemp.get(i).getCustomerName());
+        }
+        
+        
+        Vector<Measures> measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+        for (int i = 0; i < measuretemp.size(); i++) {
+            measuresVt.add(measuretemp.get(i).getMeasureName());
         }
         
         Dimension dim = dimension;

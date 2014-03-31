@@ -42,9 +42,14 @@ public class BillingDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
-                
+                try {
+                    //
+                    Bills.deleteBill(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillingDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(BillingDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 BillingDialog.this.dispose();
             }
         });

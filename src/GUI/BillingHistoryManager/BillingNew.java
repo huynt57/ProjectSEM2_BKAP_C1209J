@@ -10,13 +10,19 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.CustomersManager.Customers;
+import GUI.MeasureManager.Measures;
+import GUI.MedicinesManager.Medicines;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -26,7 +32,7 @@ import javax.swing.UIManager;
 
 public class BillingNew extends CustomFrame {
 
-    public BillingNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public BillingNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -51,12 +57,22 @@ public class BillingNew extends CustomFrame {
         
         
         
-        // ADD DATA TO COMBOBOX
-        for(int i=0; i<100; i++) {
-            medicinesVt.add(i);
-            measuresVt.add(i);
-            customersVt.add(i);
+        Vector<Medicines> medicinetemp = GUI.MedicinesManager.Medicines.getAllMedicine();
+        for (int i = 0; i < medicinetemp.size(); i++) {
+            medicinesVt.add(medicinetemp.get(i).getMedicineName());
         }
+        
+        Vector<Customers> custemp = GUI.CustomersManager.Customers.getAllCustomer();
+        for (int i = 0; i < custemp.size(); i++) {
+            customersVt.add(custemp.get(i).getCustomerName());
+        }
+        
+        
+        Vector<Measures> measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+        for (int i = 0; i < measuretemp.size(); i++) {
+            measuresVt.add(measuretemp.get(i).getMeasureName());
+        }
+        
         
         Dimension dim = dimension;
         final  CustomComboBox customerName = new CustomComboBox(customersVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),  new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane);
@@ -80,12 +96,13 @@ public class BillingNew extends CustomFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
-                
-                
-                
-                
-                // ADD TO DB
+                try {
+                    Bills.insertBill();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillingNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(BillingNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 
                 

@@ -20,10 +20,14 @@ import GUI.Classes.HintTextField;
 import GUI.CustomersManager.CustomersPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BillingHistoryPanel extends JPanel {
-	public BillingHistoryPanel(JPanel parentPanel, Point pos, Dimension d) {
+	public BillingHistoryPanel(JPanel parentPanel, Point pos, Dimension d) throws SQLException, ClassNotFoundException {
 		super();
 		this.setBounds(pos.x, pos.y, d.width, d.height);
 		setLayout(null);
@@ -39,7 +43,14 @@ public class BillingHistoryPanel extends JPanel {
 		add.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
-                         BillingNew addOrder = new BillingNew("", false, false, false, new Dimension(400, 420));
+                         BillingNew addOrder = null;
+                        try {
+                            addOrder = new BillingNew("", false, false, false, new Dimension(400, 420));
+                        } catch (SQLException ex) {
+                            Logger.getLogger(BillingHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(BillingHistoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                          addOrder.setVisible(true);
                     }
                 });
@@ -71,11 +82,12 @@ public class BillingHistoryPanel extends JPanel {
                 
                 /////////////////////
                 /// GET DATA
+                 Vector<Bills> loadbill =  Bills.getAllBill();
                 ArrayList<BillingHistoryPanel.Billing> billing = new ArrayList<BillingHistoryPanel.Billing>();
 		for(int i=0; i<50; i++) billing.add(new BillingHistoryPanel.Billing("" + i, "Name " + i, "Type " + i, "Address " + i, "Price " + i, "Status" + i));
 		table.setPreferredSize(new Dimension(1000, billing.size() * 40));
-		for(int i=0; i<billing.size(); i++)
-		table.add(new BillingRow(billing.get(i).id, billing.get(i).name, billing.get(i).type, billing.get(i).address, billing.get(i).price, billing.get(i).status, idSize, nameSize, typeSize, addressSize, priceSize, statusSize, optionSize, new Point(0, i * 40), table));
+		for(int i=0; i<loadbill.size(); i++)
+		table.add(new BillingRow(loadbill.get(i).getbillCode()+"", loadbill.get(i).getcustomerCode()+"", loadbill.get(i).getbillType(), loadbill.get(i).getaddressToDeliver(), loadbill.get(i).getprice()+"", loadbill.get(i).getstatus(), idSize, nameSize, typeSize, addressSize, priceSize, statusSize, optionSize, new Point(0, i * 40), table));
                 /////////////////////////////////////////
 	}
         public class Billing {

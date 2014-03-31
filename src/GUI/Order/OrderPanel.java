@@ -44,7 +44,14 @@ public class OrderPanel extends JPanel {
         add.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
                 OrderPanel.this.setEnabled(false);
-                OrderNew addOrder = new OrderNew("", false, false, false, new Dimension(400, 380));
+                OrderNew addOrder = null;
+                            try {
+                                addOrder = new OrderNew("", false, false, false, new Dimension(400, 380));
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(OrderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                 addOrder.setVisible(true);
             }
         });

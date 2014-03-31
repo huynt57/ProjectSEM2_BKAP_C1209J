@@ -10,6 +10,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -50,7 +53,14 @@ public class BillingRow extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BillingEdit editBilling = new BillingEdit("", false, false, false, new Dimension(400, 420));
+                BillingEdit editBilling = null;
+                try {
+                    editBilling = new BillingEdit("", false, false, false, new Dimension(400, 420));
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillingRow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(BillingRow.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 editBilling.setVisible(true);
             }
         });

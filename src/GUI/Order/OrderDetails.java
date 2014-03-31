@@ -1,6 +1,4 @@
-
 package GUI.Order;
-
 
 import GUI.AccountManager.AccountPanel;
 import GUI.Classes.Configure;
@@ -28,7 +26,7 @@ import javax.swing.UIManager;
 
 public class OrderDetails extends CustomFrame {
 
-    public OrderDetails( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, String id) throws SQLException, ClassNotFoundException {
+    public OrderDetails(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, String id) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -72,12 +70,12 @@ public class OrderDetails extends CustomFrame {
         CustomLabel medinices = new CustomLabel("Term of use",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-               new Point(205, 110), new Dimension((dim.width - 40) / 2 - 5, 30), true,
+                new Point(205, 110), new Dimension((dim.width - 40) / 2 - 5, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-          CustomLabel measures = new CustomLabel("Supplier",
+        CustomLabel measures = new CustomLabel("Supplier",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
-               new Point(20, 230), new Dimension(dim.width - 40, 20), true,
+                new Point(20, 230), new Dimension(dim.width - 40, 20), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         CustomLabel customers = new CustomLabel("Measure",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
@@ -89,20 +87,18 @@ public class OrderDetails extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
                 new Point(20, 310), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-       
-       
-        
+
 //        supplierLabel.setText("Supplier: " + xxx);
-         Orders ordertemp = Orders.getOrderbyId(id);
-        
-        nameLabel.setText("Customer code: "+ordertemp.getcustomerCode()+"");
-        dateOrder.setText("Date order: "+ordertemp.getdateOrder());
-        addressToDeliver.setText("Address: "+ordertemp.getaddressToDeliver());
-        price.setText("Price: "+ordertemp.getpriceOrder()+"");
-        quantity.setText("Quantity: "+ordertemp.getquantity()+"");
-        medinices.setText("Medicine code: "+ordertemp.getmedicineCode()+"");
-        measures.setText("Measure code: "+ordertemp.getmeasureCode()+"");
-        customers.setText("Customer code: "+ordertemp.getcustomerCode()+"");
+        Orders ordertemp = Orders.getOrderbyId(id);
+
+        nameLabel.setText("Customer code: " + ordertemp.getcustomerCode() + "");
+        dateOrder.setText("Date order: " + ordertemp.getdateOrder());
+        addressToDeliver.setText("Address: " + ordertemp.getaddressToDeliver());
+        price.setText("Price: " + ordertemp.getpriceOrder() + "");
+        quantity.setText("Quantity: " + ordertemp.getquantity() + "");
+        medinices.setText("Medicine code: " + ordertemp.getmedicineCode() + "");
+        measures.setText("Measure code: " + ordertemp.getmeasureCode() + "");
+        customers.setText("Customer code: " + ordertemp.getcustomerCode() + "");
         relationship.setText("Relationship: familiar");
 
         final CustomButton ok = new CustomButton("OK", Color.WHITE,
@@ -119,5 +115,4 @@ public class OrderDetails extends CustomFrame {
 
     }
 
-    
 }
