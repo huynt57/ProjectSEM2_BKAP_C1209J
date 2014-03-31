@@ -13,6 +13,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingConstants;
 
@@ -39,9 +42,14 @@ public class UserManagerDialog extends CustomFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                //
-                
+                try {
+                    //
+                    Users.DeleteUser(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserManagerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserManagerDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 UserManagerDialog.this.dispose();
             }
         });

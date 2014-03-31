@@ -14,10 +14,11 @@ import GUI.Classes.Configure;
 import GUI.Classes.CustomButton;
 import GUI.Classes.CustomFont;
 import GUI.Classes.CustomLabel;
-import GUI.MedicinesManager.MedicineRow;
-import static GUI.MedicinesManager.MedicineRow.white;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserManagerRow extends JPanel {
         public static boolean white = true;
@@ -47,7 +48,12 @@ public class UserManagerRow extends JPanel {
                 details.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    UserManagerDetails addUserManager = new UserManagerDetails("", false, false, false, new Dimension(400, 500));
+                    UserManagerDetails addUserManager = null;
+                    try {
+                        addUserManager = new UserManagerDetails("", false, false, false, new Dimension(400, 500), id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserManagerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     addUserManager.setVisible(true);
                 }
                 });
@@ -55,7 +61,14 @@ public class UserManagerRow extends JPanel {
             edit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    UserManagerNew addUserManagers = new UserManagerNew("", false, false, false, new Dimension(400, 340));
+                    UserManagerEdit addUserManagers = null;
+                    try {
+                        addUserManagers = new UserManagerEdit("", false, false, false, new Dimension(400, 340), id);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(UserManagerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(UserManagerRow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     addUserManagers.setVisible(true);
                 }
             });

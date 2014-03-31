@@ -62,7 +62,7 @@ public class MedicineTypes {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            sta.executeQuery("INSERT INTO MedicineType VALUES ('" + name + "')");
+            sta.execute("INSERT INTO MedicineType VALUES ('" + name + "')");
            
         } catch (SQLException ex) {
         }
@@ -75,7 +75,7 @@ public class MedicineTypes {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            sta.executeQuery("DELETE FROM MedicineType WHERE measureCode = "+id);
+            sta.execute("DELETE FROM MedicineType WHERE medicineTypeCode = "+id);
            
         } catch (SQLException ex) {
         }
@@ -88,7 +88,7 @@ public class MedicineTypes {
             Connection con = DBHelper.connect();
             Statement sta = con.createStatement();
 
-            sta.executeQuery("UPDATE MedicineType VALUES ('" + name + "') WHERE medicineTypeCode = "+id);
+            sta.execute("UPDATE MedicineType SET medicineTypeName  = '" + name + "' WHERE medicineTypeCode = "+id);
            
         } catch (SQLException ex) {
         }

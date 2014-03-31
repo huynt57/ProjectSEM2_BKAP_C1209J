@@ -18,6 +18,9 @@ import GUI.MedicinesManager.MedicineRow;
 import static GUI.MedicinesManager.MedicineRow.white;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MeasureRow extends JPanel {
         public static boolean white = true;
@@ -39,7 +42,14 @@ public class MeasureRow extends JPanel {
 		edit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                           MeasureEdit addMeasure = new MeasureEdit("", false, false, false, new Dimension(250, 150));
+                           MeasureEdit addMeasure = null;
+                        try {
+                            addMeasure = new MeasureEdit("", false, false, false, new Dimension(250, 150), id);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(MeasureRow.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(MeasureRow.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                            addMeasure.setVisible(true);
                     }
                 });
@@ -48,6 +58,7 @@ public class MeasureRow extends JPanel {
                 delete.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                       
                         MeasureDialog dialog = new MeasureDialog("Are you sure ?", true, true, false, new Dimension(200, 100), id );
                     }
                 });

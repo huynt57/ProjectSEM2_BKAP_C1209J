@@ -35,6 +35,9 @@ public class HintTextField extends JTextField implements FocusListener {
 	      showingHint = false;
 	    }
 	  }
+
+  
+          
 	  @Override
 	  public void focusLost(FocusEvent e) {
 	    if(this.getText().isEmpty()) {

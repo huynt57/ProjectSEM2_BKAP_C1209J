@@ -14,13 +14,20 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.MeasureManager.Measures;
+import GUI.MedicineTypeManager.MedicineTypes;
+import GUI.SupplierManager.Suppliers;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Boolean.TRUE;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -30,7 +37,7 @@ import javax.swing.UIManager;
 
 public class MedicineEdit extends CustomFrame {
 
-    public MedicineEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, Vector supplierVt, Vector typeVt, Vector measureVt) {
+    public MedicineEdit(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, final String id) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -59,6 +66,32 @@ public class MedicineEdit extends CustomFrame {
         final HintTextField registerNumber = new HintTextField(" Register number", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
         final HintTextField used = new HintTextField(" Used", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension(dim.width - 40, 30), contenPane, false);
 
+        Medicines medicineDetails = Medicines.getMedicineById(id);
+
+        //System.out.println(id);
+        name.setText(medicineDetails.getMedicineName());
+        price.setText(medicineDetails.getPricePerUnit() + "");
+        termOfUse.setText(medicineDetails.getTermsOfUse());
+        number.setText(medicineDetails.getAvaiableAmount() + "");
+        registerNumber.setText(medicineDetails.getRegisterNumber());
+        used.setText(medicineDetails.getUsed());
+
+        Vector<String> supplierVt = new Vector<String>();
+        Vector<Suppliers> supplierTemp = GUI.SupplierManager.Suppliers.getAllSupplier();
+        for (int i = 0; i < supplierTemp.size(); i++) {
+            supplierVt.add(supplierTemp.get(i).getSupplierName());
+        }
+        Vector<String> typeVt = new Vector<String>();
+        Vector<MedicineTypes> metypeTemp = GUI.MedicineTypeManager.MedicineTypes.getAllMedicineType();
+        for (int i = 0; i < metypeTemp.size(); i++) {
+            typeVt.add(metypeTemp.get(i).getMedicineTypeName());
+        }
+        Vector<String> measureVt = new Vector<String>();
+        Vector<Measures> measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+        for (int i = 0; i < measuretemp.size(); i++) {
+            measureVt.add(measuretemp.get(i).getMeasureName());
+        }
+
         CustomLabel supplierLabel = new CustomLabel("Supplier",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
@@ -77,6 +110,10 @@ public class MedicineEdit extends CustomFrame {
                 new Point(20, 310), new Dimension(100, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         final CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(100, 310), new Dimension(dim.width - 120, 30), contenPane);
+
+        supplier.setSelectedItem(medicineDetails.getSupplierName());
+        measure.setSelectedItem(medicineDetails.getMeasureName());
+        type.setSelectedItem(medicineDetails.getMedicineTypeName());
 
         final JRadioButton domestic = new JRadioButton("");
         domestic.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
@@ -111,33 +148,51 @@ public class MedicineEdit extends CustomFrame {
                 domestic.setSelected(false);
             }
         });
-        HintTextField userGuide = new HintTextField(" User guide", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 380), new Dimension(dim.width - 40, 100), contenPane, false);
+        final HintTextField userGuide = new HintTextField(" User guide", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 380), new Dimension(dim.width - 40, 100), contenPane, false);
 
+        userGuide.setText(medicineDetails.getUseGuide());
+        if (medicineDetails.getOrigin().equals("domestic"))
+        {
+            domestic.setSelected(TRUE);
+        }
+        else{
+            foreign.setSelected(TRUE);
+        }
         final CustomButton ok = new CustomButton("Save", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
                 false, false, Color.GRAY, true, new Point(20, 500),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
 
         ok.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String namex = name.getText().toString();
-                String supplierx = supplier.getSelectedItem().toString();
-                String pricex = price.getText();
-                String termofUsed = termOfUse.getText().toString();
-                String regNum = registerNumber.getText().toString();
-                String num = number.getText().toString();
-                String usedx = used.getText().toString();
-                String measurex = measure.getSelectedItem().toString();
-                String typex = type.getSelectedItem().toString();
-                String origin;
-                if (domestic.isSelected()) {
-                    origin = "domestic";
-                } else {
-                    origin = "foreign";
+                try {
+                    String namex = name.getText().toString();
+                    String supplierx = supplier.getSelectedItem().toString();
+                    String pricex = price.getText();
+                    String termofUsed = termOfUse.getText().toString();
+                    String regNum = registerNumber.getText().toString();
+                    String num = number.getText().toString();
+                    String usedx = used.getText().toString();
+                    String measurex = measure.getSelectedItem().toString();
+                    String typex = type.getSelectedItem().toString();
+                    String origin;
+                    if (domestic.isSelected()) {
+                        origin = "domestic";
+                    } else {
+                        origin = "foreign";
+                    }
+                    String guide = userGuide.getText().toString();
+                    Medicines.UpdateMedicine(namex, supplierx, pricex, termofUsed, num, regNum, usedx, measurex, typex, origin, guide, id);
+
+                    MedicineEdit.this.dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineEdit.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineEdit.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                MedicineEdit.this.dispose();
             }
         });
 

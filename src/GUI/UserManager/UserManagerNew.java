@@ -1,4 +1,3 @@
-
 package GUI.UserManager;
 
 import GUI.Classes.Configure;
@@ -15,19 +14,22 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 
 public class UserManagerNew extends CustomFrame {
 
-    public UserManagerNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public UserManagerNew(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
         Color BackGround = Color.getHSBColor(20, 12, 21);
         contenPane.setBackground(BackGround);
         this.setContentPane(contenPane);
-        setLayout(null); 
+        setLayout(null);
         CustomLabel titleLabel = new CustomLabel("Add new user",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
@@ -35,20 +37,20 @@ public class UserManagerNew extends CustomFrame {
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
 
         Dimension dim = dimension;
-        final HintTextField id = new HintTextField(" User id", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension((dim.width - 60) / 3, 30), contenPane, false);
-        final HintTextField username = new HintTextField(" Username", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point((dim.width - 60) / 3 + 30, 70), new Dimension((dim.width - 60) / 3, 30), contenPane, false);
-        final HintTextField password = new HintTextField(" Password", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point((dim.width - 60) / 3 * 2 + 40, 70), new Dimension((dim.width - 60) / 3, 30), contenPane, false);
+        final HintTextField username = new HintTextField(" Username", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
+        final HintTextField password = new HintTextField(" Password", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point((dim.width - 40) / 2 + 25, 70), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
         final HintTextField name = new HintTextField(" Full name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40, 30), contenPane, false);
-       
+
         Vector typeVt = new Vector();
         typeVt.add("Choose user type");
-        
-        
-        for(int i=0; i<10; i++) typeVt.add(i);
-        
-        final  CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),  new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30 ), contenPane);
+        Vector<UserType.UserTypes> utypeTemp = UserType.UserTypes.getAllUserType();
+        for (int i = 0; i < utypeTemp.size(); i++) {
+            typeVt.add(utypeTemp.get(i).getUsertypename());
+        }
+
+        final CustomComboBox type = new CustomComboBox(typeVt, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane);
         final HintTextField phone = new HintTextField(" Phone", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
-        final HintTextField active = new HintTextField(" Active", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);        
+        final HintTextField active = new HintTextField(" Active", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 150), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
         final HintTextField email = new HintTextField(" Email", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(205, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
         final HintTextField address = new HintTextField(" Address", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 230), new Dimension(dim.width - 40, 30), contenPane, false);
 
@@ -61,8 +63,21 @@ public class UserManagerNew extends CustomFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-    
-            
+                String usernamex = username.getText().toString();
+                String pass = password.getText().toString();
+                String namex = name.getText().toString();
+                String typex = type.getSelectedItem().toString();
+                String phonex = phone.getText().toString();
+                String activex = active.getText().toString();
+                String emailx = email.getText().toString();
+                String add = address.getText().toString();
+                try {
+                    Users.insertUser(usernamex, pass, typex, add, phonex, emailx, activex, "noava", namex, namex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserManagerNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserManagerNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 UserManagerNew.this.dispose();
             }
         });
@@ -80,5 +95,4 @@ public class UserManagerNew extends CustomFrame {
         });
     }
 
-    
 }

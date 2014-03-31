@@ -17,6 +17,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 
 public class MedicineTypeNew extends CustomFrame {
@@ -45,7 +48,14 @@ public class MedicineTypeNew extends CustomFrame {
             public void actionPerformed(ActionEvent ae) {
                 
                  // Add medicine type
-                
+                String namex = name.getText();
+                try {
+                    MedicineTypes.insertMedicineType(namex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedicineTypeNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MedicineTypeNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 MedicineTypeNew.this.dispose();
             }
         });

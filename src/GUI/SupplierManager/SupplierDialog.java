@@ -40,9 +40,14 @@ public class SupplierDialog extends CustomFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-//                DELETE from DB
-                
+                try {
+                    //                DELETE from DB
+                    Suppliers.deleteSupplier(id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(SupplierDialog.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(SupplierDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 SupplierDialog.this.dispose();
             }
         });

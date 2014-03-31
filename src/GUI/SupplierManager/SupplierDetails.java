@@ -17,11 +17,12 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.SwingConstants;
 
 public class SupplierDetails extends CustomFrame {
 
-    public SupplierDetails(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public SupplierDetails(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, String id) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -41,7 +42,7 @@ public class SupplierDetails extends CustomFrame {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
                 new Point(20, 70), new Dimension(dim.width - 40, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
-        CustomLabel priceLabel = new CustomLabel(" Price",
+        CustomLabel fullnameLabel = new CustomLabel("Full name",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
                 new Point(20, 110), new Dimension(dim.width - 40, 30), true,
@@ -77,6 +78,16 @@ public class SupplierDetails extends CustomFrame {
                 false, false, Color.GRAY, true, new Point(20, 280),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
 
+        Suppliers suppliertemp = Suppliers.getSupplierbyId(id);
+        
+        nameLabel.setText("Name: "+suppliertemp.getSupplierName());
+        fullnameLabel.setText("Full name: "+suppliertemp.getSupplierfullName());
+        addressLabel.setText("Address: "+suppliertemp.getSupplierAddress());
+        phoneLabel.setText("Phone: "+suppliertemp.getSupplierPhone());
+        faxLabel.setText("Fax: "+suppliertemp.getSupplierFax());
+        emailLabel.setText("Email: "+suppliertemp.getSupplierEmail());
+        webLabel.setText("Web: "+suppliertemp.getSupplierWebsite());
+        
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

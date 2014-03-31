@@ -1,4 +1,3 @@
-
 package GUI.UserManager;
 
 import java.awt.Color;
@@ -34,7 +33,7 @@ public class UserManagerPanel extends JPanel {
         this.setBounds(pos.x, pos.y, d.width, d.height);
         setLayout(null);
         parentPanel.add(this);
-        
+
         CustomLabel titleLabel = new CustomLabel("Users manager",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 35),
@@ -47,7 +46,14 @@ public class UserManagerPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 UserManagerPanel.this.setEnabled(false);
-                UserManagerNew addUserManager = new UserManagerNew("", false, false, false, new Dimension(400, 340));
+                UserManagerNew addUserManager = null;
+                try {
+                    addUserManager = new UserManagerNew("", false, false, false, new Dimension(400, 340));
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserManagerPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(UserManagerPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 addUserManager.setVisible(true);
             }
         });
@@ -74,136 +80,154 @@ public class UserManagerPanel extends JPanel {
         JScrollPane x = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         x.setBounds(40, 150, d.width - 70, d.height - 170);
         this.add(x);
-        
-        Vector<UserManagers> loadUserManager = UserManagers.getAllUserManager();
- 
-        final ArrayList<UserManagerPanel.UserManager> customers = new ArrayList<UserManagerPanel.UserManager>();
-        for(int i=0; i<loadUserManager.size(); i++) customers.add(new UserManager(loadUserManager.get(i).getUserManagerCode() + "", loadUserManager.get(i).getUserManagerName(), loadUserManager.get(i).getUserManagerType() + "", loadUserManager.get(i).getUserManagerAddress() , loadUserManager.get(i).getUserManagerPhone()));   
-        table.setPreferredSize(new Dimension(1000, customers.size() * 40));	
-        for(int i=0; i<customers.size(); i++)
-        table.add(new UserManagerRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
-        table.setPreferredSize(new Dimension(1000, customers.size() * 40));
-       
+
+        Vector<Users> loadUserManager = Users.getAllUser();
+
+        final ArrayList<UserManagerPanel.UserManager> users = new ArrayList<UserManagerPanel.UserManager>();
+        for (int i = 0; i < loadUserManager.size(); i++) {
+            users.add(new UserManager(loadUserManager.get(i).getUserCode() + "", loadUserManager.get(i).getNameLogin(), loadUserManager.get(i).getUserTypeCode() + "", loadUserManager.get(i).getUserAddress(), loadUserManager.get(i).getUserPhone()));
+        }
+        table.setPreferredSize(new Dimension(1000, users.size() * 40));
+        for (int i = 0; i < users.size(); i++) {
+            table.add(new UserManagerRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+        }
+        table.setPreferredSize(new Dimension(1000, users.size() * 40));
+
         name.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        for(int i=0; i<customers.size()-1; i++)
-                            for(int j=i+1; j<customers.size(); j++) 
-                                if(nameSort) {
-                                    if(customers.get(i).name.compareTo(customers.get(j).name) < 0) {
-                                        swap(customers, i, j);
-                                    } 
-                                } else {
-                                    if(customers.get(i).name.compareTo(customers.get(j).name) > 0) {
-                                       swap(customers, i, j);
-                                    } 
-                                }      
-                        nameSort = !nameSort;
-                        table.removeAll();
-                        UserManagerRow.white = true;
-                        for(int i=0; i<customers.size(); i++)
-                	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
-                        table.repaint();
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (int i = 0; i < users.size() - 1; i++) {
+                    for (int j = i + 1; j < users.size(); j++) {
+                        if (nameSort) {
+                            if (users.get(i).name.compareTo(users.get(j).name) < 0) {
+                                swap(users, i, j);
+                            }
+                        } else {
+                            if (users.get(i).name.compareTo(users.get(j).name) > 0) {
+                                swap(users, i, j);
+                            }
+                        }
                     }
-                });
-        
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                UserManagerRow.white = true;
+                for (int i = 0; i < users.size(); i++) {
+                    table.add(new MedicineRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
+            }
+        });
+
         id.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        for(int i=0; i<customers.size()-1; i++)
-                            for(int j=i+1; j<customers.size(); j++) 
-                                if(nameSort) {
-                                    if(Integer.parseInt(customers.get(i).id) < Integer.parseInt(customers.get(j).id)) {
-                                        swap(customers, i, j);
-                                    } 
-                                } else {
-                                    if(Integer.parseInt(customers.get(i).id) > Integer.parseInt(customers.get(j).id)) {
-                                       swap(customers, i, j);
-                                    } 
-                                }      
-                        nameSort = !nameSort;
-                        table.removeAll();
-                        UserManagerRow.white = true;
-                        for(int i=0; i<customers.size(); i++)
-                	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
-                        table.repaint();
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (int i = 0; i < users.size() - 1; i++) {
+                    for (int j = i + 1; j < users.size(); j++) {
+                        if (nameSort) {
+                            if (Integer.parseInt(users.get(i).id) < Integer.parseInt(users.get(j).id)) {
+                                swap(users, i, j);
+                            }
+                        } else {
+                            if (Integer.parseInt(users.get(i).id) > Integer.parseInt(users.get(j).id)) {
+                                swap(users, i, j);
+                            }
+                        }
                     }
-                });
-        
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                UserManagerRow.white = true;
+                for (int i = 0; i < users.size(); i++) {
+                    table.add(new MedicineRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
+            }
+        });
+
         type.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        for(int i=0; i<customers.size()-1; i++)
-                            for(int j=i+1; j<customers.size(); j++) 
-                                if(nameSort) {
-                                    if(customers.get(i).type.compareTo(customers.get(j).type) < 0) {
-                                        swap(customers, i, j);
-                                    } 
-                                } else {
-                                    if(customers.get(i).type.compareTo(customers.get(j).type) > 0) {
-                                       swap(customers, i, j);
-                                    } 
-                                }      
-                        nameSort = !nameSort;
-                        table.removeAll();
-                        UserManagerRow.white = true;
-                        for(int i=0; i<customers.size(); i++)
-                	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
-                        table.repaint();
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (int i = 0; i < users.size() - 1; i++) {
+                    for (int j = i + 1; j < users.size(); j++) {
+                        if (nameSort) {
+                            if (users.get(i).type.compareTo(users.get(j).type) < 0) {
+                                swap(users, i, j);
+                            }
+                        } else {
+                            if (users.get(i).type.compareTo(users.get(j).type) > 0) {
+                                swap(users, i, j);
+                            }
+                        }
                     }
-                });
-        
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                UserManagerRow.white = true;
+                for (int i = 0; i < users.size(); i++) {
+                    table.add(new MedicineRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
+            }
+        });
+
         address.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        for(int i=0; i<customers.size()-1; i++)
-                            for(int j=i+1; j<customers.size(); j++) 
-                                if(nameSort) {
-                                    if(customers.get(i).address.compareTo(customers.get(j).address) < 0) {
-                                        swap(customers, i, j);
-                                    } 
-                                } else {
-                                    if(customers.get(i).address.compareTo(customers.get(j).address) > 0) {
-                                       swap(customers, i, j);
-                                    } 
-                                }      
-                        nameSort = !nameSort;
-                        table.removeAll();
-                        UserManagerRow.white = true;
-                        for(int i=0; i<customers.size(); i++)
-                	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
-                        table.repaint();
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (int i = 0; i < users.size() - 1; i++) {
+                    for (int j = i + 1; j < users.size(); j++) {
+                        if (nameSort) {
+                            if (users.get(i).address.compareTo(users.get(j).address) < 0) {
+                                swap(users, i, j);
+                            }
+                        } else {
+                            if (users.get(i).address.compareTo(users.get(j).address) > 0) {
+                                swap(users, i, j);
+                            }
+                        }
                     }
-                });
-        
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                UserManagerRow.white = true;
+                for (int i = 0; i < users.size(); i++) {
+                    table.add(new MedicineRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
+            }
+        });
+
         phone.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent ae) {
-                        for(int i=0; i<customers.size()-1; i++)
-                            for(int j=i+1; j<customers.size(); j++) 
-                                if(nameSort) {
-                                    if(customers.get(i).phone.compareTo(customers.get(j).phone) < 0) {
-                                        swap(customers, i, j);
-                                    } 
-                                } else {
-                                    if(customers.get(i).phone.compareTo(customers.get(j).phone) > 0) {
-                                       swap(customers, i, j);
-                                    } 
-                                }      
-                        nameSort = !nameSort;
-                        table.removeAll();
-                        UserManagerRow.white = true;
-                        for(int i=0; i<customers.size(); i++)
-                	table.add(new MedicineRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize , phoneSize, optionSize, new Point(0, i * 40), table));
-                        table.repaint();
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                for (int i = 0; i < users.size() - 1; i++) {
+                    for (int j = i + 1; j < users.size(); j++) {
+                        if (nameSort) {
+                            if (users.get(i).phone.compareTo(users.get(j).phone) < 0) {
+                                swap(users, i, j);
+                            }
+                        } else {
+                            if (users.get(i).phone.compareTo(users.get(j).phone) > 0) {
+                                swap(users, i, j);
+                            }
+                        }
                     }
-                });
-        
-       refresh.addActionListener(new ActionListener() {
+                }
+                nameSort = !nameSort;
+                table.removeAll();
+                UserManagerRow.white = true;
+                for (int i = 0; i < users.size(); i++) {
+                    table.add(new MedicineRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+                }
+                table.repaint();
+            }
+        });
+
+        refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    updateTable(table, idSize,nameSize, typeSize, addressSize, phoneSize, optionSize);
+                    updateTable(table, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize);
                 } catch (SQLException ex) {
                     Logger.getLogger(UserManagerPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -214,31 +238,36 @@ public class UserManagerPanel extends JPanel {
     }
 
     public static boolean nameSort = true;
-    
+
     public void updateTable(CustomTable table, int idSize, int nameSize, int typeSize, int addressSize, int phoneSize, int optionSize) throws SQLException, ClassNotFoundException {
         table.removeAll();
-        Vector<UserManagers> loadUserManager = UserManagers.getAllUserManager();
-        final ArrayList<UserManagerPanel.UserManager> customers = new ArrayList<UserManagerPanel.UserManager>();
-        for(int i=0; i<loadUserManager.size(); i++) customers.add(new UserManager(loadUserManager.get(i).getUserManagerCode() + "", loadUserManager.get(i).getUserManagerName(), loadUserManager.get(i).getUserManagerType() + "", loadUserManager.get(i).getUserManagerAddress() , loadUserManager.get(i).getUserManagerPhone()));   
-        table.setPreferredSize(new Dimension(1000, customers.size() * 40));	
-        for(int i=0; i<customers.size(); i++)
-        table.add(new UserManagerRow(customers.get(i).id, customers.get(i).name, customers.get(i).type, customers.get(i).address, customers.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+        Vector<Users> loadUserManager = Users.getAllUser();
+        final ArrayList<UserManagerPanel.UserManager> users = new ArrayList<UserManagerPanel.UserManager>();
+        for (int i = 0; i < loadUserManager.size(); i++) {
+            users.add(new UserManager(loadUserManager.get(i).getUserCode() + "", loadUserManager.get(i).getNameLogin(), loadUserManager.get(i).getUserTypeCode() + "", loadUserManager.get(i).getUserAddress(), loadUserManager.get(i).getUserPhone()));
+        }
+        table.setPreferredSize(new Dimension(1000, users.size() * 40));
+        for (int i = 0; i < users.size(); i++) {
+            table.add(new UserManagerRow(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone, idSize, nameSize, typeSize, addressSize, phoneSize, optionSize, new Point(0, i * 40), table));
+        }
+        table.setPreferredSize(new Dimension(1000, users.size() * 40));
         table.repaint();
     }
-    
-        public void swap(ArrayList<UserManagerPanel.UserManager> customers, int i, int j) {
-            UserManagerPanel.UserManager temp = new UserManagerPanel.UserManager(customers.get(i).id,customers.get(i).name,customers.get(i).type,customers.get(i).address,customers.get(i).phone);
-            customers.get(i).id = customers.get(j).id;
-            customers.get(i).name = customers.get(j).name;
-            customers.get(i).type = customers.get(j).type;
-            customers.get(i).address = customers.get(j).address;
-            customers.get(i).phone = customers.get(j).phone;
-            customers.get(j).id = temp.id;
-            customers.get(j).name = temp.name;
-            customers.get(j).type = temp.type;
-            customers.get(j).address = temp.address;
-            customers.get(j).phone = temp.phone;
-        }
+
+    public void swap(ArrayList<UserManagerPanel.UserManager> users, int i, int j) {
+        UserManagerPanel.UserManager temp = new UserManagerPanel.UserManager(users.get(i).id, users.get(i).name, users.get(i).type, users.get(i).address, users.get(i).phone);
+        users.get(i).id = users.get(j).id;
+        users.get(i).name = users.get(j).name;
+        users.get(i).type = users.get(j).type;
+        users.get(i).address = users.get(j).address;
+        users.get(i).phone = users.get(j).phone;
+        users.get(j).id = temp.id;
+        users.get(j).name = temp.name;
+        users.get(j).type = temp.type;
+        users.get(j).address = temp.address;
+        users.get(j).phone = temp.phone;
+    }
+
     public class UserManager {
 
         String id;
