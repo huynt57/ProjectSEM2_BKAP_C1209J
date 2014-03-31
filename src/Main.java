@@ -27,13 +27,13 @@ public class Main {
     		e.printStackTrace();
     	}
     	
-    	if(keepLogged.equals("0")) {
-	    	mainFrame = new MainScreen("MSB Portal", false, true, false, Configure.DEFAULT_SIZE);
-	    	if(rememberState.equals("0")) loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, false, false);
-	    	else loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, true, false);
-    	} else {
+//    	if(keepLogged.equals("0")) {
+//	    	mainFrame = new MainScreen("MSB Portal", false, true, false, Configure.DEFAULT_SIZE);
+//	    	if(rememberState.equals("0")) loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, false, false);
+//	    	else loginFrame = new LoginScreen("Login", false, true, false, new Dimension(300, 380), mainFrame, true, false);
+//    	} else {
     		mainFrame = new MainScreen("MSB Portal", false, true, false, Configure.DEFAULT_SIZE);  
                 mainFrame.setVisible(true);
-    	}
+//    	}
 	}
 }
