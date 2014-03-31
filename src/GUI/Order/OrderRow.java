@@ -49,7 +49,14 @@ public class OrderRow extends JPanel {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderDetails addOrders = new OrderDetails("", false, false, false, new Dimension(400, 500), id);
+                OrderDetails addOrders = null;
+                try {
+                    addOrders = new OrderDetails("", false, false, false, new Dimension(400, 500), id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderRow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderRow.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 addOrders.setVisible(true);
             }
         });

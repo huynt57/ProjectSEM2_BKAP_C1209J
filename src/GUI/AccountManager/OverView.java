@@ -42,25 +42,26 @@ public class OverView extends JPanel {
         rs = sta.executeQuery(sql);
         Users objUser;
 
-        // TODO: Update DB with new user's info 
-        objUser = new Users();
-        while (rs.next()) {
-            objUser.nameLogin = rs.getString("nameLogin");
-            objUser.password = rs.getString("password");
-            objUser.userCode = rs.getInt("userCode");
-            objUser.userActive = rs.getInt("userActive");
-            objUser.firstName = rs.getString("firstName");
-            objUser.lastName = rs.getString("lastName");
-            objUser.userAddress = rs.getString("userAddress");
-            objUser.userPhone = rs.getString("userPhone");
-            objUser.userEmail = rs.getString("userEmail");
-            objUser.userType = rs.getString("userType");
-            v.add(objUser);
-        }
-        Users u = null;
-        for (int j = 0; j < v.size(); j++) {
-            u = (Users) v.get(j);
-        }
+//        // TODO: Update DB with new user's info 
+//        objUser = new Users();
+//        while (rs.next()) {
+//            objUser.nameLogin = rs.getString("nameLogin");
+//            objUser.password = rs.getString("password");
+//            objUser.userCode = rs.getInt("userCode");
+//            objUser.userActive = rs.getInt("userActive");
+//            objUser.firstName = rs.getString("firstName");
+//            objUser.lastName = rs.getString("lastName");
+//            objUser.userAddress = rs.getString("userAddress");
+//            objUser.userPhone = rs.getString("userPhone");
+//            objUser.userEmail = rs.getString("userEmail");
+//            objUser.userType = rs.getString("userType");
+//            v.add(objUser);
+//        }
+//        Users u = null;
+//        for (int j = 0; j < v.size(); j++) {
+//            u = (Users) v.get(j);
+//        }
+        
         CustomLabel userIdLabel = new CustomLabel("User id",
                 Color.GRAY, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
@@ -106,15 +107,16 @@ public class OverView extends JPanel {
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15),
                 new Point(marginLeft, begin + step * i++), new Dimension(d.width - 40, 30), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, this);
-        userIdLabel.setText("ID: " + u.getUserCode());
-        usernameLabel.setText("username: " + u.getNameLogin());
-        passwordLabel.setText("password: " + u.getPassword());
-        fullNumberLabel.setText("fullname: " + u.getFirstName() + " " + u.getLastName());
-        typeLabel.setText("Type: " + u.getUserTypeCode());
-        activeLabel.setText("Active: " + u.getUserActive());
-        phoneLabel.setText("Phone: " + u.getUserPhone());
-        emailLabel.setText("Email: " + u.getUserEmail());
-        addressLabel.setText("Address: " + u.getUserAddress());
+        
+//        userIdLabel.setText("ID: " + u.getUserCode());
+//        usernameLabel.setText("username: " + u.getNameLogin());
+//        passwordLabel.setText("password: " + u.getPassword());
+//        fullNumberLabel.setText("fullname: " + u.getFirstName() + " " + u.getLastName());
+//        typeLabel.setText("Type: " + u.getUserTypeCode());
+//        activeLabel.setText("Active: " + u.getUserActive());
+//        phoneLabel.setText("Phone: " + u.getUserPhone());
+//        emailLabel.setText("Email: " + u.getUserEmail());
+//        addressLabel.setText("Address: " + u.getUserAddress());
 
     }
 

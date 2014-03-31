@@ -18,11 +18,14 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
 public class MedicineSearch extends CustomFrame {
 
-    public MedicineSearch(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, Vector supplierVt, Vector typeVt, Vector measureVt) {
+    public static int searchtype;
+    
+    public MedicineSearch(String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension ) {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -33,25 +36,57 @@ public class MedicineSearch extends CustomFrame {
  
         Dimension dim = dimension;
         
-         CustomLabel titleLabel = new CustomLabel("Search type",
+         CustomLabel titleLabel = new CustomLabel("Search medicine",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 19),
                 new Point(20, 17), new Dimension(360, 40), true,
                 SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
          
-         
+        final JRadioButton name = new JRadioButton("");
+        name.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
+        name.setBounds(20, 70, 20, 20);
+        name.setBackground(BackGround);
+        contenPane.add(name);
+        CustomLabel nameLabel = new CustomLabel("Name search",
+                Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
+                new Point(50, 70), new Dimension(dim.width - 40, 20), true,
+                SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
         
+        final JRadioButton type = new JRadioButton("");
+        type.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
+        type.setBounds(20, 100, 20, 20);
+        type.setBackground(BackGround);
+        contenPane.add(type);
+        CustomLabel typeLabel = new CustomLabel("Type search",
+                Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
+                new Point(50, 100), new Dimension(dim.width - 40, 20), true,
+                SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
+        
+        final JRadioButton suppliername = new JRadioButton("");
+        suppliername.setFont(CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13));
+        suppliername.setBounds(20, 130, 20, 20);
+        suppliername.setBackground(BackGround);
+        contenPane.add(suppliername);
+        CustomLabel supplierLabel = new CustomLabel("Supplier search",
+                Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
+                CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13),
+                new Point(50, 130), new Dimension(dim.width - 40, 20), true,
+                SwingConstants.LEFT, SwingConstants.CENTER, contenPane);
+  
         final CustomButton ok = new CustomButton("Search", Color.WHITE,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 14),
-                false, false, Color.GRAY, true, new Point(20, 500),
+                false, false, Color.GRAY, true, new Point(60, 170),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
-
-        
+ 
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-              
-                // 
+                
+                if(name.isSelected()) searchtype = 1;
+                if(type.isSelected()) searchtype = 2;
+                if(suppliername.isSelected()) searchtype = 3;
                 
                 MedicineSearch.this.dispose();
             }

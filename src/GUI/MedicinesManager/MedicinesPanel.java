@@ -23,6 +23,7 @@ import GUI.Classes.CustomTable;
 import GUI.Classes.CustomTextField;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import com.sun.jndi.toolkit.dir.SearchFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -59,8 +60,11 @@ public class MedicinesPanel extends JPanel {
             }
         });
 
-        HintTextField search = new HintTextField(" Search Medicines", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MedicinesPanel.this, false);
+        final HintTextField search = new HintTextField(" Search Medicines", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 12), new Point(d.width - 280, 80), new Dimension(200, 30), MedicinesPanel.this, false);
         CustomButton searchButton = new CustomButton(new ImageIcon("src/GUI/Resources/search.png"), "", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), false, false, Color.GRAY, true, new Point(d.width - 72, 80), new Dimension(40, 30), MedicinesPanel.this, SwingConstants.CENTER, SwingConstants.CENTER);
+        
+
+        
         int totalWidth = d.width - 230;
         final int nameSize = totalWidth / 3;
         final int typeSize = totalWidth / 6;
@@ -123,6 +127,41 @@ public class MedicinesPanel extends JPanel {
             }
         });
 
+        
+                searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+//                MedicineSearch addMedicines = new MedicineSearch("", false, false, false, new Dimension(250, 220));
+//                addMedicines.setVisible(true);
+                    String key = search.getText();
+                      table.removeAll();
+
+                    Vector<Medicines> loadMedicine = null;
+                    try {
+                        try {
+                            loadMedicine = Medicines.getAllMedicine();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(MedicinesPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    final ArrayList<Medicine> medicines = new ArrayList<MedicinesPanel.Medicine>();
+                    for (int i = 0; i < loadMedicine.size(); i++) {
+                        if(loadMedicine.get(i).getMedicineName().equals(key) ||loadMedicine.get(i).getMedicineTypeName().equals(key)  ||loadMedicine.get(i).getSupplierName().equals(key))
+                        medicines.add(new Medicine(loadMedicine.get(i).getMedicineCode() + "", loadMedicine.get(i).getMedicineName(), loadMedicine.get(i).getMedicineTypeName(), loadMedicine.get(i).getSupplierName(), loadMedicine.get(i).getAvaiableAmount() + ""));
+                    }
+                    table.setPreferredSize(new Dimension(1000, medicines.size() * 40));
+
+                    for (int i = 0; i < medicines.size(); i++) {
+                        table.add(new MedicineRow(medicines.get(i).id, medicines.get(i).name, medicines.get(i).type, medicines.get(i).supplier, medicines.get(i).remain, idSize, nameSize, typeSize, supplierSize, remainSize, optionSize, new Point(0, i * 40), table));
+                    }
+                    table.repaint();
+            }
+        });
+        
+        
+        
         id.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
