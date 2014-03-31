@@ -49,7 +49,7 @@ public class OrderRow extends JPanel {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderDetails addOrders = new OrderDetails("", false, false, false, new Dimension(400, 500));
+                OrderDetails addOrders = new OrderDetails("", false, false, false, new Dimension(400, 500), id);
                 addOrders.setVisible(true);
             }
         });
@@ -57,7 +57,14 @@ public class OrderRow extends JPanel {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OrderEdit editOrder = new OrderEdit("", false, false, false, new Dimension(400, 380));
+                OrderEdit editOrder = null;
+                try {
+                    editOrder = new OrderEdit("", false, false, false, new Dimension(400, 380), id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderRow.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderRow.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 editOrder.setVisible(true);
             }
         });

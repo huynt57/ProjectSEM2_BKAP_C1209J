@@ -60,8 +60,10 @@ public class OrderPanel extends JPanel {
         final int optionSize = 111;
         Color BACK_GROUND = Color.GRAY;
       
+        
+        
         CustomButton id = new CustomButton("ID", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40, 120), new Dimension(idSize, 30), OrderPanel.this);
-        CustomButton name = new CustomButton("Name", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + idSize, 120), new Dimension(nameSize, 30), OrderPanel.this);
+        CustomButton name = new CustomButton("Customer Code", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + idSize, 120), new Dimension(nameSize, 30), OrderPanel.this);
         CustomButton price = new CustomButton("Price", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + idSize, 120), new Dimension(priceSize, 30), OrderPanel.this);
         CustomButton addressToDeliver = new CustomButton("Address to deliver", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + priceSize + idSize, 120), new Dimension(addressToDeliverSize, 30), OrderPanel.this);
         CustomButton dateOver = new CustomButton("Date over", Color.WHITE, CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 15), false, false, BACK_GROUND, true, new Point(40 + nameSize + priceSize + addressToDeliverSize + idSize, 120), new Dimension(dateOverSize, 30), OrderPanel.this);

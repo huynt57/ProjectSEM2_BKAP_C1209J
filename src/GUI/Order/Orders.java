@@ -187,8 +187,10 @@ public class Orders {
             while (rssupplier.next()) {
                 customercode = rssupplier.getInt("customerCode");
             }
+//INSERT INTO Orders VALUES ('4','2/3/2014','1', '" + address + "', '100')
+//INSERT INTO OrderDetails VALUES ('1','1','10','10')
 
-            String sql1 = "INSERT INTO Orders VALUES ('" + customercode + "'," + dateorder + "," + usercode + ", '" + address + "')";
+            String sql1 = "INSERT INTO Orders (customerCode, dateOrder, userCode, addressToDeliver, price) VALUES ('" + customercode + "','" + dateorder + "','" + usercode + "', '" + address + "', '"+price+"')";
             sta.execute(sql1);
             String sql3 = "SELECT MAX (orderCode) AS orderCode  FROM Orders";
 
@@ -198,7 +200,7 @@ public class Orders {
             while (rs.next()) {
                 code = rs.getInt("orderCode");
             }
-            String sql2 = "INSERT INTO OrderDetails VALUES (" + code + "," + medicinecode + "," + measurecode + "," + quantity + ",'" + price + "')";
+            String sql2 = "INSERT INTO OrderDetails  (orderCode, measureCode, medicineCode, quantity) VALUES ('" + code + "','" + measurecode + "','" + medicinecode + "','" + quantity + "')";
 
             // System.out.println("fcsdkjhf");
             sta.execute(sql2);
@@ -282,12 +284,40 @@ public class Orders {
         return v;
     }
 
+    public static Orders getOrderbyId(String id) throws SQLException, ClassNotFoundException {
+        // Vector v = new Vector();
+        Orders objOrder = new Orders();
+        try {
+            Connection con = DBHelper.connect();
+            Statement sta = con.createStatement();
+
+            ResultSet rs = sta.executeQuery("SELECT * FROM Orders join OrderDetails ON Orders.orderCode = OrderDetails.orderCode WHERE Orders.orderCode = " + id);
+            while (rs.next()) {
+
+                objOrder.orderCode = rs.getInt("orderCode");
+                objOrder.customerCode = rs.getInt("customerCode");
+                objOrder.dateOrder = rs.getString("dateOrder");
+                objOrder.addressToDeliver = rs.getString("addressToDeliver");
+                objOrder.priceOrder = rs.getInt("price");
+                objOrder.measureCode = rs.getInt("measureCode");
+                objOrder.medicineCode = rs.getInt("medicineCode");
+                objOrder.quantity = rs.getInt("quantity");
+                objOrder.userCode = rs.getInt("userCode");
+                objOrder.priceOrder = rs.getInt("price");
+                // v.add(objOrder);
+            }
+        } catch (SQLException ex) {
+
+        }
+        return objOrder;
+    }
+
     public static void DeleteOrder(String id) throws SQLException, ClassNotFoundException {
         Connection con = DBHelper.connect();
         Statement sta = con.createStatement();
 
-        sta.execute("DELETE FROM Orders WHERE orderCode = '" + id+"'");
-        sta.execute("DELETE FROM OrderDetails WHERE orderCode = '" + id+"'");
+        sta.execute("DELETE FROM Orders WHERE orderCode = '" + id + "'");
+        sta.execute("DELETE FROM OrderDetails WHERE orderCode = '" + id + "'");
     }
 
 //    public static Vector viewOrder(String id) throws SQLException, ClassNotFoundException {

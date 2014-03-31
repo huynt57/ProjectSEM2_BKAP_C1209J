@@ -10,13 +10,21 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.CustomersManager.Customers;
+import GUI.MeasureManager.Measures;
+import GUI.MedicineTypeManager.MedicineTypes;
+import GUI.MedicinesManager.Medicines;
+import GUI.SupplierManager.Suppliers;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -26,7 +34,7 @@ import javax.swing.UIManager;
 
 public class OrderEdit extends CustomFrame {
 
-    public OrderEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public OrderEdit( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension, final String id) throws SQLException, ClassNotFoundException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -35,7 +43,7 @@ public class OrderEdit extends CustomFrame {
         this.setContentPane(contenPane);
         setLayout(null);
 //        type, supplier, measure,,  origine,  user guide, 
-        CustomLabel titleLabel = new CustomLabel("Add new order",
+        CustomLabel titleLabel = new CustomLabel("Edit Order",
                 Color.BLACK, Configure.DEFAULT_RIGHT_PANEL_COLOR,
                 CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 24),
                 new Point(20, 17), new Dimension(360, 40), true,
@@ -53,13 +61,23 @@ public class OrderEdit extends CustomFrame {
         
         
         
-        
-        // ADD DATA TO COMBOBOX
-        for(int i=0; i<100; i++) {
-            medicinesVt.add(i);
-            measuresVt.add(i);
-            customersVt.add(i);
+        Vector<Medicines> medicinetemp = GUI.MedicinesManager.Medicines.getAllMedicine();
+        for (int i = 0; i < medicinetemp.size(); i++) {
+            medicinesVt.add(medicinetemp.get(i).getMedicineName());
         }
+        
+        Vector<Customers> custemp = GUI.CustomersManager.Customers.getAllCustomer();
+        for (int i = 0; i < custemp.size(); i++) {
+            customersVt.add(custemp.get(i).getCustomerName());
+        }
+        
+        
+        Vector<Measures> measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+        for (int i = 0; i < measuretemp.size(); i++) {
+            measuresVt.add(measuretemp.get(i).getMeasureName());
+        }
+        
+        
         
         Dimension dim = dimension;
         final HintTextField customerName = new HintTextField(" Customer name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
@@ -78,20 +96,41 @@ public class OrderEdit extends CustomFrame {
                 false, false, Color.GRAY, true, new Point(20, 320),
                 new Dimension((dim.width - 50) / 2, 30), contenPane);
 
+        
+        Orders ordertemp = Orders.getOrderbyId(id);
+        
+        customerName.setText(ordertemp.getcustomerCode()+"");
+        dateOrder.setText(ordertemp.getdateOrder());
+        addressToDeliver.setText(ordertemp.getaddressToDeliver());
+        price.setText(ordertemp.getpriceOrder()+"");
+        quantity.setText(ordertemp.getquantity()+"");
+        medinices.setSelectedItem(ordertemp.getmedicineCode()+"");
+        measures.setSelectedItem(ordertemp.getmeasureCode());
+        customers.setSelectedItem(ordertemp.getcustomerCode());
+        relationship.setSelectedItem("familiar");
+        
+       
+        
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
-                
-                
-                
-                
-                // ADD TO DB
-                
-                
-                
-                
-                
+                String namex = customerName.getText();
+                String date = dateOrder.getText();
+                String add = addressToDeliver.getText();
+                String pricex = price.getText();
+                String quantityx = quantity.getText();
+                String medi = medinices.getSelectedItem().toString();
+                String mea = measures.getSelectedItem().toString();
+                String rel = relationship.getSelectedItem().toString();
+                String cus = customers.getSelectedItem().toString();
+                try {
+                    Orders.UpdateOrder(cus, date, "1", add, medi, mea, quantityx, pricex, id);
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderEdit.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderEdit.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 OrderEdit.this.dispose();
             }
         });

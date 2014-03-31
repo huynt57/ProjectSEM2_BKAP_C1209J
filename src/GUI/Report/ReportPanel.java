@@ -68,12 +68,12 @@ public class ReportPanel extends JPanel {
         
 
         final ArrayList<Report> reports = new ArrayList<Report>();
-        for(int i=0; i<=20; i++)
-        reports.add(new Report(i+"", i+"", i+"", i+"", i+"", i+"", i+""));
-//        Vector<Reports> loadReport = Reports.getAllReport();
-// 
-//        final ArrayList<ReportPanel.Report> customers = new ArrayList<ReportPanel.Report>();
-//        for(int i=0; i<loadReport.size(); i++) customers.add(new Report(loadReport.get(i).getReportCode() + "", loadReport.get(i).getReportName(), loadReport.get(i).getReportType() + "", loadReport.get(i).getReportAddress() , loadReport.get(i).getReportPhone()));   
+//        for(int i=0; i<=20; i++)
+//        reports.add(new Report(i+"", i+"", i+"", i+"", i+"", i+"", i+""));
+        Vector<Reports> loadReport = Reports.getAllReport();
+
+       final ArrayList<ReportPanel.Report> customers = new ArrayList<ReportPanel.Report>();
+       for(int i=0; i<loadReport.size(); i++) customers.add(new Report(loadReport.get(i).getbillCode()+ "", loadReport.get(i).getcustomerCode()+"", loadReport.get(i).getbillType()+ "", loadReport.get(i).getrelationship(), loadReport.get(i).getuserCode()+"",loadReport.get(i).getprice()+"",loadReport.get(i).getstatus()) );   
         table.setPreferredSize(new Dimension(1000, reports.size() * 40));	
         for(int i=0; i<reports.size(); i++)
         table.add(new ReportRow(reports.get(i).id, reports.get(i).customerName, reports.get(i).billType, reports.get(i).relationship, reports.get(i).creator, reports.get(i).creator, reports.get(i).status, idSize, customerNameSize, billTypeSize, relationshipSize, creatorSize , creatorSize, statusSize, new Point(0, i * 40), table));

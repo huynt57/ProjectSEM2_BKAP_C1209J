@@ -9,13 +9,19 @@ import GUI.Classes.CustomFrame;
 import GUI.Classes.CustomLabel;
 import GUI.Classes.HintTextField;
 import GUI.Classes.RemovablePanel;
+import GUI.CustomersManager.Customers;
+import GUI.MeasureManager.Measures;
+import GUI.MedicinesManager.Medicines;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -25,7 +31,7 @@ import javax.swing.UIManager;
 
 public class OrderNew extends CustomFrame {
 
-    public OrderNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) {
+    public OrderNew( String title, boolean visible, boolean undecorate, boolean resizeable, Dimension dimension) throws ClassNotFoundException, SQLException {
         super(title, visible, undecorate, resizeable, dimension);
         setUndecorated(true);
         RemovablePanel contenPane = new RemovablePanel(this);
@@ -52,16 +58,24 @@ public class OrderNew extends CustomFrame {
         
         
         
+        Vector<Medicines> medicinetemp = GUI.MedicinesManager.Medicines.getAllMedicine();
+        for (int i = 0; i < medicinetemp.size(); i++) {
+            medicinesVt.add(medicinetemp.get(i).getMedicineName());
+        }
         
-        // ADD DATA TO COMBOBOX
-        for(int i=0; i<100; i++) {
-            medicinesVt.add(i);
-            measuresVt.add(i);
-            customersVt.add(i);
+        Vector<Customers> custemp = GUI.CustomersManager.Customers.getAllCustomer();
+        for (int i = 0; i < custemp.size(); i++) {
+            customersVt.add(custemp.get(i).getCustomerName());
+        }
+        
+        
+        Vector<Measures> measuretemp = GUI.MeasureManager.Measures.getAllMeasure();
+        for (int i = 0; i < measuretemp.size(); i++) {
+            measuresVt.add(measuretemp.get(i).getMeasureName());
         }
         
         Dimension dim = dimension;
-        final HintTextField customerName = new HintTextField(" Customer name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
+        final HintTextField customerName = new HintTextField(" Order name", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 70), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField dateOrder = new HintTextField(" Date order", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 110), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField addressToDeliver = new HintTextField(" Address", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 150), new Dimension(dim.width - 40, 30), contenPane, false);
         final HintTextField price = new HintTextField(" Price", CustomFont.getFont(Configure.DEFAULT_FONT, Font.PLAIN, 13), new Point(20, 190), new Dimension((dim.width - 40) / 2 - 5, 30), contenPane, false);
@@ -82,12 +96,24 @@ public class OrderNew extends CustomFrame {
             public void actionPerformed(ActionEvent ae) {
 
                 
-                String customerx = customerName.getText().toString();
-                String datex = dateOrder.getText().toString();
-                
-                
-                
-                // ADD TO DB
+               
+                String namex = customerName.getText();
+                String date = dateOrder.getText();
+                String add = addressToDeliver.getText();
+                String pricex = price.getText();
+                String quantityx = quantity.getText();
+                String medi = medinices.getSelectedItem().toString();
+                String mea = measures.getSelectedItem().toString();
+                String rel = relationship.getSelectedItem().toString();
+                String cus = customers.getSelectedItem().toString();
+                try {
+                   Orders.InsertOrder(cus, date, "1", add, medi, mea, quantityx, pricex); 
+                    // ADD TO DB
+                } catch (SQLException ex) {
+                    Logger.getLogger(OrderNew.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(OrderNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
                 
                 
